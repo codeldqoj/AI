@@ -1,0 +1,671 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-10-25.1",
+  "courseId": "mth-435",
+  "prerequisites": [
+    "CSE 191, số học môđun, xác suất và thuật toán cơ bản"
+  ],
+  "outcomes": [
+    "Tính toán trên nhóm và trường hữu hạn",
+    "Giải thích tính đúng các hệ mật cơ bản",
+    "Phân biệt bí mật, toàn vẹn, xác thực và giả thiết an toàn"
+  ],
+  "sections": [
+    {
+      "id": "modular",
+      "title": "Số học modulo, Euclid và nghịch đảo",
+      "theory": [
+        "Đồng dư modulo n bảo toàn phép cộng và nhân. Một lớp a có nghịch đảo nhân modulo n khi và chỉ khi gcd(a,n)=1; Euclid mở rộng tìm hệ số Bezout và nghịch đảo.",
+        "Lũy thừa modulo dùng bình phương–nhân, chi phí số phép nhân theo O(log e); chi phí bit còn phụ thuộc độ dài môđun. Không được chia một đồng dư cho một phần tử không khả nghịch như chia trong trường số thực."
+      ],
+      "method": [
+        "Rút gọn theo môđun.",
+        "Kiểm tra gcd trước khi tìm nghịch đảo.",
+        "Dùng Euclid hoặc bình phương–nhân rồi kiểm tra lại."
+      ],
+      "pitfalls": [
+        "Không rút gọn số mũ theo phi(n) nếu chưa đáp ứng giả thiết áp dụng."
+      ],
+      "examples": [
+        {
+          "statement": "Tìm nghịch đảo của 3 modulo 7.",
+          "steps": [
+            "Gcd(3,7)=1 nên có nghịch đảo.",
+            "$3\\cdot5=15=1+2\\cdot7$.",
+            "Vì vậy lớp 5 nhân với lớp 3 cho lớp đơn vị."
+          ],
+          "result": "$3^{-1}\\equiv5\\pmod7$.",
+          "insight": "Kiểm tra bằng nhân là chứng cứ trực tiếp và ngắn gọn."
+        },
+        {
+          "statement": "Số 6 có nghịch đảo modulo 15 không?",
+          "steps": [
+            "Gcd(6,15)=3.",
+            "Nếu $6x\\equiv1\\pmod{15}$ thì 3 phải chia 1 sau khi viết $6x-15k=1$.",
+            "Điều này không thể xảy ra."
+          ],
+          "result": "Không có nghịch đảo.",
+          "insight": "Không phải mọi phần tử khác 0 trong một vành modulo đều là đơn vị."
+        },
+        {
+          "statement": "Tính $2^{10}\\bmod17$.",
+          "steps": [
+            "$2^4=16\\equiv-1$.",
+            "Bình phương cho $2^8\\equiv1$.",
+            "Nhân thêm $2^2=4$ để có $2^{10}\\equiv4$."
+          ],
+          "result": "4.",
+          "insight": "Rút gọn sau từng lần bình phương giữ số trung gian nhỏ."
+        },
+        {
+          "statement": "Giải $3x\\equiv4\\pmod7$.",
+          "steps": [
+            "Nghịch đảo của 3 là 5.",
+            "Nhân cả hai vế với 5 cho $x\\equiv20$.",
+            "Rút gọn 20 modulo 7 và thế lại."
+          ],
+          "result": "$x\\equiv6\\pmod7$.",
+          "insight": "Chỉ phép nhân với nghịch đảo hợp lệ mới thực hiện vai trò phép chia."
+        },
+        {
+          "statement": "Tìm x modulo 15 thỏa x bằng 2 modulo 3 và bằng 3 modulo 5.",
+          "steps": [
+            "Các số dư 3 modulo 5 trong 0 đến 14 là 3,8,13.",
+            "Chỉ 8 có số dư 2 modulo 3.",
+            "Vì 3 và 5 nguyên tố cùng nhau, định lý CRT bảo đảm duy nhất modulo 15."
+          ],
+          "result": "$x\\equiv8\\pmod{15}$.",
+          "insight": "CRT kết hợp các điều kiện số dư thành một điều kiện môđun tích."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1 Congruences, phần Groups và Finite Fields"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "§4.1 Public-Key Cryptography; các phần Rings, Fields và ứng dụng"
+        },
+        {
+          "sourceId": "stanford-crypto",
+          "locator": "Các phần symmetric encryption, message integrity, public-key encryption và signatures trong giáo trình chính thức"
+        }
+      ]
+    },
+    {
+      "id": "groups-fields",
+      "title": "Nhóm cyclic, trường hữu hạn và logarit rời rạc",
+      "theory": [
+        "Nhóm cyclic được sinh bởi một phần tử g; các phần tử có dạng lũy thừa của g. Cấp của một phần tử chia cấp nhóm hữu hạn. Trường hữu hạn có số phần tử là lũy thừa nguyên tố; $\\mathbb Z_p$ là trường khi p nguyên tố.",
+        "Bài logarit rời rạc hỏi a từ $g^a=h$. Tính lũy thừa nhanh không có nghĩa tính ngược cũng dễ. Độ khó phụ thuộc lựa chọn nhóm và kích thước, không chỉ tên thuật toán."
+      ],
+      "method": [
+        "Xác định cấu trúc nhóm và cấp.",
+        "Kiểm tra phần tử sinh hoặc phép toán trường.",
+        "Phân biệt tính thuận với bài toán nghịch đảo."
+      ],
+      "pitfalls": [
+        "Môđun hợp số không tự tạo một trường."
+      ],
+      "examples": [
+        {
+          "statement": "Tìm cấp của 2 trong nhóm nhân modulo 7.",
+          "steps": [
+            "$2^1\\equiv2$, $2^2\\equiv4$, $2^3\\equiv1$.",
+            "Không có số mũ dương nhỏ hơn 3 cho đơn vị.",
+            "Do đó cấp bằng 3, không bằng cấp toàn nhóm là 6."
+          ],
+          "result": "$\\operatorname{ord}_7(2)=3$.",
+          "insight": "Một phần tử không nhất thiết sinh toàn nhóm."
+        },
+        {
+          "statement": "Kiểm tra 3 là phần tử sinh nhóm nhân modulo 7.",
+          "steps": [
+            "Các lũy thừa lần lượt là 3,2,6,4,5,1.",
+            "Sáu lớp khác 0 đều xuất hiện.",
+            "Nhóm có đúng 6 phần tử, nên 3 sinh toàn nhóm."
+          ],
+          "result": "3 là phần tử sinh.",
+          "insight": "Trong nhóm nhỏ có thể liệt kê để hiểu khái niệm, không phải phương pháp cho tham số thực tế."
+        },
+        {
+          "statement": "Giải $3^a\\equiv2\\pmod7$ trong nhóm này.",
+          "steps": [
+            "Từ bảng lũy thừa có $3^2\\equiv2$.",
+            "Cấp của 3 bằng 6.",
+            "Mọi số mũ cùng dư 2 modulo 6 cho cùng kết quả."
+          ],
+          "result": "$a\\equiv2\\pmod6$.",
+          "insight": "Đây là logarit rời rạc trong một ví dụ đồ chơi rất nhỏ."
+        },
+        {
+          "statement": "Trong GF(2), tính $(x+1)^2$.",
+          "steps": [
+            "Khai triển hình thức cho $x^2+2x+1$.",
+            "Đặc số 2 làm hệ số 2 bằng 0.",
+            "Vì thế kết quả còn $x^2+1$."
+          ],
+          "result": "$(x+1)^2=x^2+1$ trong GF(2)[x].",
+          "insight": "Phép toán đa thức phụ thuộc trường hệ số."
+        },
+        {
+          "statement": "Trong $\\mathrm{GF}(2)[x]/(x^2+x+1)$, tìm nghịch đảo của lớp x.",
+          "steps": [
+            "Quan hệ môđun cho $x^2+x+1=0$, tức $x^2+x=1$.",
+            "Do đó $x(x+1)=1$.",
+            "Đa thức môđun bất khả quy trên GF(2), nên thương là trường 4 phần tử."
+          ],
+          "result": "Nghịch đảo của x là x+1.",
+          "insight": "Ví dụ trường mở rộng cho phép toán khác với số nguyên modulo 4."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1 Congruences, phần Groups và Finite Fields"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "§4.1 Public-Key Cryptography; các phần Rings, Fields và ứng dụng"
+        },
+        {
+          "sourceId": "stanford-crypto",
+          "locator": "Các phần symmetric encryption, message integrity, public-key encryption và signatures trong giáo trình chính thức"
+        }
+      ]
+    },
+    {
+      "id": "symmetric",
+      "title": "Mã hóa đối xứng, one-time pad và chế độ hoạt động",
+      "theory": [
+        "Mã hóa đối xứng dùng chung khóa bí mật. One-time pad với khóa đều, độc lập và chỉ dùng một lần có bí mật hoàn hảo vì mỗi bản rõ phù hợp bản mã với đúng một khóa.",
+        "Block cipher là họ hoán vị có khóa trên các khối cố định; mã hóa thông điệp dài cần chế độ thích hợp. ECB lộ tính bằng nhau của khối. Với CTR, lặp nonce cùng khóa lặp dòng khóa; mã hóa chưa tự bảo đảm toàn vẹn."
+      ],
+      "method": [
+        "Phân biệt tính bí mật với xác thực.",
+        "Ghi yêu cầu về khóa và nonce.",
+        "Kiểm tra cấu trúc rò rỉ của bản mã."
+      ],
+      "pitfalls": [
+        "Các số nhỏ và chuỗi bit ngắn trong ví dụ chỉ phục vụ giải thích toán học."
+      ],
+      "examples": [
+        {
+          "statement": "OTP: bản rõ 1011, khóa 0110. Tính bản mã.",
+          "steps": [
+            "Mã hóa bằng XOR từng vị trí.",
+            "$1011\\oplus0110=1101$.",
+            "XOR lại với cùng khóa khôi phục bản rõ vì mỗi bit khóa được cộng hai lần trong GF(2)."
+          ],
+          "result": "Bản mã 1101.",
+          "insight": "XOR là phép tự nghịch đảo, nhưng tính an toàn phụ thuộc cách sinh và dùng khóa."
+        },
+        {
+          "statement": "Hai bản rõ dùng lại cùng khóa OTP. Rò rỉ điều gì?",
+          "steps": [
+            "$C_1=M_1\\oplus K$, $C_2=M_2\\oplus K$.",
+            "XOR hai bản mã làm K triệt tiêu.",
+            "Nhận trực tiếp $C_1\\oplus C_2=M_1\\oplus M_2$."
+          ],
+          "result": "Lộ XOR của hai bản rõ.",
+          "insight": "Sử dụng lại khóa phá giả thiết chỉ dùng một lần."
+        },
+        {
+          "statement": "Vì sao ECB lộ mẫu khi có hai khối bản rõ giống nhau?",
+          "steps": [
+            "Với khóa cố định, block cipher là hàm xác định trên khối.",
+            "Nếu $M_i=M_j$ thì $E_K(M_i)=E_K(M_j)$.",
+            "Bản mã giữ quan hệ bằng nhau của các khối và có thể lộ cấu trúc."
+          ],
+          "result": "Hai khối bằng nhau cho hai khối bản mã bằng nhau.",
+          "insight": "Một hoán vị khối tốt chưa tự tạo chế độ an toàn cho toàn thông điệp."
+        },
+        {
+          "statement": "CTR dùng dòng khóa S, C=M XOR S. Nếu sửa một bit C thì M giải mã đổi thế nào?",
+          "steps": [
+            "Đặt bản mã mới $C'=C\\oplus\\Delta$.",
+            "Giải mã $C'\\oplus S=M\\oplus\\Delta$.",
+            "Bit đánh dấu bởi Delta bị đảo trong bản rõ."
+          ],
+          "result": "Mã hóa CTR thuần túy có tính dễ sửa đổi có kiểm soát.",
+          "insight": "Cần xác thực/toàn vẹn, không chỉ mã hóa để chống thay đổi thông điệp."
+        },
+        {
+          "statement": "Chứng minh OTP giấu một bit đều hoặc thiên lệch khi khóa là bit đều độc lập.",
+          "steps": [
+            "Với mọi m,c, có đúng một khóa $k=m\\oplus c$.",
+            "Do khóa đều độc lập, $P(C=c\\mid M=m)=1/2$.",
+            "Xác suất này không phụ thuộc m, nên C độc lập với M."
+          ],
+          "result": "Bản mã không cung cấp thông tin về bit bản rõ trong mô hình.",
+          "insight": "Bí mật hoàn hảo không đòi bản rõ đều; nó đòi khóa phù hợp."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1 Congruences, phần Groups và Finite Fields"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "§4.1 Public-Key Cryptography; các phần Rings, Fields và ứng dụng"
+        },
+        {
+          "sourceId": "stanford-crypto",
+          "locator": "Các phần symmetric encryption, message integrity, public-key encryption và signatures trong giáo trình chính thức"
+        }
+      ]
+    },
+    {
+      "id": "hash-mac",
+      "title": "Hàm băm, MAC và mã hóa xác thực",
+      "theory": [
+        "Hàm băm chống tiền ảnh, chống tiền ảnh thứ hai và chống va chạm là các tính chất khác nhau. Với đầu ra n bit lý tưởng, tìm va chạm tổng quát tốn khoảng $2^{n/2}$ phép thử, không phải $2^n$.",
+        "MAC dùng khóa để xác thực thông điệp; hash thuần túy không chống đối thủ tính lại hash. AEAD kết hợp bí mật và toàn vẹn, đồng thời xác thực dữ liệu kèm không mã hóa. Yêu cầu nonce phụ thuộc sơ đồ cụ thể và phải được tuân thủ."
+      ],
+      "method": [
+        "Xác định đối thủ và mục tiêu bảo mật.",
+        "Phân biệt dữ liệu công khai với khóa bí mật.",
+        "Kiểm tra nonce, tag và xử lý lỗi xác thực."
+      ],
+      "pitfalls": [
+        "Không dùng một hash không khóa như bằng chứng thông điệp đến từ người biết khóa."
+      ],
+      "examples": [
+        {
+          "statement": "Hash có đầu ra 8 bit. Nhiều nhất bao nhiêu giá trị khác nhau?",
+          "steps": [
+            "Có 2 lựa chọn cho mỗi bit.",
+            "Tổng số chuỗi đầu ra là $2^8=256$.",
+            "Với 257 thông điệp khác nhau, Dirichlet bảo đảm có va chạm."
+          ],
+          "result": "256 giá trị, va chạm tất yếu với 257 đầu vào khác nhau.",
+          "insight": "Va chạm tồn tại luôn luôn; điều khó là tìm được chúng hiệu quả."
+        },
+        {
+          "statement": "Vì sao birthday bound cho hash n bit có thang $2^{n/2}$?",
+          "steps": [
+            "Với q mẫu đầu ra lý tưởng, có khoảng $q(q-1)/2$ cặp.",
+            "Mỗi cặp trùng có xác suất $2^{-n}$.",
+            "Khi q bình phương cùng bậc $2^n$, xác suất va chạm trở nên đáng kể."
+          ],
+          "result": "Thang tìm va chạm là $q\\asymp2^{n/2}$.",
+          "insight": "Đây là thang xác suất, không phải bảo đảm trùng sau đúng số bước đó."
+        },
+        {
+          "statement": "Gửi thông điệp m kèm hash(m) có bảo đảm xác thực trước đối thủ sửa gói không?",
+          "steps": [
+            "Đối thủ sửa m thành m mới.",
+            "Vì hash không có khóa, đối thủ tính hash(m mới).",
+            "Người nhận không có tiêu chí phân biệt người gửi hợp lệ với đối thủ chỉ dựa cặp này."
+          ],
+          "result": "Không bảo đảm xác thực.",
+          "insight": "MAC hoặc chữ ký giải quyết một mục tiêu khác với kiểm tra lỗi ngẫu nhiên."
+        },
+        {
+          "statement": "Tag lý tưởng t bit, đối thủ đoán một lần. Xác suất thành công?",
+          "steps": [
+            "Tag đều có $2^t$ khả năng đối với thông điệp mới trong mô hình lý tưởng.",
+            "Một giá trị đoán trúng một khả năng.",
+            "Xác suất là $2^{-t}$; nhiều lần thử cần chặn tổng và giới hạn tốc độ."
+          ],
+          "result": "$2^{-t}$ cho một lần đoán lý tưởng.",
+          "insight": "Thực tế còn phụ thuộc sơ đồ, khóa, cách xác minh và số lần thử."
+        },
+        {
+          "statement": "Trong AEAD, header công khai có cần đưa vào associated data không?",
+          "steps": [
+            "Header không nhất thiết cần giấu.",
+            "Nếu nội dung header ảnh hưởng cách hiểu bản rõ, đối thủ sửa nó có thể gây sai nghĩa.",
+            "Đưa vào associated data giúp tag bảo vệ tính toàn vẹn của header mà vẫn giữ nó công khai."
+          ],
+          "result": "Nên xác thực các trường công khai có ý nghĩa an ninh bằng associated data.",
+          "insight": "Công khai và không cần toàn vẹn là hai khái niệm khác nhau."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1 Congruences, phần Groups và Finite Fields"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "§4.1 Public-Key Cryptography; các phần Rings, Fields và ứng dụng"
+        },
+        {
+          "sourceId": "stanford-crypto",
+          "locator": "Các phần symmetric encryption, message integrity, public-key encryption và signatures trong giáo trình chính thức"
+        }
+      ]
+    },
+    {
+      "id": "rsa",
+      "title": "RSA: phép toán, tính đúng và giới hạn textbook",
+      "theory": [
+        "Với hai nguyên tố p,q, đặt n=pq và chọn e nguyên tố cùng phi(n). Khóa bí mật d thỏa ed bằng 1 modulo phi(n). Tính đúng dựa trên Fermat/Euler và CRT, kể cả bản rõ không nguyên tố cùng n khi xét riêng từng nguyên tố.",
+        "RSA nguyên thủy xác định và có cấu trúc đại số, không phải sơ đồ mã hóa an toàn cho thông điệp thực tế. Cần padding/encoding và tham số chuẩn phù hợp; ví dụ số nhỏ chỉ minh họa."
+      ],
+      "method": [
+        "Tính môđun, phi và nghịch đảo số mũ.",
+        "Mã hóa/giải mã bằng lũy thừa modulo.",
+        "Kiểm tra tính đúng rồi tách khỏi câu hỏi an toàn."
+      ],
+      "pitfalls": [
+        "Tính đúng số học không chứng minh bí mật hay an toàn chống chosen-ciphertext."
+      ],
+      "examples": [
+        {
+          "statement": "Chọn p=5,q=11,e=3. Tìm d trong 1 đến 39.",
+          "steps": [
+            "n=55 và phi(n)=4 nhân 10 bằng 40.",
+            "Giải $3d\\equiv1\\pmod{40}$.",
+            "d=27 vì $3\\cdot27=81=1+2\\cdot40$."
+          ],
+          "result": "n=55,d=27.",
+          "insight": "Cần e nguyên tố cùng phi trước khi tìm nghịch đảo."
+        },
+        {
+          "statement": "Với khóa trên, mã hóa bản rõ m=12.",
+          "steps": [
+            "Tính $c=12^3\\bmod55$.",
+            "$12^2\\equiv34$, rồi $34\\cdot12=408\\equiv23$.",
+            "Bản mã là một lớp dư trong 0 đến 54."
+          ],
+          "result": "c=23.",
+          "insight": "Rút gọn sau từng phép nhân tránh số trung gian quá lớn."
+        },
+        {
+          "statement": "Giải mã c=23 với d=27,n=55.",
+          "steps": [
+            "Dùng bình phương–nhân tính $23^{27}\\bmod55$.",
+            "Các bình phương lần lượt $23^2\\equiv34$, $23^4\\equiv1$, $23^8\\equiv1$, $23^{16}\\equiv1$.",
+            "Vì 27=16+8+2+1, tích còn $34\\cdot23\\equiv12$."
+          ],
+          "result": "Khôi phục m=12.",
+          "insight": "Một phép kiểm tra ngược xác nhận ví dụ mã hóa."
+        },
+        {
+          "statement": "Vì sao RSA nguyên thủy không đạt an toàn không phân biệt cho thông điệp chọn trước?",
+          "steps": [
+            "Mã hóa với khóa công khai là phép xác định.",
+            "Đối thủ tự mã hóa hai bản rõ ứng viên rồi so với bản mã thách thức.",
+            "Khi hai ứng viên mã hóa khác nhau, đối thủ phân biệt được."
+          ],
+          "result": "Mã hóa xác định textbook không đạt yêu cầu IND-CPA thông thường.",
+          "insight": "Ngẫu nhiên hóa hoặc encoding an toàn không phải chi tiết trang trí."
+        },
+        {
+          "statement": "RSA nguyên thủy có quan hệ nhân nào giữa hai bản mã?",
+          "steps": [
+            "$c_1=m_1^e\\bmod n$ và $c_2=m_2^e\\bmod n$.",
+            "Nhân chúng cho $c_1c_2\\equiv(m_1m_2)^e\\pmod n$.",
+            "Vì vậy biến đổi bản mã tạo quan hệ có thể dự đoán ở bản rõ."
+          ],
+          "result": "Có tính nhân trong vành modulo n.",
+          "insight": "Tính đại số hữu ích cho chứng minh nhưng cũng cho thấy nhu cầu thiết kế sơ đồ an toàn."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1 Congruences, phần Groups và Finite Fields"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "§4.1 Public-Key Cryptography; các phần Rings, Fields và ứng dụng"
+        },
+        {
+          "sourceId": "stanford-crypto",
+          "locator": "Các phần symmetric encryption, message integrity, public-key encryption và signatures trong giáo trình chính thức"
+        }
+      ]
+    },
+    {
+      "id": "dh-elgamal",
+      "title": "Diffie–Hellman và ElGamal",
+      "theory": [
+        "Trong nhóm cyclic, Diffie–Hellman công bố $g^a,g^b$ và hai phía cùng tính $g^{ab}$. Khó tính logarit rời rạc là một nền tảng liên quan nhưng không tự tương đương mọi giả thiết CDH/DDH.",
+        "ElGamal dùng số ngẫu nhiên mới r để tạo $(g^r,mh^r)$ khi h là khóa công khai. DH không xác thực dễ bị trung gian; phải gắn trao đổi khóa với danh tính bằng giao thức có chứng minh thích hợp."
+      ],
+      "method": [
+        "Xác định nhóm, cấp và thành viên hợp lệ.",
+        "Tính lũy thừa theo khóa ngẫu nhiên riêng.",
+        "Tách thỏa thuận khóa khỏi xác thực danh tính."
+      ],
+      "pitfalls": [
+        "Không dùng lại số ngẫu nhiên bí mật giữa những phiên mà sơ đồ yêu cầu tính mới."
+      ],
+      "examples": [
+        {
+          "statement": "DH modulo 23, g=5,a=6,b=15. Tính các giá trị công khai.",
+          "steps": [
+            "Tính $A=5^6\\bmod23=8$.",
+            "Tính $B=5^{15}\\bmod23=19$.",
+            "Cả hai được gửi công khai; a và b phải giữ riêng."
+          ],
+          "result": "A=8,B=19.",
+          "insight": "Tham số nhỏ này chỉ nhằm kiểm tra số học."
+        },
+        {
+          "statement": "Tính khóa chung của ví dụ trên.",
+          "steps": [
+            "Phía a tính $B^a=19^6\\bmod23$.",
+            "Phía b tính $A^b=8^{15}\\bmod23$.",
+            "Cả hai bằng $5^{90}\\bmod23=2$."
+          ],
+          "result": "Khóa nhóm chung bằng 2.",
+          "insight": "Thực tế khóa dùng mã hóa thường được dẫn xuất qua KDF từ bí mật chung."
+        },
+        {
+          "statement": "ElGamal modulo 23,g=5,x=3,m=7,r=4. Tính bản mã.",
+          "steps": [
+            "Khóa công khai h bằng $5^3\\bmod23=10$.",
+            "$c_1=5^4\\bmod23=4$ và $h^4\\bmod23=18$.",
+            "$c_2=7\\cdot18\\bmod23=11$."
+          ],
+          "result": "Bản mã là (4,11).",
+          "insight": "Số r mới làm mã hóa cùng m có thể tạo bản mã khác nhau."
+        },
+        {
+          "statement": "Giải mã (4,11) trong ví dụ ElGamal.",
+          "steps": [
+            "Tính $c_1^x=4^3\\bmod23=18$.",
+            "Nghịch đảo 18 modulo 23 là 9 vì 18 nhân 9 bằng 162 dư 1.",
+            "Nhân $11\\cdot9\\bmod23=7$."
+          ],
+          "result": "Khôi phục m=7.",
+          "insight": "Thành phần g mũ r cho phép người giữ khóa x tạo đúng mặt nạ để bỏ đi."
+        },
+        {
+          "statement": "Tại sao DH thuần túy có nguy cơ bị trung gian?",
+          "steps": [
+            "Đối thủ thay giá trị công khai của mỗi phía bằng giá trị do mình tạo.",
+            "Đối thủ thiết lập một bí mật với mỗi bên và chuyển tiếp thông điệp.",
+            "Không có chứng cứ danh tính nên hai bên không phát hiện chỉ từ DH số học."
+          ],
+          "result": "Cần giao thức trao đổi khóa có xác thực.",
+          "insight": "Độ khó toán học không tự bảo vệ việc gắn khóa công khai với đúng người."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1 Congruences, phần Groups và Finite Fields"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "§4.1 Public-Key Cryptography; các phần Rings, Fields và ứng dụng"
+        },
+        {
+          "sourceId": "stanford-crypto",
+          "locator": "Các phần symmetric encryption, message integrity, public-key encryption và signatures trong giáo trình chính thức"
+        }
+      ]
+    },
+    {
+      "id": "signatures",
+      "title": "Chữ ký số, chứng thư và chống phát lại",
+      "theory": [
+        "Chữ ký dùng khóa bí mật để ký và khóa công khai để kiểm tra, phục vụ tính xác thực/toàn vẹn chứ không tự giấu nội dung. Chứng thư liên kết danh tính với khóa theo một hạ tầng tin cậy cần xác minh.",
+        "Một chữ ký hợp lệ có thể bị phát lại nếu giao thức không gắn nonce, thời gian, người nhận và mục đích. Các sơ đồ dựa nonce như ECDSA yêu cầu nonce bí mật đúng quy tắc; lỗi nonce có thể phá bí mật khóa."
+      ],
+      "method": [
+        "Nêu thông điệp chuẩn hóa và ngữ cảnh ký.",
+        "Xác minh chữ ký và chuỗi tin cậy.",
+        "Kiểm tra hạn, mục đích và tính mới để chống phát lại."
+      ],
+      "pitfalls": [
+        "Không coi kiểm tra chữ ký thành công là đủ để chấp nhận một giao dịch ở mọi ngữ cảnh."
+      ],
+      "examples": [
+        {
+          "statement": "Chữ ký có giấu được nội dung thông điệp không?",
+          "steps": [
+            "Quy trình xác minh thường nhận thông điệp và chữ ký công khai.",
+            "Mục tiêu là chứng minh liên hệ với khóa ký, không che bản rõ.",
+            "Muốn giấu nội dung phải thêm mã hóa thích hợp."
+          ],
+          "result": "Không; bí mật là mục tiêu riêng.",
+          "insight": "Cần phân biệt chữ ký với mã hóa khóa công khai."
+        },
+        {
+          "statement": "Tại sao cần ký cả mã giao dịch và người nhận?",
+          "steps": [
+            "Nếu chỉ ký số tiền, chữ ký có thể bị ghép vào giao dịch khác cùng số tiền.",
+            "Gắn mã giao dịch và người nhận ràng buộc ngữ cảnh.",
+            "Phía nhận còn phải kiểm tra mã chưa dùng để chặn phát lại."
+          ],
+          "result": "Chữ ký nên bao phủ đầy đủ dữ liệu quyết định ý nghĩa giao dịch.",
+          "insight": "Dữ liệu hợp lệ về mật mã vẫn có thể bị dùng sai ngữ cảnh."
+        },
+        {
+          "statement": "Với quan hệ chữ ký dạng $s=k^{-1}(z+rx)\\pmod q$, vì sao lặp k nguy hiểm?",
+          "steps": [
+            "Hai chữ ký cùng k và r cho $s_1-s_2=k^{-1}(z_1-z_2)$.",
+            "Khi hiệu s khả nghịch, suy ra k từ dữ liệu công khai.",
+            "Sau đó nếu r khả nghịch, giải $x=(s_1k-z_1)/r\\pmod q$."
+          ],
+          "result": "Lặp nonce có thể làm lộ khóa bí mật x.",
+          "insight": "Các điều kiện khả nghịch phải được nói rõ trong phép chia môđun."
+        },
+        {
+          "statement": "Chứng thư có chữ ký đúng nhưng đã hết hạn. Có chấp nhận không?",
+          "steps": [
+            "Chữ ký đúng xác nhận chứng thư chưa bị thay đổi theo khóa bên phát hành.",
+            "Nó không làm mất điều kiện thời hạn đã ghi.",
+            "Giao thức phải kiểm tra thời gian, danh tính, mục đích và các trạng thái tin cậy liên quan."
+          ],
+          "result": "Không nên chấp nhận chỉ dựa vào chữ ký đúng.",
+          "insight": "Xác minh mật mã và xác minh chính sách tin cậy là các bước khác nhau."
+        },
+        {
+          "statement": "Vì sao cần biểu diễn thông điệp chuẩn tắc trước khi ký?",
+          "steps": [
+            "Hai chuỗi byte có thể được phần mềm diễn giải thành cùng dữ liệu hoặc ngược lại.",
+            "Chữ ký bảo vệ byte được ký, không tự giải quyết sự mơ hồ của parser.",
+            "Chuẩn hóa hoặc định dạng không mơ hồ giúp hai phía kiểm tra cùng một đối tượng."
+          ],
+          "result": "Cần đặc tả encoding và trường ngữ cảnh rõ ràng.",
+          "insight": "Thiết kế biểu diễn là một phần của tính đúng của giao thức."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1 Congruences, phần Groups và Finite Fields"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "§4.1 Public-Key Cryptography; các phần Rings, Fields và ứng dụng"
+        },
+        {
+          "sourceId": "stanford-crypto",
+          "locator": "Các phần symmetric encryption, message integrity, public-key encryption và signatures trong giáo trình chính thức"
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "title": "Mô hình an toàn, reduction và chi phí tấn công",
+      "theory": [
+        "An toàn tính toán được phát biểu qua một trò chơi, năng lực đối thủ và lợi thế thành công. Reduction chỉ ra một đối thủ phá sơ đồ sẽ dẫn đến giải một bài toán được giả sử khó, với mất mát định lượng cụ thể.",
+        "An toàn không chỉ là khóa dài: cần primitive, chế độ, giao thức và cách cài đặt đúng. Timing và các kênh bên có thể rò rỉ ngoài mô hình toán học; số học đồ chơi không chứng minh an toàn thực tế."
+      ],
+      "method": [
+        "Chỉ rõ trò chơi và thông tin đối thủ có.",
+        "Phát biểu giả thiết và kết luận có điều kiện.",
+        "Kiểm tra chi phí bit và giới hạn mô hình."
+      ],
+      "pitfalls": [
+        "Không viết đã chứng minh tuyệt đối an toàn khi kết quả chỉ dựa trên một giả thiết độ khó."
+      ],
+      "examples": [
+        {
+          "statement": "Khóa đều k bit bị vét cạn. Trung bình cần thử bao nhiêu khóa nếu biết nhận diện khóa đúng?",
+          "steps": [
+            "Không gian có $2^k$ khóa.",
+            "Vị trí khóa thật trong thứ tự thử độc lập là đều.",
+            "Số thử trung bình bằng $(2^k+1)/2$, xấp xỉ $2^{k-1}$."
+          ],
+          "result": "Xấp xỉ $2^{k-1}$ lần thử.",
+          "insight": "Cần giả thiết khóa đều và có cách xác định một phép thử thành công."
+        },
+        {
+          "statement": "Tăng từ k lên k+10 bit làm không gian vét cạn tăng bao nhiêu lần?",
+          "steps": [
+            "Không gian cũ có $2^k$ khóa.",
+            "Không gian mới có $2^{k+10}$.",
+            "Tỷ số bằng $2^{10}=1024$."
+          ],
+          "result": "1024 lần trong mô hình vét cạn.",
+          "insight": "Kết luận không đánh giá các tấn công tốt hơn vét cạn hoặc lỗi cài đặt."
+        },
+        {
+          "statement": "Phân biệt tính đúng và an toàn của mã hóa bằng một ví dụ.",
+          "steps": [
+            "Sơ đồ $E(m)=m$, $D(c)=c$ luôn giải mã đúng.",
+            "Nhưng bản mã hiển thị toàn bộ bản rõ.",
+            "Do đó điều kiện $D(E(m))=m$ không bảo đảm bí mật."
+          ],
+          "result": "Một sơ đồ có thể hoàn toàn đúng mà hoàn toàn không bí mật.",
+          "insight": "Hai thuộc tính cần được phát biểu và chứng minh riêng."
+        },
+        {
+          "statement": "Nếu reduction từ phá B sang giải A có thời gian đa thức, việc chưa giải được A có chứng minh vô điều kiện B an toàn không?",
+          "steps": [
+            "Reduction tạo kết luận điều kiện: nếu A khó trong mô hình và tham số đã nêu, thì không có đối thủ B thuộc lớp được xét.",
+            "Việc chưa có thuật toán cho A không là một chứng minh A khó.",
+            "Cần công bố giả thiết và giới hạn reduction."
+          ],
+          "result": "Không phải chứng minh vô điều kiện.",
+          "insight": "Ngôn ngữ giả thiết rõ ràng là thành phần học thuật của phân tích bảo mật."
+        },
+        {
+          "statement": "Tại sao phép so sánh tag dừng ở byte sai đầu tiên có thể rò rỉ?",
+          "steps": [
+            "Thời gian xử lý có thể tăng theo số byte đầu khớp.",
+            "Đối thủ đo nhiều lần có thể khai thác tương quan thời gian với tiền tố đúng.",
+            "Phép so sánh thời gian hằng cùng xử lý giao thức phù hợp giảm loại rò rỉ này."
+          ],
+          "result": "Tính đúng logic không đủ loại kênh bên thời gian.",
+          "insight": "Mô hình cài đặt phải được xem xét bên cạnh mô hình đại số."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1 Congruences, phần Groups và Finite Fields"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "§4.1 Public-Key Cryptography; các phần Rings, Fields và ứng dụng"
+        },
+        {
+          "sourceId": "stanford-crypto",
+          "locator": "Các phần symmetric encryption, message integrity, public-key encryption và signatures trong giáo trình chính thức"
+        }
+      ]
+    }
+  ]
+}

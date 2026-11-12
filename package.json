@@ -1,0 +1,36 @@
+{
+  "name": "vmo-tst",
+  "version": "1.0.0",
+  "description": "Tài liệu ôn luyện VMO Đà Nẵng 2026-2027",
+  "type": "module",
+  "packageManager": "npm@11.20.0",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env server.js",
+    "start": "node --env-file-if-exists=.env server.js",
+    "build": "node build.js",
+    "catalog:dry-run": "node scripts/catalog-migration.mjs",
+    "catalog:plan": "node scripts/catalog-reconcile-plan.mjs",
+    "catalog:reconcile-dry-run": "node scripts/catalog-reconcile-live.mjs",
+    "catalog:apply": "node scripts/catalog-migration.mjs --apply",
+    "test": "node test/ai-fallback.test.mjs && node test/books.test.mjs && node test/rag-cross-catalog.test.mjs && node test/university-materials.test.mjs && node test/education-access.test.mjs && node test/teacher-permissions.test.mjs && node test/tst-tay-ninh-geometry.test.mjs && node test/geometry-constructions.test.mjs && node test/geometry-diagram.test.mjs && node test/module-navigation.test.mjs && node test/ai-guide-editor.test.mjs && node test/catalog-stats.test.mjs && node test/tst-locations.test.mjs && node test/province-mergers.test.mjs && node test/exam-evidence-db.test.mjs && node test/exam-prediction.test.mjs && node test/exam-trends.test.mjs && node test/specialty-content.test.mjs && node test/learning-dashboard.test.mjs && node test/submission-verification.test.mjs && node test/vercel-function-limit.test.mjs && node test/responsive-navigation.test.mjs && node test/rag-retrieval.test.mjs && node test/rag-hardening.test.mjs && node test/grade-catalogs.test.mjs && node test/math-support.test.mjs && node test/admissions.test.mjs && node test/combined-catalogs.test.mjs && node test/catalog-import.test.mjs",
+    "lint": "node -c books.js && node -c lib/books.js && node -c lib/university-catalog.js && node -c lib/rag-statement-match.js && node -c university_materials.js && node -c lib/university-materials.js && node -c university_courses.js && node -c university.js && node -c lib/university-courses.js && node -c education_access.js && node -c lib/education-access.js && node -c lib/education-db.js && node -c lib/app-shell.js && node -c lib/session.js && node -c auth.js && node -c geometry_diagram.js && node -c lib/geometry-diagram.js && node -c lib/guide-diagram.js && node -c account_mgmt.js && node -c server.js && node -c build.js && node -c app.js && node -c ai_guide_engine.js && node -c tst-locations.js && node -c vmo_db_ui.js && node -c vmo_data_service.js && node -c i18n.js && node -c i18n_content.js && node -c api/auth.js && node -c api/data.js && node -c lib/catalog-import.js && node -c lib/home-stats.js && node -c lib/learning.js && node -c lib/submission-verification.js && node -c lib/province-mergers.js && node -c lib/exam-prediction.js && node -c lib/exam-trends.js && node -c api/translate-content.js && node -c api/ai-guide.js && node -c api/ai-evaluate-solution.js && node -c api/ai-ocr-math.js && node -c api/ai-ocr-exam.js && node -c api/ai-predict-exam.js && node -c api/ai-exam-trends.js && node -c api/ai-trend-theory.js && node -c lib/ai.js && node -c lib/openai.js && node -c lib/rag-core.js && node -c lib/rag-embedding.js && node -c lib/rag-store.js && node -c lib/rag-retrieval.js && node -c lib/rag-query-cache.js && node -c lib/rag-benchmark.js && node -c lib/math-audit.js && node -c math_support.js && node -c lib/math-support.js && node -c lib/problem-access.js && node -c lib/ocr-normalization.js && node -c admissions.js && node -c lib/specialized-schools.js",
+    "rag:index": "node scripts/rag-index.mjs",
+    "rag:benchmark": "node scripts/rag-benchmark.mjs",
+    "rag:benchmark:live": "node scripts/rag-benchmark-live.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^2.22.0",
+    "compression": "^1.8.2",
+    "express": "^4.21.2",
+    "helmet": "^8.3.0",
+    "bcryptjs": "^3.0.2",
+    "mongodb": "^6.20.0"
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.1"
+  },
+  "allowScripts": {
+    "@google/genai": false,
+    "protobufjs": false
+  }
+}

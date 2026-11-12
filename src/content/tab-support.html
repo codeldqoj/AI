@@ -1,0 +1,49 @@
+<section class="tab-pane" id="tab-support" aria-labelledby="tab-btn-support">
+  <div class="feed-container">
+    <div class="section-header-box"><h2>HỖ TRỢ GIẢI TOÁN</h2><p>Tải ảnh một bài toán, nhận diện OCR và kiểm tra nội dung trước khi lưu. Bài toán của bạn được lưu riêng theo tài khoản.</p></div>
+    <form id="mathSupportForm" class="math-support-form">
+      <label for="supportImage">Ảnh bài toán (JPEG, PNG hoặc WEBP)</label>
+      <input id="supportImage" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="supportPasteHint">
+      <div id="supportPasteHint" class="tipbox" tabindex="0">📋 Sao chép ảnh bài toán, bấm vào đây rồi nhấn <kbd>Ctrl+V</kbd> (Mac: <kbd>⌘+V</kbd>) để dán ảnh. Bạn cũng có thể chọn tệp ở trên.</div>
+      <img id="supportImagePreview" alt="Ảnh bài toán được chọn" hidden>
+      <button id="supportOcrButton" class="btn-secondary" type="button" disabled>🔎 OCR bài toán</button>
+      <div id="supportOcrEditor" hidden>
+        <div class="math-support-fields">
+          <label for="supportTitle">Tên bài toán<input id="supportTitle" maxlength="200" value="Bài toán riêng lẻ" required></label>
+          <label for="supportTopic">Chuyên đề<select id="supportTopic" required aria-describedby="supportTopicHint">
+            <option value="">— Chọn chuyên đề —</option>
+            <option>Dãy số và Giới hạn dãy số</option>
+            <option>Phương trình hàm</option>
+            <option>Số học và dãy số</option>
+            <option>Hình học phẳng</option>
+            <option>Đa thức</option>
+            <option>Tổ hợp</option>
+            <option>Bất đẳng thức</option>
+          </select></label>
+          <label for="supportScore">Điểm tối đa<input id="supportScore" type="number" min="0.1" max="20" step="0.1" value="5" required></label>
+        </div>
+        <p id="supportTopicHint">Chuyên đề được tự động đề xuất sau OCR; hãy kiểm tra và điều chỉnh trước khi lưu.</p>
+        <label for="supportContent">Nội dung OCR — kiểm tra, chỉnh sửa trước khi lưu</label>
+        <textarea id="supportContent" rows="10" maxlength="50000" spellcheck="false" required></textarea>
+        <button id="supportPreviewButton" class="btn-secondary" type="button">👁️ Xem trước công thức</button>
+        <div id="supportMathPreview" class="problem-content" aria-label="Xem trước bài toán"></div>
+        <button id="supportSolveButton" class="btn-action" type="button" disabled>🧠 Giải bài toán bằng AI</button>
+        <p id="supportSolveStatus" role="status" aria-live="polite"></p>
+        <div id="supportSolveResult"></div>
+        <button id="supportSaveButton" class="btn-action" type="submit" disabled>💾 Lưu bài toán</button>
+      </div>
+      <p id="supportUploadStatus" role="status" aria-live="polite"></p>
+    </form>
+    <div class="math-support-toolbar">
+      <label for="supportSearch">Tìm bài toán đã lưu<input id="supportSearch" type="search" placeholder="Tên bài, chuyên đề hoặc nội dung..."></label>
+      <button id="supportReload" type="button" class="btn-secondary">↻ Tải lại</button>
+    </div>
+    <p id="supportListStatus" role="status" aria-live="polite"></p>
+    <div id="supportProblems"></div>
+    <nav class="math-support-pagination" aria-label="Trang bài toán">
+      <button id="supportPrevious" type="button" class="btn-secondary" disabled>← Trang trước</button>
+      <span id="supportPageLabel"></span>
+      <button id="supportNext" type="button" class="btn-secondary" disabled>Trang sau →</button>
+    </nav>
+  </div>
+</section>

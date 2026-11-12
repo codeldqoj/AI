@@ -1,0 +1,703 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-10-25.1",
+  "courseId": "mth-311",
+  "prerequisites": [
+    "Đại số phổ thông, sẵn sàng đọc chứng minh"
+  ],
+  "outcomes": [
+    "Viết chứng minh với lượng từ và định nghĩa rõ ràng",
+    "Hiểu quan hệ, lực lượng và tính đầy đủ",
+    "Chuyển từ ví dụ cụ thể sang metric và cấu trúc đại số"
+  ],
+  "sections": [
+    {
+      "id": "proof-language",
+      "title": "Ngôn ngữ chứng minh và cấu trúc lập luận",
+      "theory": [
+        "Học toán cao cấp đòi phân biệt định nghĩa, giả thiết, kết luận, mệnh đề tương đương và ví dụ. Chứng minh phải xử lý mọi đối tượng trong miền đã nêu; ví dụ riêng không thay thế chứng minh phổ quát.",
+        "Để chứng minh tương đương cần hai chiều. Phản đảo tương đương với kéo theo, còn đảo nói chung khác. Phản chứng cần chỉ rõ giả thiết phủ định dẫn đến mâu thuẫn nào, không chỉ nói điều đó hiển nhiên."
+      ],
+      "method": [
+        "Viết mục tiêu với lượng từ.",
+        "Tách các trường hợp hoặc hai chiều.",
+        "Kết luận phạm vi và kiểm tra điểm biên."
+      ],
+      "pitfalls": [
+        "Dùng chính điều cần chứng minh trong một bước trung gian là lập luận vòng tròn."
+      ],
+      "examples": [
+        {
+          "statement": "Chứng minh nếu n bình phương lẻ thì n lẻ.",
+          "steps": [
+            "Dùng phản đảo: giả sử n chẵn, viết n=2k.",
+            "Khi đó $n^2=4k^2=2(2k^2)$ chẵn.",
+            "Vì phản đảo đúng, mệnh đề ban đầu đúng."
+          ],
+          "result": "$n^2$ lẻ suy ra n lẻ.",
+          "insight": "Phản đảo giúp thay một giả thiết về bình phương bằng dạng biểu diễn của n."
+        },
+        {
+          "statement": "Chứng minh n chẵn khi và chỉ khi n bình phương chẵn.",
+          "steps": [
+            "Chiều thuận: n=2k cho bình phương chẵn.",
+            "Chiều ngược: nếu n lẻ thì n=2k+1, bình phương là $2(2k^2+2k)+1$ lẻ.",
+            "Phản đảo của chiều ngược hoàn tất tương đương."
+          ],
+          "result": "Hai điều kiện tương đương trên số nguyên.",
+          "insight": "Một mệnh đề khi và chỉ khi cần kiểm tra cả hai chiều."
+        },
+        {
+          "statement": "Chứng minh không tồn tại số nguyên lớn nhất.",
+          "steps": [
+            "Giả sử m là số nguyên lớn nhất.",
+            "Số m+1 cũng là số nguyên.",
+            "Nhưng m+1 lớn hơn m, mâu thuẫn giả thiết lớn nhất."
+          ],
+          "result": "Tập số nguyên không có phần tử lớn nhất.",
+          "insight": "Mâu thuẫn được chỉ ra bằng một đối tượng cụ thể xây từ giả thiết."
+        },
+        {
+          "statement": "Bác bỏ: nếu ab=0 thì a=b=0 trên số thực.",
+          "steps": [
+            "Chọn a=0,b=1.",
+            "Tích ab bằng 0, nên giả thiết được thỏa.",
+            "Nhưng b khác 0 nên kết luận đồng thời a=b=0 sai."
+          ],
+          "result": "Mệnh đề sai; kết luận đúng là a=0 hoặc b=0.",
+          "insight": "Liên từ hoặc và và không thể thay thế cho nhau trong kết luận."
+        },
+        {
+          "statement": "Chứng minh tổng hai số hữu tỷ là hữu tỷ.",
+          "steps": [
+            "Viết $a=p/q$, $b=r/s$ với p,q,r,s nguyên và qs khác 0.",
+            "Tổng là $(ps+rq)/(qs)$.",
+            "Tử và mẫu đều nguyên, mẫu khác 0, đúng định nghĩa hữu tỷ."
+          ],
+          "result": "$\\mathbb Q$ đóng với phép cộng.",
+          "insight": "Kết thúc bằng kiểm tra từng điều kiện của định nghĩa đang dùng."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 0: Logic, Sets, Relations, Mappings; các mục Continuity, Compactness và Completeness"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1–3: Preliminaries, Groups, Homomorphisms"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "Các phần về tập hợp, không gian metric, topology và đại số"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Các phần Congruences, Groups, Rings, Polynomials"
+        }
+      ]
+    },
+    {
+      "id": "sets-functions",
+      "title": "Tập hợp, ảnh, nghịch ảnh và ánh xạ",
+      "theory": [
+        "Ảnh f(A) gồm các giá trị đạt từ A; nghịch ảnh $f^{-1}(B)$ là tập mọi đầu vào có ảnh thuộc B, tồn tại với mọi hàm dù hàm không khả nghịch. Nghịch ảnh bảo toàn hợp, giao và phần bù đúng theo miền.",
+        "Ảnh bảo toàn hợp nhưng không luôn bảo toàn giao; tính đơn ánh là điều kiện tạo thêm các đẳng thức. Khi so sánh hai tập, chứng minh hai bao hàm bằng cách lấy phần tử tùy ý."
+      ],
+      "method": [
+        "Bắt đầu bằng định nghĩa thuộc tập.",
+        "Dịch qua điều kiện hàm.",
+        "Chứng minh hai chiều nếu yêu cầu đẳng thức."
+      ],
+      "pitfalls": [
+        "Ký hiệu nghịch ảnh tập không khẳng định hàm có hàm ngược."
+      ],
+      "examples": [
+        {
+          "statement": "Với f(x)=x bình phương trên R, tìm nghịch ảnh [1,4].",
+          "steps": [
+            "Điều kiện thuộc nghịch ảnh là $1\\le x^2\\le4$.",
+            "Suy ra $1\\le|x|\\le2$.",
+            "Tách hai phía số thực."
+          ],
+          "result": "$f^{-1}([1,4])=[-2,-1]\\cup[1,2]$.",
+          "insight": "Nghịch ảnh được xác định dù hàm bình phương không đơn ánh trên R."
+        },
+        {
+          "statement": "Chứng minh $f^{-1}(B\\cap C)=f^{-1}(B)\\cap f^{-1}(C)$.",
+          "steps": [
+            "x thuộc vế trái đúng khi f(x) thuộc cả B và C.",
+            "Điều đó tương đương x thuộc cả hai nghịch ảnh.",
+            "Tương đương phần tử đúng cho mọi x nên hai tập bằng nhau."
+          ],
+          "result": "Nghịch ảnh bảo toàn giao.",
+          "insight": "Đây là mẫu chứng minh đẳng thức tập bằng tương đương từng phần tử."
+        },
+        {
+          "statement": "Cho f(x)=x bình phương, A={-1},B={1}. So sánh ảnh của giao và giao các ảnh.",
+          "steps": [
+            "A giao B rỗng nên ảnh của giao rỗng.",
+            "Hai ảnh đều là {1}.",
+            "Giao các ảnh là {1}, lớn hơn tập rỗng."
+          ],
+          "result": "$f(A\\cap B)\\ne f(A)\\cap f(B)$.",
+          "insight": "Ảnh có thể gộp hai đầu vào khác nhau khi hàm không đơn ánh."
+        },
+        {
+          "statement": "Chứng minh hợp của hai hàm đơn ánh là đơn ánh.",
+          "steps": [
+            "Giả sử $g(f(x_1))=g(f(x_2))$.",
+            "Do g đơn ánh, $f(x_1)=f(x_2)$.",
+            "Do f đơn ánh, $x_1=x_2$."
+          ],
+          "result": "$g\\circ f$ đơn ánh trên miền phù hợp.",
+          "insight": "Thứ tự dùng tính đơn ánh đi từ hàm ngoài vào hàm trong."
+        },
+        {
+          "statement": "Với A={1,2}, liệt kê tập lũy thừa và số phần tử.",
+          "steps": [
+            "Một tập con chọn hoặc không chọn từng phần tử.",
+            "Các tập con là rỗng, {1}, {2}, {1,2}.",
+            "Có $2^2=4$ khả năng."
+          ],
+          "result": "$\\mathcal P(A)=\\{\\varnothing,\\{1\\},\\{2\\},\\{1,2\\}\\}$.",
+          "insight": "Phân biệt phần tử 1 với tập con {1} để tránh sai kiểu đối tượng."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 0: Logic, Sets, Relations, Mappings; các mục Continuity, Compactness và Completeness"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1–3: Preliminaries, Groups, Homomorphisms"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "Các phần về tập hợp, không gian metric, topology và đại số"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Các phần Congruences, Groups, Rings, Polynomials"
+        }
+      ]
+    },
+    {
+      "id": "induction-order",
+      "title": "Quy nạp mạnh, đệ quy và nguyên lý thứ tự tốt",
+      "theory": [
+        "Quy nạp mạnh cho phép dùng tất cả trường hợp nhỏ hơn n khi chứng minh trường hợp n; nó tương đương quy nạp thường trên số tự nhiên. Nguyên lý thứ tự tốt nói mỗi tập con không rỗng của số tự nhiên có phần tử nhỏ nhất.",
+        "Định nghĩa đệ quy cần trường hợp cơ sở và chỉ phụ thuộc các giá trị trước để tạo đối tượng xác định. Chứng minh tồn tại và duy nhất thường đi cùng quy nạp. Mỗi phương pháp phải gắn với miền thứ tự phù hợp."
+      ],
+      "method": [
+        "Chọn cơ sở đủ cho bước truyền.",
+        "Chỉ rõ những chỉ số nhỏ hơn được sử dụng.",
+        "Với phản ví dụ nhỏ nhất, tạo phản ví dụ nhỏ hơn để mâu thuẫn."
+      ],
+      "pitfalls": [
+        "Bước quy nạp không được sử dụng trường hợp cùng chỉ số hoặc chỉ số lớn hơn chưa chứng minh."
+      ],
+      "examples": [
+        {
+          "statement": "Chứng minh mọi số nguyên n lớn hơn 1 là tích các số nguyên tố.",
+          "steps": [
+            "Cơ sở 2 là nguyên tố.",
+            "Với n, nếu nguyên tố thì xong; nếu hợp số viết n=ab với 1<a,b<n.",
+            "Giả thiết quy nạp mạnh phân tích được a,b, ghép hai tích cho n."
+          ],
+          "result": "Mọi n lớn hơn 1 có phân tích thành tích nguyên tố.",
+          "insight": "Chứng minh này là tồn tại; tính duy nhất đòi lập luận bổ sung."
+        },
+        {
+          "statement": "Chứng minh $2^n\\ge n+1$ với n nguyên không âm.",
+          "steps": [
+            "Cơ sở n=0 cho 1 bằng 1.",
+            "Nếu đúng ở n thì $2^{n+1}\\ge2n+2$.",
+            "Vì $2n+2\\ge n+2$ cho n không âm, bước tiếp theo đúng."
+          ],
+          "result": "Bất đẳng thức đúng với mọi n không âm.",
+          "insight": "Bất đẳng thức phụ trong bước truyền phải được kiểm tra trên đúng miền."
+        },
+        {
+          "statement": "Đệ quy $a_0=1$, $a_{n+1}=3a_n$ có xác định duy nhất một dãy không?",
+          "steps": [
+            "a0 được cho duy nhất.",
+            "Nếu an đã xác định thì công thức gán duy nhất an+1.",
+            "Quy nạp vừa xây từng số hạng vừa cho tính duy nhất; công thức là $3^n$."
+          ],
+          "result": "Có, $a_n=3^n$.",
+          "insight": "Định nghĩa đệ quy là một cách xây dựng, không chỉ là một ràng buộc mơ hồ."
+        },
+        {
+          "statement": "Vì sao mọi tập con không rỗng của Z không nhất thiết có phần tử nhỏ nhất?",
+          "steps": [
+            "Xét tập các số nguyên âm.",
+            "Với mỗi phần tử n, n-1 cũng thuộc tập và nhỏ hơn.",
+            "Vì thế không có phần tử nhỏ nhất dù tập không rỗng."
+          ],
+          "result": "Phản ví dụ là tập số nguyên âm.",
+          "insight": "Thứ tự tốt của số tự nhiên không áp dụng nguyên xi cho toàn số nguyên."
+        },
+        {
+          "statement": "Chứng minh phép chia Euclid: với a nguyên, b nguyên dương, tồn tại duy nhất a=bq+r, 0 không vượt r nhỏ hơn b.",
+          "steps": [
+            "Tập các số không âm dạng a-bq không rỗng vì có thể chọn q âm đủ nhỏ; theo thứ tự tốt chọn số nhỏ nhất r.",
+            "Nếu r ít nhất b, thì r-b là một số cùng dạng không âm nhỏ hơn r, mâu thuẫn; vậy 0 không vượt r nhỏ hơn b.",
+            "Nếu hai biểu diễn tồn tại thì b nhân hiệu hai thương bằng hiệu hai số dư, có trị tuyệt đối nhỏ hơn b; bội đó phải bằng 0, nên cả thương và dư trùng nhau."
+          ],
+          "result": "Tồn tại duy nhất thương q và dư r.",
+          "insight": "Nguyên lý thứ tự tốt chứng minh tồn tại; chặn hiệu các số dư chứng minh duy nhất."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 0: Logic, Sets, Relations, Mappings; các mục Continuity, Compactness và Completeness"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1–3: Preliminaries, Groups, Homomorphisms"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "Các phần về tập hợp, không gian metric, topology và đại số"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Các phần Congruences, Groups, Rings, Polynomials"
+        }
+      ]
+    },
+    {
+      "id": "relations-orders",
+      "title": "Quan hệ tương đương, phân hoạch và thứ tự",
+      "theory": [
+        "Quan hệ tương đương phân chia tập thành các lớp rời nhau: hai lớp hoặc bằng nhau hoặc không giao. Một phân hoạch ngược lại xác định quan hệ cùng khối.",
+        "Thứ tự bộ phận có phản xạ, phản đối xứng và bắc cầu. Phần tử lớn nhất/nhỏ nhất phải so sánh được với mọi phần tử; cực đại/cực tiểu chỉ không có phần tử lớn/nhỏ hơn nó trong tập. Hai khái niệm khác nhau khi thứ tự không toàn phần."
+      ],
+      "method": [
+        "Kiểm tra ba tiên đề của quan hệ.",
+        "Mô tả lớp hoặc sơ đồ thứ tự.",
+        "Phân biệt cực đại với lớn nhất bằng định nghĩa."
+      ],
+      "pitfalls": [
+        "Trong thứ tự bộ phận, nhiều cực đại có thể tồn tại nhưng phần tử lớn nhất nếu có là duy nhất."
+      ],
+      "examples": [
+        {
+          "statement": "Quan hệ trên R: x tương đương y khi x-y nguyên. Lớp của 1/2 là gì?",
+          "steps": [
+            "Điều kiện là $x-1/2\\in\\mathbb Z$.",
+            "Viết x thành $1/2+k$.",
+            "Mọi k nguyên thỏa và không có giá trị nào khác."
+          ],
+          "result": "Lớp $1/2+\\mathbb Z$.",
+          "insight": "Đại diện có thể chọn trong [0,1) cho các lớp kiểu này."
+        },
+        {
+          "statement": "Chứng minh hai lớp tương đương có điểm chung thì bằng nhau.",
+          "steps": [
+            "Giả sử z thuộc lớp a và lớp b, nên a tương đương b nhờ đối xứng và bắc cầu.",
+            "Mọi x tương đương a cũng tương đương b.",
+            "Đổi vai a,b được bao hàm ngược."
+          ],
+          "result": "Hai lớp bằng nhau.",
+          "insight": "Đây là lý do các lớp tạo phân hoạch thay vì phủ chồng lấn."
+        },
+        {
+          "statement": "Xét chia hết trên {1,2,3,6}. Tìm phần tử nhỏ nhất và lớn nhất.",
+          "steps": [
+            "Số 1 chia hết vào mọi phần tử nên nhỏ nhất theo thứ tự chia hết.",
+            "Mọi phần tử đều chia 6 nên 6 lớn nhất.",
+            "Tập này có hai phần tử 2,3 không so sánh được, nhưng vẫn có hai phần tử biên chung."
+          ],
+          "result": "Nhỏ nhất 1, lớn nhất 6.",
+          "insight": "Lớn theo thứ tự chia hết không đơn thuần là lớn về độ lớn số học trong mọi tập."
+        },
+        {
+          "statement": "Trên {2,3} với thứ tự chia hết, có phần tử lớn nhất không?",
+          "steps": [
+            "2 không chia 3 và 3 không chia 2.",
+            "Cả hai đều cực đại vì không có phần tử khác lớn hơn chúng theo chia hết.",
+            "Nhưng không phần tử nào lớn hơn hoặc bằng cả hai."
+          ],
+          "result": "Hai cực đại, không có lớn nhất.",
+          "insight": "Ví dụ nhỏ này tách rõ hai định nghĩa."
+        },
+        {
+          "statement": "Chứng minh phần tử nhỏ nhất của một thứ tự bộ phận là duy nhất nếu tồn tại.",
+          "steps": [
+            "Giả sử a và b cùng nhỏ nhất.",
+            "Từ định nghĩa có $a\\le b$ và $b\\le a$.",
+            "Phản đối xứng cho a=b."
+          ],
+          "result": "Phần tử nhỏ nhất là duy nhất.",
+          "insight": "Điều kiện phản đối xứng là bước quyết định tính duy nhất."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 0: Logic, Sets, Relations, Mappings; các mục Continuity, Compactness và Completeness"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1–3: Preliminaries, Groups, Homomorphisms"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "Các phần về tập hợp, không gian metric, topology và đại số"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Các phần Congruences, Groups, Rings, Polynomials"
+        }
+      ]
+    },
+    {
+      "id": "cardinality",
+      "title": "Đếm được, song ánh và lập luận đường chéo",
+      "theory": [
+        "Hai tập cùng lực lượng khi có song ánh giữa chúng. Tập đếm được có thể hữu hạn hoặc liệt kê theo số tự nhiên tùy quy ước; ở đây ghi rõ khi cần vô hạn đếm được. Hợp đếm được các tập đếm được vẫn đếm được.",
+        "Cantor dùng đường chéo để chứng minh tập lũy thừa của A có lực lượng lớn hơn A; số thực không đếm được. Với biểu diễn thập phân, nên tránh các chữ số có hai biểu diễn tương đương."
+      ],
+      "method": [
+        "Tìm song ánh hoặc một quy trình liệt kê.",
+        "Kiểm tra không bỏ sót và xử lý trùng.",
+        "Khi chứng minh không đếm được, tạo đối tượng khác mọi phần tử liệt kê."
+      ],
+      "pitfalls": [
+        "Một tập vô hạn có thể cùng lực lượng với một tập con thực sự của nó."
+      ],
+      "examples": [
+        {
+          "statement": "Tập số tự nhiên và tập số chẵn không âm có cùng lực lượng không?",
+          "steps": [
+            "Hàm f(n)=2n ánh xạ số tự nhiên tới số chẵn.",
+            "Nếu 2a=2b thì a=b; mọi số chẵn không âm có dạng 2n.",
+            "Vì vừa đơn ánh vừa toàn ánh, đây là song ánh."
+          ],
+          "result": "Có cùng lực lượng.",
+          "insight": "Trực giác kích thước hữu hạn không chuyển nguyên xi sang tập vô hạn."
+        },
+        {
+          "statement": "Vì sao Z đếm được?",
+          "steps": [
+            "Liệt kê $0,1,-1,2,-2,3,-3,\\ldots$.",
+            "Mọi số nguyên có độ lớn hữu hạn nên xuất hiện sau hữu hạn bước.",
+            "Danh sách không lặp và có thể đánh chỉ số tự nhiên."
+          ],
+          "result": "Z là vô hạn đếm được.",
+          "insight": "Một quy trình liệt kê rõ ràng là chứng minh tồn tại song ánh."
+        },
+        {
+          "statement": "Vì sao Q đếm được?",
+          "steps": [
+            "Biểu diễn hữu tỷ bằng cặp số nguyên p,q với q dương.",
+            "Duyệt theo $|p|+q$ tăng, mỗi lớp hữu hạn và hợp phủ mọi cặp.",
+            "Bỏ các biểu diễn trùng bằng phân số tối giản để thu một liệt kê."
+          ],
+          "result": "Q là vô hạn đếm được.",
+          "insight": "Sự trùng biểu diễn không cản tính đếm được nếu có thể bỏ trùng."
+        },
+        {
+          "statement": "Chứng minh không có toàn ánh $f:A\\to\\mathcal P(A)$.",
+          "steps": [
+            "Đặt $D=\\{a\\in A:a\\notin f(a)\\}$.",
+            "Nếu có d sao cho f(d)=D, thì $d\\in D$ tương đương $d\\notin D$.",
+            "Mâu thuẫn cho thấy D không nằm trong ảnh."
+          ],
+          "result": "$|\\mathcal P(A)|>|A|$ theo định lý Cantor.",
+          "insight": "Tập đường chéo được xây để khác từng tập ảnh tại chính phần tử chỉ số."
+        },
+        {
+          "statement": "Giải thích đường chéo chứng minh (0,1) không đếm được.",
+          "steps": [
+            "Giả sử liệt kê các số thực trong khoảng bằng các chữ số thập phân đã chọn quy ước.",
+            "Tạo số y có chữ số thứ n là 1 nếu chữ số thứ n của số thứ n không là 1, ngược lại chọn 2.",
+            "y khác mọi số thứ n ở chữ số thứ n; chỉ dùng 1,2 tránh mơ hồ đuôi 9."
+          ],
+          "result": "Không thể liệt kê toàn bộ (0,1).",
+          "insight": "Phải xây một số vẫn thuộc tập và xử lý tính không duy nhất của biểu diễn."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 0: Logic, Sets, Relations, Mappings; các mục Continuity, Compactness và Completeness"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1–3: Preliminaries, Groups, Homomorphisms"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "Các phần về tập hợp, không gian metric, topology và đại số"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Các phần Congruences, Groups, Rings, Polynomials"
+        }
+      ]
+    },
+    {
+      "id": "real-completeness",
+      "title": "Tính đầy đủ của R, supremum và dãy Cauchy",
+      "theory": [
+        "Tính đầy đủ của R có thể phát biểu qua chặn trên nhỏ nhất: mọi tập không rỗng bị chặn trên có supremum. Từ đó suy ra hội tụ của dãy đơn điệu bị chặn và tiêu chuẩn Cauchy.",
+        "Supremum không nhất thiết thuộc tập. Dãy Cauchy đòi các số hạng đủ xa gần nhau đôi một, khác phát biểu mỗi số hạng gần một giới hạn đã biết. Q không đầy đủ vì thiếu các giới hạn như căn 2."
+      ],
+      "method": [
+        "Nêu tập hoặc dãy và điều kiện bị chặn.",
+        "Chứng minh tính nhỏ nhất của chặn trên hoặc tính Cauchy.",
+        "Chỉ rõ không gian đang xét."
+      ],
+      "pitfalls": [
+        "Có chặn trên không có nghĩa tập có phần tử lớn nhất."
+      ],
+      "examples": [
+        {
+          "statement": "Tìm sup và max của tập (0,1).",
+          "steps": [
+            "Số 1 là một chặn trên.",
+            "Mọi b nhỏ hơn 1 không thể là chặn trên vì có số thuộc (0,1) lớn hơn b.",
+            "Nhưng 1 không thuộc tập nên không có max."
+          ],
+          "result": "Sup bằng 1; không có phần tử lớn nhất.",
+          "insight": "Định nghĩa sup gồm cả chặn trên và nhỏ nhất trong các chặn trên."
+        },
+        {
+          "statement": "Chứng minh dãy $a_n=1-1/n$ tăng và hội tụ.",
+          "steps": [
+            "Hiệu $a_{n+1}-a_n=1/[n(n+1)]$ dương.",
+            "Mọi số hạng nhỏ hơn 1 nên bị chặn trên.",
+            "Từ công thức trực tiếp hoặc đơn điệu–bị chặn, giới hạn bằng 1."
+          ],
+          "result": "$a_n\\uparrow1$.",
+          "insight": "Định lý tồn tại giới hạn và công thức xác định giá trị giới hạn hỗ trợ nhau."
+        },
+        {
+          "statement": "Chứng minh dãy 1/n là Cauchy.",
+          "steps": [
+            "Với m,n>N, $|1/m-1/n|\\le1/N$.",
+            "Chọn N lớn hơn $1/\\varepsilon$.",
+            "Khi đó mọi cặp số hạng sau N có khoảng cách nhỏ hơn epsilon."
+          ],
+          "result": "Dãy 1/n là Cauchy.",
+          "insight": "Chỉ cần một chặn đều cho mọi m,n đủ lớn."
+        },
+        {
+          "statement": "Tại sao xấp xỉ thập phân căn 2 tạo dãy Cauchy trong Q không có giới hạn trong Q?",
+          "steps": [
+            "Chọn các phân số cắt thập phân căn 2 đến n chữ số.",
+            "Sai số trong R không vượt $10^{-n}$ nên dãy Cauchy.",
+            "Nếu có giới hạn hữu tỷ thì tính duy nhất giới hạn trong R buộc nó bằng căn 2, trái tính vô tỷ."
+          ],
+          "result": "Q không đầy đủ.",
+          "insight": "Tính Cauchy phụ thuộc khoảng cách; có giới hạn trong không gian còn phụ thuộc các điểm không gian chứa."
+        },
+        {
+          "statement": "Tìm inf của $\\{1/n:n\\ge1\\}$.",
+          "steps": [
+            "0 là chặn dưới vì mọi phần tử dương.",
+            "Với mọi epsilon dương có n đủ lớn sao cho 1/n nhỏ hơn epsilon.",
+            "Vì không số dương nào là chặn dưới tốt hơn 0, inf bằng 0."
+          ],
+          "result": "Inf bằng 0 nhưng tập không có phần tử nhỏ nhất.",
+          "insight": "Đây là phiên bản chặn dưới tương ứng với sup của khoảng mở."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 0: Logic, Sets, Relations, Mappings; các mục Continuity, Compactness và Completeness"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1–3: Preliminaries, Groups, Homomorphisms"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "Các phần về tập hợp, không gian metric, topology và đại số"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Các phần Congruences, Groups, Rings, Polynomials"
+        }
+      ]
+    },
+    {
+      "id": "metric-continuity",
+      "title": "Khoảng cách, liên tục và compact",
+      "theory": [
+        "Metric d không âm, bằng 0 đúng trên đường chéo, đối xứng và thỏa bất đẳng thức tam giác. Liên tục được mô tả bằng epsilon–delta theo metric. Liên tục đều dùng một delta cho tất cả điểm trong miền.",
+        "Trong R mũ n với metric Euclid, compact tương đương đóng và bị chặn; phát biểu này không đúng cho mọi không gian metric. Hàm liên tục trên compact đạt cực trị và liên tục đều. Trên miền không compact cần kiểm tra riêng."
+      ],
+      "method": [
+        "Xác định metric và miền.",
+        "Phân biệt lượng từ của liên tục điểm và đều.",
+        "Kiểm tra compact trước khi dùng định lý."
+      ],
+      "pitfalls": [
+        "Đóng và bị chặn không luôn kéo theo compact ngoài không gian Euclid hữu hạn chiều."
+      ],
+      "examples": [
+        {
+          "statement": "Kiểm tra $d(x,y)=|x-y|$ là metric trên R.",
+          "steps": [
+            "Không âm, đối xứng và bằng 0 đúng khi x=y là các tính chất trị tuyệt đối.",
+            "Bất đẳng thức tam giác $|x-z|\\le|x-y|+|y-z|$ được thỏa.",
+            "Vì đủ bốn điều kiện, đây là metric."
+          ],
+          "result": "Khoảng cách chuẩn trên R là một metric.",
+          "insight": "Chứng minh metric cần đủ điều kiện, không chỉ trực giác khoảng cách."
+        },
+        {
+          "statement": "Chứng minh f(x)=3x liên tục đều trên R.",
+          "steps": [
+            "Hiệu giá trị có độ lớn $3|x-y|$.",
+            "Với epsilon dương, chọn delta bằng epsilon/3.",
+            "Delta không phụ thuộc điểm x,y, nên liên tục đều."
+          ],
+          "result": "f liên tục đều, thậm chí Lipschitz hệ số 3.",
+          "insight": "Một chặn Lipschitz toàn miền cho liên tục đều ngay lập tức."
+        },
+        {
+          "statement": "Hàm 1/x trên (0,1) có liên tục đều không?",
+          "steps": [
+            "Chọn $x_n=1/(n+1)$, $y_n=1/(n+2)$, đều trong miền.",
+            "Khoảng cách đầu vào về 0.",
+            "Hiệu giá trị hàm luôn bằng 1, nên không thể có delta chung cho epsilon bằng 1/2."
+          ],
+          "result": "Không liên tục đều, dù liên tục tại mọi điểm trong miền.",
+          "insight": "Hai dãy đầu vào gần nhau nhưng ảnh không gần là chứng cứ bác bỏ liên tục đều."
+        },
+        {
+          "statement": "Hàm liên tục trên [2,5] có đạt giá trị nhỏ nhất không?",
+          "steps": [
+            "Đoạn [2,5] đóng và bị chặn trong R nên compact.",
+            "Ảnh của compact qua hàm liên tục là compact.",
+            "Tập ảnh không rỗng compact trong R chứa infimum của nó."
+          ],
+          "result": "Có một điểm trong đoạn đạt giá trị nhỏ nhất.",
+          "insight": "Định lý là tồn tại; muốn tìm điểm cụ thể vẫn cần phân tích hàm."
+        },
+        {
+          "statement": "Tập (0,1) có compact trong R không?",
+          "steps": [
+            "Nó không đóng vì dãy 1/n trong tập có giới hạn 0 ngoài tập.",
+            "Theo Heine–Borel, compact trong R phải đóng và bị chặn.",
+            "Bị chặn riêng lẻ không đủ."
+          ],
+          "result": "Không compact.",
+          "insight": "Một dãy có giới hạn ngoài tập là cách chứng minh tập không đóng."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 0: Logic, Sets, Relations, Mappings; các mục Continuity, Compactness và Completeness"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1–3: Preliminaries, Groups, Homomorphisms"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "Các phần về tập hợp, không gian metric, topology và đại số"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Các phần Congruences, Groups, Rings, Polynomials"
+        }
+      ]
+    },
+    {
+      "id": "structures",
+      "title": "Cấu trúc đại số, đa thức và tư duy trừu tượng",
+      "theory": [
+        "Nhóm có phép toán kết hợp, đơn vị và nghịch đảo; giao hoán là điều kiện bổ sung. Vành có cộng và nhân tương thích; trường cho nghịch đảo mọi phần tử khác 0. Đồng cấu bảo toàn phép toán và giúp so sánh các cấu trúc qua kernel, ảnh.",
+        "Đa thức trên một trường có phép chia Euclid. Tính trừu tượng không loại bỏ tính toán: ví dụ và phản ví dụ giúp kiểm tra một định nghĩa có thật sự áp dụng hay không."
+      ],
+      "method": [
+        "Liệt kê các tiên đề đúng loại cấu trúc.",
+        "Kiểm tra bằng phép toán cụ thể hoặc một phản ví dụ.",
+        "Nối tính toán với khái niệm kernel, ảnh, đồng cấu."
+      ],
+      "pitfalls": [
+        "Tập có cùng số phần tử chưa chắc có cùng cấu trúc đại số."
+      ],
+      "examples": [
+        {
+          "statement": "Z với phép cộng có là nhóm?",
+          "steps": [
+            "Cộng số nguyên kết hợp và đóng.",
+            "Đơn vị là 0, nghịch đảo của n là -n.",
+            "Phép cộng còn giao hoán nên là nhóm Abel."
+          ],
+          "result": "Có, nhóm Abel.",
+          "insight": "Một số nguyên có nghịch đảo cộng không có nghĩa có nghịch đảo nhân nguyên."
+        },
+        {
+          "statement": "Z với phép nhân có là nhóm không?",
+          "steps": [
+            "Phần tử đơn vị nhân là 1.",
+            "Nhưng 0 không có nghịch đảo, và 2 cũng không có nghịch đảo thuộc Z.",
+            "Một tiên đề nhóm không thỏa nên không là nhóm."
+          ],
+          "result": "Không.",
+          "insight": "Khi kiểm tra cấu trúc, phải dùng đúng phép toán đang xét."
+        },
+        {
+          "statement": "Hàm từ Z tới Z/5Z gửi n tới lớp dư n có bảo toàn cộng không?",
+          "steps": [
+            "Lớp của a+b bằng tổng lớp a và lớp b theo định nghĩa phép cộng modulo.",
+            "Vì vậy đây là đồng cấu nhóm cộng.",
+            "Kernel là các số có lớp dư 0, tức 5Z."
+          ],
+          "result": "Là đồng cấu toàn ánh với kernel 5Z.",
+          "insight": "Kernel mô tả những phần tử bị đồng cấu gộp về đơn vị."
+        },
+        {
+          "statement": "Chia $x^3-1$ cho x-1 trên R[x].",
+          "steps": [
+            "Nhận đẳng thức hằng đẳng thức $x^3-1=(x-1)(x^2+x+1)$.",
+            "Thương là đa thức bậc 2, dư 0.",
+            "Thay x=1 xác nhận 1 là nghiệm và x-1 là nhân tử."
+          ],
+          "result": "Thương $x^2+x+1$, dư 0.",
+          "insight": "Phép chia đa thức nối thuật toán cụ thể với định lý nhân tử."
+        },
+        {
+          "statement": "Nhóm cyclic 4 phần tử có đẳng cấu với nhóm Klein bốn không?",
+          "steps": [
+            "Nhóm cyclic có phần tử cấp 4.",
+            "Trong nhóm Klein, mọi phần tử khác đơn vị có cấp 2.",
+            "Đồng cấu đẳng cấu bảo toàn cấp phần tử nên hai nhóm không thể đẳng cấu."
+          ],
+          "result": "Không đẳng cấu dù cùng có 4 phần tử.",
+          "insight": "Bất biến cấu trúc giúp bác bỏ đẳng cấu mà không thử mọi song ánh."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 0: Logic, Sets, Relations, Mappings; các mục Continuity, Compactness và Completeness"
+        },
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1–3: Preliminaries, Groups, Homomorphisms"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "Các phần về tập hợp, không gian metric, topology và đại số"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Các phần Congruences, Groups, Rings, Polynomials"
+        }
+      ]
+    }
+  ]
+}

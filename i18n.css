@@ -1,0 +1,89 @@
+/* ============================================================
+   CHUYỂN ĐỔI NGÔN NGỮ (VI/EN) - VMO ĐÀ NẴNG 2026-2027
+   Language Switcher Component & Styling
+   ============================================================ */
+
+.lang-switch-wrap {
+  display: inline-flex;
+  align-items: center;
+  background: var(--soft, #eef5fb);
+  border: 1px solid var(--border, #dde3ea);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+  margin-right: 8px;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.lang-switch-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted, #667085);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1.25;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lang-switch-btn:hover {
+  color: var(--primary, #173b64);
+}
+
+.lang-switch-btn.active {
+  background: var(--primary, #173b64);
+  color: #ffffff !important;
+  box-shadow: 0 1px 4px rgba(23, 59, 100, 0.25);
+}
+
+/* Dark Mode Styles */
+body.dark .lang-switch-wrap {
+  background: #152235;
+  border-color: #2b3a4c;
+}
+
+body.dark .lang-switch-btn {
+  color: #9facba;
+}
+
+body.dark .lang-switch-btn:hover {
+  color: #e4ebf3;
+}
+
+body.dark .lang-switch-btn.active {
+  background: #2563eb;
+  color: #ffffff !important;
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.4);
+}
+
+/* Lang Switch on Login Page */
+.login-lang-container {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  z-index: 100;
+}
+
+.login-lang-container .lang-switch-wrap {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 680px) {
+  .lang-switch-wrap {
+    margin-right: 4px;
+    padding: 1px;
+  }
+  .lang-switch-btn {
+    padding: 3px 6px;
+    font-size: 0.72rem;
+  }
+}

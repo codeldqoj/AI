@@ -1,0 +1,142 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Hồ sơ người dùng và phân quyền hệ thống VMO Đà Nẵng",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Mã định danh người dùng Firebase UID hoặc local ID" },
+        "email": { "type": "string", "description": "Email người dùng" },
+        "displayName": { "type": "string", "description": "Họ và tên hiển thị" },
+        "username": { "type": "string", "description": "Tên đăng nhập hệ thống" },
+        "photoURL": { "type": "string", "description": "Ảnh đại diện người dùng" },
+        "role": { "type": "string", "enum": ["admin", "teacher", "student", "user"], "description": "Vai trò tài khoản" },
+        "authProvider": { "type": "string", "description": "Phương thức xác thực (google hoặc password)" },
+        "createdAt": { "type": "string", "description": "Thời điểm tạo tài khoản (ISO string)" },
+        "lastLoginAt": { "type": "string", "description": "Thời điểm đăng nhập gần nhất (ISO string)" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "DocumentItem": {
+      "title": "DocumentItem",
+      "description": "Tài liệu chuyên đề, bài giảng, kỷ yếu chuyên toán",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Mã tài liệu duy nhất" },
+        "title": { "type": "string", "description": "Tiêu đề tài liệu chuyên đề" },
+        "topic": { "type": "string", "description": "Chủ đề (Hình học, Số học, Đại số & Giải tích, Tổ hợp, Tổng hợp)" },
+        "author": { "type": "string", "description": "Tác giả biên soạn / nguồn chia sẻ" },
+        "description": { "type": "string", "description": "Mô tả tóm tắt nội dung tài liệu" },
+        "fileUrl": { "type": "string", "description": "Đường dẫn tải tài liệu hoặc xem trực tuyến" },
+        "chapter": { "type": "string", "description": "Chương tài liệu liên quan trong giáo trình" },
+        "createdById": { "type": "string", "description": "UID người đăng tài liệu" },
+        "createdAt": { "type": "string", "description": "Thời điểm đăng tải (ISO string)" },
+        "updatedAt": { "type": "string", "description": "Thời điểm cập nhật gần nhất" }
+      },
+      "required": ["title", "topic"]
+    },
+    "Exam": {
+      "title": "Exam",
+      "description": "Đề thi học sinh giỏi các cấp (VMO, TST, Trường hè, Đội tuyển tỉnh/thành)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Mã định danh đề thi" },
+        "title": { "type": "string", "description": "Tên kỳ thi / Đề thi" },
+        "category": { "type": "string", "enum": ["vmo-danang", "mock", "tst-national", "history-dn-qn"], "description": "Phân loại bộ đề" },
+        "year": { "type": "string", "description": "Năm học hoặc mùa thi (ví dụ: 2026-2027)" },
+        "day": { "type": "string", "description": "Ngày thi (Ngày 1, Ngày 2, hoặc Thi 1 lượt)" },
+        "province": { "type": "string", "description": "Địa phương hoặc đơn vị ra đề" },
+        "duration": { "type": "integer", "description": "Thời gian làm bài (phút)" },
+        "description": { "type": "string", "description": "Mô tả ghi chú về đề thi" },
+        "sourceUrl": { "type": "string", "description": "Link bài đăng nguồn hoặc tài liệu gốc" },
+        "createdById": { "type": "string", "description": "UID người tạo" },
+        "createdAt": { "type": "string", "description": "Thời điểm thêm vào hệ thống" }
+      },
+      "required": ["title", "category"]
+    },
+    "Problem": {
+      "title": "Problem",
+      "description": "Câu hỏi / Bài toán chi tiết thuộc một đề thi",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Mã câu hỏi duy nhất (ví dụ: DANANG-QN-2014-C1)" },
+        "examId": { "type": "string", "description": "Mã đề thi chứa bài toán này" },
+        "orderNumber": { "type": "integer", "description": "Số thứ tự câu hỏi trong đề" },
+        "title": { "type": "string", "description": "Tiêu đề câu hỏi (ví dụ: Câu 1 - Dãy số)" },
+        "topic": { "type": "string", "description": "Phân môn chuyên đề (Đại số, Hình học, Số học, Tổ hợp, Giải tích)" },
+        "content": { "type": "string", "description": "Nội dung bài toán chứa mã LaTeX MathJax ($...$ hoặc $$...$$)" },
+        "officialSolution": { "type": "string", "description": "Lời giải chuẩn / Đáp án chính thức có LaTeX" },
+        "aiKnowledge": { "type": "string", "description": "Kiến thức & bổ đề AI tóm tắt" },
+        "aiIntuition": { "type": "string", "description": "Ý tưởng tiếp cận & phân tích của Giáo sư" },
+        "maxScore": { "type": "number", "description": "Thang điểm tối đa (ví dụ: 5.0, 7.0)" },
+        "createdById": { "type": "string", "description": "UID người tạo bài" },
+        "createdAt": { "type": "string", "description": "Thời điểm tạo" }
+      },
+      "required": ["examId", "title", "content"]
+    },
+    "Submission": {
+      "title": "Submission",
+      "description": "Câu trả lời & bài giải do học sinh nộp cho một bài toán",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Mã bài nộp duy nhất" },
+        "problemId": { "type": "string", "description": "Mã bài toán được nộp" },
+        "problemTitle": { "type": "string", "description": "Tiêu đề bài toán" },
+        "userId": { "type": "string", "description": "UID của học sinh nộp bài" },
+        "authorName": { "type": "string", "description": "Họ tên học sinh / tài khoản" },
+        "authorEmail": { "type": "string", "description": "Email người nộp" },
+        "solutionContent": { "type": "string", "description": "Nội dung lời giải bài làm (hỗ trợ LaTeX MathJax)" },
+        "status": { "type": "string", "enum": ["submitted", "reviewed", "draft"], "description": "Trạng thái bài nộp" },
+        "score": { "type": "number", "description": "Điểm số được giáo viên hoặc AI chấm" },
+        "feedback": { "type": "string", "description": "Nhận xét của Giáo viên / Chuyên gia" },
+        "createdAt": { "type": "string", "description": "Thời điểm nộp bài (ISO string)" },
+        "updatedAt": { "type": "string", "description": "Thời điểm chỉnh sửa gần nhất" }
+      },
+      "required": ["problemId", "userId", "solutionContent"]
+    },
+    "EventItem": {
+      "title": "EventItem",
+      "description": "Sự kiện, lịch thi chọn đội tuyển, seminar chuyên đề toán",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Mã sự kiện duy nhất" },
+        "title": { "type": "string", "description": "Tên sự kiện / Lịch thi / Buổi tập huấn" },
+        "eventType": { "type": "string", "enum": ["exam", "seminar", "training", "deadline", "other"], "description": "Phân loại sự kiện" },
+        "startDate": { "type": "string", "description": "Thời điểm bắt đầu (YYYY-MM-DD hoặc ISO string)" },
+        "endDate": { "type": "string", "description": "Thời điểm kết thúc (tùy chọn)" },
+        "location": { "type": "string", "description": "Địa điểm tổ chức (Phòng học, Trường THPT Chuyên, hoặc Trực tuyến)" },
+        "description": { "type": "string", "description": "Mô tả chi tiết nội dung sự kiện" },
+        "targetAudience": { "type": "string", "description": "Đối tượng tham gia (Đội tuyển QG, Khối 10, Khối 11, Khối 12)" },
+        "createdById": { "type": "string", "description": "UID người tạo sự kiện" },
+        "createdAt": { "type": "string", "description": "Thời điểm tạo" }
+      },
+      "required": ["title", "eventType", "startDate"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Hồ sơ cá nhân và phân quyền của từng người dùng"
+    },
+    "/documents/{documentId}": {
+      "schema": "DocumentItem",
+      "description": "Kho tài liệu, giáo trình, chuyên đề toán Olympic"
+    },
+    "/exams/{examId}": {
+      "schema": "Exam",
+      "description": "Danh mục các đề thi học sinh giỏi"
+    },
+    "/problems/{problemId}": {
+      "schema": "Problem",
+      "description": "Chi tiết các câu hỏi trong từng đề thi"
+    },
+    "/submissions/{submissionId}": {
+      "schema": "Submission",
+      "description": "Các bài giải, câu trả lời do học sinh nộp"
+    },
+    "/events/{eventId}": {
+      "schema": "EventItem",
+      "description": "Lịch sự kiện, kế hoạch ôn thi và các buổi tập huấn"
+    }
+  }
+}

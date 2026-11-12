@@ -1,0 +1,889 @@
+{
+  "mth-141": {
+    "functions": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 100,
+        "printedPage": "87",
+        "locator": "§2.1 The Derivative of a Function — các hàm cơ bản",
+        "verificationText": "The Derivative of a Function"
+      }
+    ],
+    "limits": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 136,
+        "printedPage": "123",
+        "locator": "§2.6 Limits",
+        "verificationText": "Limits"
+      }
+    ],
+    "continuity": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 144,
+        "printedPage": "131",
+        "locator": "§2.7 Continuous Functions",
+        "verificationText": "Continuous Functions"
+      }
+    ],
+    "derivative": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 151,
+        "printedPage": "138",
+        "locator": "§3.1 Linear Approximation",
+        "verificationText": "Linear Approximation"
+      }
+    ],
+    "rules": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 217,
+        "printedPage": "204",
+        "locator": "§4.1 The Chain Rule",
+        "verificationText": "The Chain Rule"
+      },
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 224,
+        "printedPage": "211",
+        "locator": "§4.2 Implicit Differentiation and Related Rates",
+        "verificationText": "Implicit Differentiation"
+      }
+    ],
+    "mean-value": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 210,
+        "printedPage": "197",
+        "locator": "§3.8 The Mean Value Theorem",
+        "verificationText": "The Mean Value Theorem"
+      }
+    ],
+    "optimization": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 156,
+        "printedPage": "143",
+        "locator": "§3.2 Maximum and Minimum Problems",
+        "verificationText": "Maximum and Minimum Problems"
+      },
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 200,
+        "printedPage": "187",
+        "locator": "§3.7 Newton’s Method",
+        "verificationText": "Newton"
+      }
+    ],
+    "integral-ftc": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 280,
+        "printedPage": "267",
+        "locator": "§5.7 The Fundamental Theorem and Its Applications",
+        "verificationText": "The Fundamental Theorem"
+      }
+    ]
+  },
+  "mth-142": {
+    "substitution-parts": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 355,
+        "printedPage": "342",
+        "locator": "§7.1 Integration by Parts",
+        "verificationText": "Integration by Parts"
+      }
+    ],
+    "rational-trig": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 361,
+        "printedPage": "348",
+        "locator": "§7.2 Trigonometric Integrals; §7.4 Partial Fractions",
+        "verificationText": "Trigonometric Integrals"
+      }
+    ],
+    "improper": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 380,
+        "printedPage": "367",
+        "locator": "§7.5 Improper Integrals",
+        "verificationText": "Improper Integrals"
+      }
+    ],
+    "applications": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 386,
+        "printedPage": "373",
+        "locator": "§8.1 Areas and Volumes by Slices",
+        "verificationText": "Areas and Volumes"
+      }
+    ],
+    "sequences": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 192,
+        "printedPage": "179",
+        "locator": "§3.6 Iterations — dãy truy hồi",
+        "verificationText": "Iterations"
+      },
+      {
+        "sourceId": "gallier",
+        "pdfPage": 374,
+        "printedPage": "374",
+        "locator": "§9.7 Limits of Sequences and Series",
+        "verificationText": "Limits of Sequences"
+      }
+    ],
+    "series": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 453,
+        "printedPage": "440",
+        "locator": "§10.2 Convergence Tests: Positive Series",
+        "verificationText": "Convergence Tests"
+      }
+    ],
+    "taylor": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 465,
+        "printedPage": "452",
+        "locator": "§10.4 The Taylor Series",
+        "verificationText": "Taylor Series"
+      }
+    ],
+    "parametric-polar-ode": [
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 425,
+        "printedPage": "412",
+        "locator": "§9.1 Polar Coordinates",
+        "verificationText": "Polar Coordinates"
+      },
+      {
+        "sourceId": "strang-calculus",
+        "pdfPage": 330,
+        "printedPage": "317",
+        "locator": "§6.5 Separable Equations Including the Logistic Equation",
+        "verificationText": "Separable Equations"
+      }
+    ]
+  },
+  "cse-191": {
+    "logic": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 50,
+        "printedPage": "41",
+        "locator": "Chương 3 Logical Formulas",
+        "verificationText": "Logical Formulas"
+      }
+    ],
+    "proof-induction": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 124,
+        "printedPage": "115",
+        "locator": "Chương 5 Induction",
+        "verificationText": "Induction"
+      }
+    ],
+    "sets-relations": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 90,
+        "printedPage": "81",
+        "locator": "Chương 4 Mathematical Data Types",
+        "verificationText": "Mathematical Data Types"
+      }
+    ],
+    "counting": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 560,
+        "printedPage": "551",
+        "locator": "Chương 14 Cardinality Rules",
+        "verificationText": "Cardinality Rules"
+      }
+    ],
+    "pigeonhole-inclusion": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 581,
+        "printedPage": "572",
+        "locator": "§14.8 The Pigeonhole Principle",
+        "verificationText": "Pigeonhole"
+      },
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 590,
+        "printedPage": "581",
+        "locator": "§14.9 Inclusion-Exclusion",
+        "verificationText": "Inclusion"
+      }
+    ],
+    "recurrences": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 636,
+        "printedPage": "627",
+        "locator": "Chương 15 Generating Functions",
+        "verificationText": "Generating Functions"
+      }
+    ],
+    "graphs": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 402,
+        "printedPage": "393",
+        "locator": "Chương 11 Simple Graphs",
+        "verificationText": "Simple Graphs"
+      }
+    ],
+    "trees-boolean": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 433,
+        "printedPage": "424",
+        "locator": "§11.10 Forests & Trees",
+        "verificationText": "Forests"
+      },
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 59,
+        "printedPage": "50",
+        "locator": "§3.4 The Algebra of Propositions",
+        "verificationText": "Algebra of Propositions"
+      }
+    ]
+  },
+  "mth-309": {
+    "systems": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 261,
+        "printedPage": "261",
+        "locator": "§8.2 Gaussian Elimination",
+        "verificationText": "Gaussian Elimination"
+      }
+    ],
+    "matrix-lu": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 269,
+        "printedPage": "269",
+        "locator": "§8.4 LU-Factorization",
+        "verificationText": "Factorization"
+      }
+    ],
+    "spaces-bases": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 86,
+        "printedPage": "86",
+        "locator": "§3.5 Bases of a Vector Space",
+        "verificationText": "Bases of a Vector Space"
+      }
+    ],
+    "maps-rank": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 202,
+        "printedPage": "202",
+        "locator": "§6.3 The Rank-Nullity Theorem",
+        "verificationText": "Rank"
+      }
+    ],
+    "determinants": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 227,
+        "printedPage": "227",
+        "locator": "§7.3 Definition of a Determinant",
+        "verificationText": "Determinant"
+      }
+    ],
+    "eigenvalues": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 569,
+        "printedPage": "569",
+        "locator": "§15.1 Eigenvectors and Eigenvalues",
+        "verificationText": "Eigenvectors"
+      }
+    ],
+    "orthogonality": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 472,
+        "printedPage": "472",
+        "locator": "§12.4 Orthonormal Bases and the Gram–Schmidt Procedure",
+        "verificationText": "Gram"
+      },
+      {
+        "sourceId": "gallier",
+        "pdfPage": 769,
+        "printedPage": "769",
+        "locator": "§23.1 Least Squares Problems and the Pseudo-Inverse",
+        "verificationText": "Least Squares"
+      }
+    ],
+    "svd-quadratic": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 753,
+        "printedPage": "753",
+        "locator": "§22.2 Singular Value Decomposition for Square Matrices",
+        "verificationText": "Singular Value Decomposition"
+      },
+      {
+        "sourceId": "gallier",
+        "pdfPage": 631,
+        "printedPage": "631",
+        "locator": "§17.3 Spectral Theorem for Normal Linear Maps",
+        "verificationText": "Spectral Theorem"
+      }
+    ]
+  },
+  "eas-305": {
+    "models": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 6,
+        "printedPage": "1",
+        "locator": "§1.1 Probability spaces",
+        "verificationText": "Probability spaces"
+      }
+    ],
+    "conditioning": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 9,
+        "printedPage": "4",
+        "locator": "§1.2 Conditional probability",
+        "verificationText": "Conditional probability"
+      }
+    ],
+    "discrete": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 17,
+        "printedPage": "12",
+        "locator": "§2.2 Discrete random variables",
+        "verificationText": "Discrete random variables"
+      }
+    ],
+    "continuous": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 24,
+        "printedPage": "19",
+        "locator": "§2.3 Continuous random variables",
+        "verificationText": "Continuous random variables"
+      }
+    ],
+    "joint-transform": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 40,
+        "printedPage": "35",
+        "locator": "§3.1 Joint distributions: discrete random variables",
+        "verificationText": "Discrete random variables"
+      }
+    ],
+    "moments": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 78,
+        "printedPage": "73",
+        "locator": "§4.2 Mean and variance",
+        "verificationText": "Mean and variance"
+      }
+    ],
+    "limits": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 117,
+        "printedPage": "112",
+        "locator": "§6.2 Law of large numbers",
+        "verificationText": "Law of large numbers"
+      },
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 118,
+        "printedPage": "113",
+        "locator": "§6.3 Central limit theorem",
+        "verificationText": "Central limit theorem"
+      }
+    ],
+    "processes": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 107,
+        "printedPage": "102",
+        "locator": "§5.5 Poisson process",
+        "verificationText": "Poisson process"
+      },
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 128,
+        "printedPage": "123",
+        "locator": "§7.1 Time-homogeneous discrete-time Markov chains",
+        "verificationText": "Markov chains"
+      }
+    ]
+  },
+  "sta-301": {
+    "data-sampling": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 147,
+        "printedPage": "142",
+        "locator": "§8.1–8.2 Histogram; Sample mean and variance",
+        "verificationText": "Histogram"
+      }
+    ],
+    "estimation": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 173,
+        "printedPage": "168",
+        "locator": "§9.6 Parametric model estimation",
+        "verificationText": "Parametric model estimation"
+      }
+    ],
+    "intervals": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 165,
+        "printedPage": "160",
+        "locator": "§9.4 Confidence intervals",
+        "verificationText": "Confidence intervals"
+      }
+    ],
+    "tests": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 194,
+        "printedPage": "189",
+        "locator": "§11.1 The hypothesis-testing framework",
+        "verificationText": "hypothesis-testing framework"
+      }
+    ],
+    "comparisons": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 196,
+        "printedPage": "191",
+        "locator": "§11.2 Parametric testing — cơ sở kiểm định so sánh",
+        "verificationText": "Parametric testing"
+      },
+      {
+        "sourceId": "openintro",
+        "pdfPage": 267,
+        "printedPage": "267",
+        "locator": "§7.3 Difference of two means",
+        "verificationText": "Difference of two means"
+      },
+      {
+        "sourceId": "openintro",
+        "pdfPage": 285,
+        "printedPage": "285",
+        "locator": "§7.5 Comparing many means with ANOVA",
+        "verificationText": "ANOVA"
+      }
+    ],
+    "regression": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 207,
+        "printedPage": "202",
+        "locator": "§12.1 Linear models",
+        "verificationText": "Linear models"
+      }
+    ],
+    "categorical": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 201,
+        "printedPage": "196",
+        "locator": "§11.3 Nonparametric testing: The permutation test",
+        "verificationText": "permutation test"
+      },
+      {
+        "sourceId": "openintro",
+        "pdfPage": 229,
+        "printedPage": "229",
+        "locator": "§6.3 Testing for goodness of fit using chi-square",
+        "verificationText": "chi-square"
+      },
+      {
+        "sourceId": "openintro",
+        "pdfPage": 240,
+        "printedPage": "240",
+        "locator": "§6.4 Testing for independence in two-way tables",
+        "verificationText": "independence"
+      }
+    ],
+    "bayes-bootstrap": [
+      {
+        "sourceId": "fernandez",
+        "pdfPage": 184,
+        "printedPage": "179",
+        "locator": "§10.1 Bayesian parametric models",
+        "verificationText": "Bayesian parametric models"
+      }
+    ]
+  },
+  "cse-496": {
+    "correctness-cost": [
+      {
+        "sourceId": "erickson",
+        "pdfPage": 19,
+        "printedPage": "1",
+        "locator": "Chương 0 Introduction",
+        "verificationText": "Introduction"
+      },
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 537,
+        "printedPage": "528",
+        "locator": "§13.7 Asymptotic Notation",
+        "verificationText": "Asymptotic Notation"
+      }
+    ],
+    "divide-conquer": [
+      {
+        "sourceId": "erickson",
+        "pdfPage": 39,
+        "printedPage": "21",
+        "locator": "Chương 1 Recursion",
+        "verificationText": "Recursion"
+      }
+    ],
+    "sorting-structures": [
+      {
+        "sourceId": "erickson",
+        "pdfPage": 44,
+        "printedPage": "26",
+        "locator": "§1.4 Mergesort",
+        "verificationText": "Mergesort"
+      }
+    ],
+    "dynamic-programming": [
+      {
+        "sourceId": "erickson",
+        "pdfPage": 115,
+        "printedPage": "97",
+        "locator": "Chương 3 Dynamic Programming",
+        "verificationText": "Dynamic Programming"
+      }
+    ],
+    "greedy-amortized": [
+      {
+        "sourceId": "erickson",
+        "pdfPage": 177,
+        "printedPage": "159",
+        "locator": "Chương 4 Greedy Algorithms",
+        "verificationText": "Greedy Algorithms"
+      }
+    ],
+    "shortest-paths": [
+      {
+        "sourceId": "erickson",
+        "pdfPage": 291,
+        "printedPage": "273",
+        "locator": "Chương 8 Shortest Paths",
+        "verificationText": "Shortest Paths"
+      }
+    ],
+    "flow-matching": [
+      {
+        "sourceId": "erickson",
+        "pdfPage": 345,
+        "printedPage": "327",
+        "locator": "Chương 10 Maximum Flows & Minimum Cuts",
+        "verificationText": "Maximum Flows"
+      }
+    ],
+    "complexity": [
+      {
+        "sourceId": "erickson",
+        "pdfPage": 397,
+        "printedPage": "379",
+        "locator": "Chương 12 NP-Hardness",
+        "verificationText": "NP"
+      }
+    ]
+  },
+  "mth-411": {
+    "measure": [
+      {
+        "sourceId": "durrett",
+        "pdfPage": 9,
+        "printedPage": "1",
+        "locator": "§1.1 Probability Spaces",
+        "verificationText": "Probability Spaces"
+      }
+    ],
+    "integration": [
+      {
+        "sourceId": "durrett",
+        "pdfPage": 26,
+        "printedPage": "18",
+        "locator": "§1.4 Integration",
+        "verificationText": "Integration"
+      },
+      {
+        "sourceId": "durrett",
+        "pdfPage": 45,
+        "printedPage": "37",
+        "locator": "§1.7 Product Measures, Fubini’s Theorem",
+        "verificationText": "Fubini"
+      }
+    ],
+    "independence-bc": [
+      {
+        "sourceId": "durrett",
+        "pdfPage": 75,
+        "printedPage": "67",
+        "locator": "§2.3 Borel–Cantelli Lemmas",
+        "verificationText": "Borel"
+      }
+    ],
+    "convergence": [
+      {
+        "sourceId": "durrett",
+        "pdfPage": 252,
+        "printedPage": "244",
+        "locator": "§4.6 Uniform Integrability, Convergence in L1",
+        "verificationText": "Uniform Integrability"
+      }
+    ],
+    "conditional-expectation": [
+      {
+        "sourceId": "durrett",
+        "pdfPage": 213,
+        "printedPage": "205",
+        "locator": "§4.1 Conditional Expectation",
+        "verificationText": "Conditional Expectation"
+      }
+    ],
+    "limit-laws": [
+      {
+        "sourceId": "durrett",
+        "pdfPage": 133,
+        "printedPage": "125",
+        "locator": "§3.3 Characteristic Functions",
+        "verificationText": "Characteristic Functions"
+      },
+      {
+        "sourceId": "durrett",
+        "pdfPage": 151,
+        "printedPage": "143",
+        "locator": "§3.4 Central Limit Theorems",
+        "verificationText": "Central Limit Theorems"
+      }
+    ],
+    "martingales": [
+      {
+        "sourceId": "durrett",
+        "pdfPage": 225,
+        "printedPage": "217",
+        "locator": "§4.2 Martingales, Almost Sure Convergence",
+        "verificationText": "Martingales"
+      },
+      {
+        "sourceId": "durrett",
+        "pdfPage": 263,
+        "printedPage": "255",
+        "locator": "§4.8 Optional Stopping Theorems",
+        "verificationText": "Optional Stopping"
+      }
+    ],
+    "concentration-mcmc": [
+      {
+        "sourceId": "durrett",
+        "pdfPage": 113,
+        "printedPage": "105",
+        "locator": "§2.7 Large Deviations",
+        "verificationText": "Large Deviations"
+      },
+      {
+        "sourceId": "roch",
+        "pdfPage": 294,
+        "printedPage": "281",
+        "locator": "§4.3 Coupling of Markov chains and application to mixing",
+        "verificationText": "Coupling of Markov chains"
+      }
+    ]
+  },
+  "mth-435": {
+    "modular": [
+      {
+        "sourceId": "scherk",
+        "pdfPage": 17,
+        "printedPage": "3",
+        "locator": "§1.1 Basic Properties — congruences",
+        "verificationText": "Basic Properties"
+      }
+    ],
+    "groups-fields": [
+      {
+        "sourceId": "scherk",
+        "pdfPage": 51,
+        "printedPage": "37",
+        "locator": "§3.2 Cyclic Groups",
+        "verificationText": "Cyclic Groups"
+      }
+    ],
+    "symmetric": [
+      {
+        "sourceId": "stanford-crypto",
+        "pdfPage": 20,
+        "printedPage": "4",
+        "locator": "§2.1 Shannon ciphers and perfect security",
+        "verificationText": "Shannon ciphers"
+      }
+    ],
+    "hash-mac": [
+      {
+        "sourceId": "stanford-crypto",
+        "pdfPage": 231,
+        "printedPage": "215",
+        "locator": "Chương 6 Message integrity",
+        "verificationText": "Message integrity"
+      },
+      {
+        "sourceId": "stanford-crypto",
+        "pdfPage": 373,
+        "printedPage": "357",
+        "locator": "Chương 9 Authenticated Encryption",
+        "verificationText": "Authenticated Encryption"
+      }
+    ],
+    "rsa": [
+      {
+        "sourceId": "stanford-crypto",
+        "pdfPage": 419,
+        "printedPage": "403",
+        "locator": "§10.3 A trapdoor permutation scheme based on RSA",
+        "verificationText": "RSA"
+      }
+    ],
+    "dh-elgamal": [
+      {
+        "sourceId": "stanford-crypto",
+        "pdfPage": 422,
+        "printedPage": "406",
+        "locator": "§10.4 Diffie–Hellman key exchange",
+        "verificationText": "Diffie"
+      },
+      {
+        "sourceId": "stanford-crypto",
+        "pdfPage": 461,
+        "printedPage": "445",
+        "locator": "§11.5 ElGamal encryption",
+        "verificationText": "ElGamal"
+      }
+    ],
+    "signatures": [
+      {
+        "sourceId": "stanford-crypto",
+        "pdfPage": 542,
+        "printedPage": "526",
+        "locator": "Chương 13 Digital signatures",
+        "verificationText": "Digital signatures"
+      }
+    ],
+    "security": [
+      {
+        "sourceId": "stanford-crypto",
+        "pdfPage": 29,
+        "printedPage": "13",
+        "locator": "§2.2 Computational ciphers and semantic security",
+        "verificationText": "semantic security"
+      }
+    ]
+  },
+  "mth-311": {
+    "proof-language": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 14,
+        "printedPage": "5",
+        "locator": "Chương 1 What is a Proof?",
+        "verificationText": "What is a Proof"
+      }
+    ],
+    "sets-functions": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 90,
+        "printedPage": "81",
+        "locator": "Chương 4 Mathematical Data Types",
+        "verificationText": "Mathematical Data Types"
+      }
+    ],
+    "induction-order": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 36,
+        "printedPage": "27",
+        "locator": "Chương 2 The Well Ordering Principle",
+        "verificationText": "Well Ordering"
+      }
+    ],
+    "relations-orders": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 350,
+        "printedPage": "341",
+        "locator": "§9.10 Equivalence Relations",
+        "verificationText": "Equivalence Relations"
+      }
+    ],
+    "cardinality": [
+      {
+        "sourceId": "mit-discrete",
+        "pdfPage": 214,
+        "printedPage": "205",
+        "locator": "Chương 7 Infinite Sets",
+        "verificationText": "Sets"
+      }
+    ],
+    "real-completeness": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 1407,
+        "printedPage": "1407",
+        "locator": "§37.8 Complete Metric Spaces and Compactness",
+        "verificationText": "Complete Metric Spaces"
+      }
+    ],
+    "metric-continuity": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 1353,
+        "printedPage": "1353",
+        "locator": "§37.1 Metric Spaces and Normed Vector Spaces",
+        "verificationText": "Metric Spaces"
+      }
+    ],
+    "structures": [
+      {
+        "sourceId": "gallier",
+        "pdfPage": 21,
+        "printedPage": "21",
+        "locator": "§2.1 Groups, Subgroups, Cosets",
+        "verificationText": "Groups"
+      }
+    ]
+  }
+}

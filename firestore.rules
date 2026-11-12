@@ -1,0 +1,83 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 1. Hàm kiểm tra đã đăng nhập hay chưa
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // 2. Hàm kiểm tra chủ sở hữu tài nguyên
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // 3. Hàm kiểm tra quyền Quản trị viên (Admin)
+    function isAdmin() {
+      return isAuthenticated() &&
+        (request.auth.token.email == 'vutrhuy81@gmail.com' ||
+         (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'));
+    }
+
+    // 4. Bảng Users (Hồ sơ người dùng & phân quyền)
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow create: if isAuthenticated() && isOwner(userId)
+        && request.resource.data.uid == userId
+        && (!('role' in request.resource.data) || request.resource.data.role in ['user', 'student', 'teacher'] || isAdmin());
+      allow update: if isAuthenticated() && (isOwner(userId) || isAdmin())
+        && (isAdmin() || request.resource.data.role == resource.data.role);
+      allow delete: if isAdmin();
+    }
+
+    // 5. Bảng Documents (Tài liệu chuyên đề toán)
+    match /documents/{documentId} {
+      // Mọi thành viên đã đăng nhập đều có thể đọc tài liệu
+      allow read: if isAuthenticated();
+      // Chỉ Admin mới có quyền thêm/sửa/xóa tài liệu hệ thống
+      allow create: if isAdmin() && request.resource.data.title is string && request.resource.data.title.size() > 0;
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // 6. Bảng Exams (Đề thi)
+    match /exams/{examId} {
+      allow read: if isAuthenticated();
+      allow create: if isAdmin() && request.resource.data.title is string && request.resource.data.title.size() > 0;
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // 7. Bảng Problems (Các câu hỏi / bài toán)
+    match /problems/{problemId} {
+      allow read: if isAuthenticated();
+      allow create: if isAdmin() && request.resource.data.content is string;
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // 8. Bảng Submissions (Câu trả lời, lời giải của học sinh)
+    match /submissions/{submissionId} {
+      // Học sinh có thể đọc bài làm của mình, Admin/Giáo viên có thể đọc mọi bài làm để chấm điểm
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      // Học sinh nộp bài giải với userId chính là tài khoản của mình
+      allow create: if isAuthenticated()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.solutionContent is string
+        && request.resource.data.solutionContent.size() > 0;
+      // Học sinh có thể sửa bài của mình khi chưa chấm xong, Admin có thể cập nhật điểm/nhận xét
+      allow update: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      // Chỉ Admin hoặc chính chủ được xóa bài nộp
+      allow delete: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // 9. Bảng Events (Lịch thi & Sự kiện)
+    match /events/{eventId} {
+      allow read: if isAuthenticated();
+      allow create: if isAdmin() && request.resource.data.title is string;
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+  }
+}

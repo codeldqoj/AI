@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Đúng khóa: thay problemRef bằng khóa Atlas và bổ sung expectedSourceIds đã gán nhãn",
+    "problemRef": "ADMIN_ENTER_CURRENT_PROBLEM_KEY"
+  },
+  {
+    "name": "Đề đã sửa: bổ sung forbiddenSourceIds của snapshot cũ",
+    "problemRef": "ADMIN_ENTER_EDITED_PROBLEM_KEY"
+  },
+  {
+    "name": "Khác giả thiết: Admin nhập khóa và nhãn sau khi đối chiếu",
+    "problemRef": "ADMIN_ENTER_SIMILAR_PROBLEM_KEY"
+  },
+  {
+    "name": "Nguồn thu hồi/xóa: dùng dữ liệu test riêng, bổ sung forbiddenSourceIds",
+    "problemRef": "ADMIN_ENTER_TEST_PROBLEM_KEY"
+  }
+]

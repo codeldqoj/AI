@@ -1,0 +1,1083 @@
+{
+  "asOf": "2026-10-16",
+  "sources": {
+    "huit-2026": "https://huit.edu.vn/Images/Documents/N00CT/ds-truong-chuyen-nam-2026.pdf",
+    "crosscheck": "https://vi.wikipedia.org/wiki/Danh_sách_trường_trung_học_phổ_thông_chuyên_tại_Việt_Nam",
+    "rename-tran-van-giau": "https://thptchuyentranvangiau.edu.vn/thong-bao/thong-bao-ve-viec-doi-ten-truong.html",
+    "university-khoa-hoc-tu-nhien": "https://www.hsgs.edu.vn/vi/thong-tin-chung/tuyen-sinh-a-thi-thu?layout=default",
+    "university-dai-hoc-su-pham": "https://thanhnien.hnue.edu.vn/Học-bổng/p/1987",
+    "university-ngoai-ngu": "https://flss.vnu.edu.vn/files/uploads/2026/03/1.pdf",
+    "university-khoa-hoc-xa-hoi-va-nhan-van": "https://ussh.vnu.edu.vn/vi/news/dao-tao/thong-bao-so-1-ve-viec-tuyen-sinh-vao-lop-10-truong-thpt-chuyen-khoa-hoc-xa-hoi-nhan-van-nam-hoc-2026-2027-23965.html",
+    "university-dai-hoc-vinh": "https://tuyensinh.vinhuni.edu.vn/tin-tuc-tuyen-sinh/seo/thong-bao-so-1-tuyen-sinh-vao-lop-10-truong-thpt-chuyen-truong-dai-hoc-vinh-nam-hoc-2026-2027-143834",
+    "university-khoa-hoc-hue": "https://tuyensinh-thpt.husc.edu.vn/tintuc.php?id=8",
+    "university-pho-thong-nang-khieu": "https://ptnk.edu.vn/thongbaoso1-ts10-2026-2027/",
+    "university-nang-khieu-dai-hoc-tan-tao": "https://ttst.edu.vn/thong-bao-tuyen-sinh/",
+    "tuyen-quang": "https://www.tuyenquang.gov.vn/vi/post/kiem-tra-cong-tac-chuan-bi-to-chuc-thi-lai-ky-thi-tot-nghiep-thpt-nam-2026-tai-diem-thi-truong-thpt-chuyen-tuyen-quang?id=250229&type=NEWS",
+    "ou-2026": "https://tuyensinh.ou.edu.vn/danh-muc-cac-truong-thpt-chuyenthpt-nang-khieu-nam-2026"
+  },
+  "notes": [
+    "Danh mục trường, không phải danh sách đề đã có trong Atlas.",
+    "Tân Tạo là trường năng khiếu thuộc đại học, giữ đúng tên pháp lý, không tự gắn tên chuyên.",
+    "Trường đổi tên hoặc mã tuyển sinh lịch sử trùng nhau chỉ xuất hiện một lần.",
+    "Đối chiếu thêm danh mục ĐH Mở TP.HCM năm 2026: nguồn này giữ địa giới/mã cũ và có trường đã dừng hệ chuyên; không nhập nguyên xi.",
+    "Bổ sung KHXH&NV, Chu Văn An và Sơn Tây theo tên hiện tại; không thêm Trung học Thực hành ĐHSP TP.HCM vào danh mục trường hiện đang tuyển hệ chuyên."
+  ],
+  "schools": [
+    {
+      "id": "ha-noi-ha-noi-amsterdam",
+      "name": "Trường THPT chuyên Hà Nội – Amsterdam",
+      "province": "Hà Nội",
+      "provinceId": "ha-noi",
+      "region": "BAC",
+      "authority": "Sở GDĐT Hà Nội",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "ha-noi-chu-van-an",
+      "name": "Trường THPT chuyên Chu Văn An",
+      "province": "Hà Nội",
+      "provinceId": "ha-noi",
+      "region": "BAC",
+      "authority": "Sở GDĐT Hà Nội",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "ha-noi-nguyen-hue",
+      "name": "Trường THPT chuyên Nguyễn Huệ",
+      "province": "Hà Nội",
+      "provinceId": "ha-noi",
+      "region": "BAC",
+      "authority": "Sở GDĐT Hà Nội",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "ha-noi-son-tay",
+      "name": "Trường THPT chuyên Sơn Tây",
+      "province": "Hà Nội",
+      "provinceId": "ha-noi",
+      "region": "BAC",
+      "authority": "Sở GDĐT Hà Nội",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "ha-noi-khoa-hoc-tu-nhien",
+      "name": "Trường THPT chuyên Khoa học Tự nhiên",
+      "province": "Hà Nội",
+      "provinceId": "ha-noi",
+      "region": "BAC",
+      "authority": "Trường ĐH Khoa học Tự nhiên – ĐHQGHN",
+      "kind": "university",
+      "aliases": [],
+      "sourceIds": [
+        "university-khoa-hoc-tu-nhien"
+      ]
+    },
+    {
+      "id": "ha-noi-dai-hoc-su-pham",
+      "name": "Trường THPT chuyên Đại học Sư phạm",
+      "province": "Hà Nội",
+      "provinceId": "ha-noi",
+      "region": "BAC",
+      "authority": "Trường ĐH Sư phạm Hà Nội",
+      "kind": "university",
+      "aliases": [],
+      "sourceIds": [
+        "university-dai-hoc-su-pham"
+      ]
+    },
+    {
+      "id": "ha-noi-ngoai-ngu",
+      "name": "Trường THPT chuyên Ngoại ngữ",
+      "province": "Hà Nội",
+      "provinceId": "ha-noi",
+      "region": "BAC",
+      "authority": "Trường ĐH Ngoại ngữ – ĐHQGHN",
+      "kind": "university",
+      "aliases": [],
+      "sourceIds": [
+        "university-ngoai-ngu"
+      ]
+    },
+    {
+      "id": "ha-noi-khoa-hoc-xa-hoi-va-nhan-van",
+      "name": "Trường THPT chuyên Khoa học Xã hội và Nhân văn",
+      "province": "Hà Nội",
+      "provinceId": "ha-noi",
+      "region": "BAC",
+      "authority": "Trường ĐH KHXH&NV – ĐHQGHN",
+      "kind": "university",
+      "aliases": [],
+      "sourceIds": [
+        "university-khoa-hoc-xa-hoi-va-nhan-van"
+      ]
+    },
+    {
+      "id": "hai-phong-tran-phu",
+      "name": "Trường THPT chuyên Trần Phú",
+      "province": "Hải Phòng",
+      "provinceId": "hai-phong",
+      "region": "BAC",
+      "authority": "Sở GDĐT Hải Phòng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "hai-phong-nguyen-trai",
+      "name": "Trường THPT chuyên Nguyễn Trãi",
+      "province": "Hải Phòng",
+      "provinceId": "hai-phong",
+      "region": "BAC",
+      "authority": "Sở GDĐT Hải Phòng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "lai-chau-le-quy-don",
+      "name": "Trường THPT chuyên Lê Quý Đôn",
+      "province": "Lai Châu",
+      "provinceId": "lai-chau",
+      "region": "BAC",
+      "authority": "Sở GDĐT Lai Châu",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "dien-bien-le-quy-don",
+      "name": "Trường THPT chuyên Lê Quý Đôn",
+      "province": "Điện Biên",
+      "provinceId": "dien-bien",
+      "region": "BAC",
+      "authority": "Sở GDĐT Điện Biên",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "son-la-son-la",
+      "name": "Trường THPT chuyên Sơn La",
+      "province": "Sơn La",
+      "provinceId": "son-la",
+      "region": "BAC",
+      "authority": "Sở GDĐT Sơn La",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "ou-2026"
+      ]
+    },
+    {
+      "id": "lang-son-chu-van-an",
+      "name": "Trường THPT chuyên Chu Văn An",
+      "province": "Lạng Sơn",
+      "provinceId": "lang-son",
+      "region": "BAC",
+      "authority": "Sở GDĐT Lạng Sơn",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "cao-bang-cao-bang",
+      "name": "Trường THPT chuyên Cao Bằng",
+      "province": "Cao Bằng",
+      "provinceId": "cao-bang",
+      "region": "BAC",
+      "authority": "Sở GDĐT Cao Bằng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "tuyen-quang-tuyen-quang",
+      "name": "Trường THPT chuyên Tuyên Quang",
+      "province": "Tuyên Quang",
+      "provinceId": "tuyen-quang",
+      "region": "BAC",
+      "authority": "Sở GDĐT Tuyên Quang",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "tuyen-quang"
+      ]
+    },
+    {
+      "id": "tuyen-quang-ha-giang",
+      "name": "Trường THPT chuyên Hà Giang",
+      "province": "Tuyên Quang",
+      "provinceId": "tuyen-quang",
+      "region": "BAC",
+      "authority": "Sở GDĐT Tuyên Quang",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "lao-cai-lao-cai",
+      "name": "Trường THPT chuyên Lào Cai",
+      "province": "Lào Cai",
+      "provinceId": "lao-cai",
+      "region": "BAC",
+      "authority": "Sở GDĐT Lào Cai",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "lao-cai-nguyen-tat-thanh",
+      "name": "Trường THPT chuyên Nguyễn Tất Thành",
+      "province": "Lào Cai",
+      "provinceId": "lao-cai",
+      "region": "BAC",
+      "authority": "Sở GDĐT Lào Cai",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "thai-nguyen-thai-nguyen",
+      "name": "Trường THPT chuyên Thái Nguyên",
+      "province": "Thái Nguyên",
+      "provinceId": "thai-nguyen",
+      "region": "BAC",
+      "authority": "Sở GDĐT Thái Nguyên",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "thai-nguyen-bac-kan",
+      "name": "Trường THPT chuyên Bắc Kạn",
+      "province": "Thái Nguyên",
+      "provinceId": "thai-nguyen",
+      "region": "BAC",
+      "authority": "Sở GDĐT Thái Nguyên",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "phu-tho-hung-vuong",
+      "name": "Trường THPT chuyên Hùng Vương",
+      "province": "Phú Thọ",
+      "provinceId": "phu-tho",
+      "region": "BAC",
+      "authority": "Sở GDĐT Phú Thọ",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "phu-tho-hoang-van-thu",
+      "name": "Trường THPT chuyên Hoàng Văn Thụ",
+      "province": "Phú Thọ",
+      "provinceId": "phu-tho",
+      "region": "BAC",
+      "authority": "Sở GDĐT Phú Thọ",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "phu-tho-vinh-phuc",
+      "name": "Trường THPT chuyên Vĩnh Phúc",
+      "province": "Phú Thọ",
+      "provinceId": "phu-tho",
+      "region": "BAC",
+      "authority": "Sở GDĐT Phú Thọ",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "bac-ninh-bac-ninh",
+      "name": "Trường THPT chuyên Bắc Ninh",
+      "province": "Bắc Ninh",
+      "provinceId": "bac-ninh",
+      "region": "BAC",
+      "authority": "Sở GDĐT Bắc Ninh",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "bac-ninh-bac-giang",
+      "name": "Trường THPT chuyên Bắc Giang",
+      "province": "Bắc Ninh",
+      "provinceId": "bac-ninh",
+      "region": "BAC",
+      "authority": "Sở GDĐT Bắc Ninh",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "quang-ninh-ha-long",
+      "name": "Trường THPT chuyên Hạ Long",
+      "province": "Quảng Ninh",
+      "provinceId": "quang-ninh",
+      "region": "BAC",
+      "authority": "Sở GDĐT Quảng Ninh",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "hung-yen-hung-yen",
+      "name": "Trường THPT chuyên Hưng Yên",
+      "province": "Hưng Yên",
+      "provinceId": "hung-yen",
+      "region": "BAC",
+      "authority": "Sở GDĐT Hưng Yên",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "hung-yen-thai-binh",
+      "name": "Trường THPT chuyên Thái Bình",
+      "province": "Hưng Yên",
+      "provinceId": "hung-yen",
+      "region": "BAC",
+      "authority": "Sở GDĐT Hưng Yên",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "ninh-binh-luong-van-tuy",
+      "name": "Trường THPT chuyên Lương Văn Tụy",
+      "province": "Ninh Bình",
+      "provinceId": "ninh-binh",
+      "region": "BAC",
+      "authority": "Sở GDĐT Ninh Bình",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "ninh-binh-le-hong-phong",
+      "name": "Trường THPT chuyên Lê Hồng Phong",
+      "province": "Ninh Bình",
+      "provinceId": "ninh-binh",
+      "region": "BAC",
+      "authority": "Sở GDĐT Ninh Bình",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "ninh-binh-bien-hoa",
+      "name": "Trường THPT chuyên Biên Hòa",
+      "province": "Ninh Bình",
+      "provinceId": "ninh-binh",
+      "region": "BAC",
+      "authority": "Sở GDĐT Ninh Bình",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "hue-quoc-hoc-hue",
+      "name": "Trường THPT chuyên Quốc Học – Huế",
+      "province": "Huế",
+      "provinceId": "hue",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Huế",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "ou-2026"
+      ]
+    },
+    {
+      "id": "hue-khoa-hoc-hue",
+      "name": "Trường THPT chuyên Khoa học Huế",
+      "province": "Huế",
+      "provinceId": "hue",
+      "region": "TRUNG",
+      "authority": "Trường ĐH Khoa học – ĐH Huế",
+      "kind": "university",
+      "aliases": [],
+      "sourceIds": [
+        "university-khoa-hoc-hue"
+      ]
+    },
+    {
+      "id": "da-nang-le-quy-don",
+      "name": "Trường THPT chuyên Lê Quý Đôn",
+      "province": "Đà Nẵng",
+      "provinceId": "da-nang",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Đà Nẵng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "da-nang-le-thanh-tong",
+      "name": "Trường THPT chuyên Lê Thánh Tông",
+      "province": "Đà Nẵng",
+      "provinceId": "da-nang",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Đà Nẵng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "da-nang-nguyen-binh-khiem",
+      "name": "Trường THPT chuyên Nguyễn Bỉnh Khiêm",
+      "province": "Đà Nẵng",
+      "provinceId": "da-nang",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Đà Nẵng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "thanh-hoa-lam-son",
+      "name": "Trường THPT chuyên Lam Sơn",
+      "province": "Thanh Hóa",
+      "provinceId": "thanh-hoa",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Thanh Hóa",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "nghe-an-phan-boi-chau",
+      "name": "Trường THPT chuyên Phan Bội Châu",
+      "province": "Nghệ An",
+      "provinceId": "nghe-an",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Nghệ An",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "nghe-an-dai-hoc-vinh",
+      "name": "Trường THPT chuyên Đại học Vinh",
+      "province": "Nghệ An",
+      "provinceId": "nghe-an",
+      "region": "TRUNG",
+      "authority": "Trường ĐH Vinh",
+      "kind": "university",
+      "aliases": [],
+      "sourceIds": [
+        "university-dai-hoc-vinh"
+      ]
+    },
+    {
+      "id": "ha-tinh-ha-tinh",
+      "name": "Trường THPT chuyên Hà Tĩnh",
+      "province": "Hà Tĩnh",
+      "provinceId": "ha-tinh",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Hà Tĩnh",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "quang-tri-le-quy-don",
+      "name": "Trường THPT chuyên Lê Quý Đôn",
+      "province": "Quảng Trị",
+      "provinceId": "quang-tri",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Quảng Trị",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "quang-tri-vo-nguyen-giap",
+      "name": "Trường THPT chuyên Võ Nguyên Giáp",
+      "province": "Quảng Trị",
+      "provinceId": "quang-tri",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Quảng Trị",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "quang-ngai-le-khiet",
+      "name": "Trường THPT chuyên Lê Khiết",
+      "province": "Quảng Ngãi",
+      "provinceId": "quang-ngai",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Quảng Ngãi",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "quang-ngai-nguyen-tat-thanh",
+      "name": "Trường THPT chuyên Nguyễn Tất Thành",
+      "province": "Quảng Ngãi",
+      "provinceId": "quang-ngai",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Quảng Ngãi",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "gia-lai-hung-vuong",
+      "name": "Trường THPT chuyên Hùng Vương",
+      "province": "Gia Lai",
+      "provinceId": "gia-lai",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Gia Lai",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "gia-lai-le-quy-don",
+      "name": "Trường THPT chuyên Lê Quý Đôn",
+      "province": "Gia Lai",
+      "provinceId": "gia-lai",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Gia Lai",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "gia-lai-chu-van-an",
+      "name": "Trường THPT chuyên Chu Văn An",
+      "province": "Gia Lai",
+      "provinceId": "gia-lai",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Gia Lai",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "khanh-hoa-le-quy-don-nam-nha-trang",
+      "name": "Trường THPT chuyên Lê Quý Đôn – Nam Nha Trang",
+      "province": "Khánh Hòa",
+      "provinceId": "khanh-hoa",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Khánh Hòa",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "khanh-hoa-le-quy-don-dong-hai",
+      "name": "Trường THPT chuyên Lê Quý Đôn – Đông Hải",
+      "province": "Khánh Hòa",
+      "provinceId": "khanh-hoa",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Khánh Hòa",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "lam-dong-thang-long",
+      "name": "Trường THPT chuyên Thăng Long",
+      "province": "Lâm Đồng",
+      "provinceId": "lam-dong",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Lâm Đồng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "lam-dong-bao-loc",
+      "name": "Trường THPT chuyên Bảo Lộc",
+      "province": "Lâm Đồng",
+      "provinceId": "lam-dong",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Lâm Đồng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "lam-dong-tran-hung-dao",
+      "name": "Trường THPT chuyên Trần Hưng Đạo",
+      "province": "Lâm Đồng",
+      "provinceId": "lam-dong",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Lâm Đồng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "lam-dong-nguyen-chi-thanh",
+      "name": "Trường THPT chuyên Nguyễn Chí Thanh",
+      "province": "Lâm Đồng",
+      "provinceId": "lam-dong",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Lâm Đồng",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "dak-lak-nguyen-du",
+      "name": "Trường THPT chuyên Nguyễn Du",
+      "province": "Đắk Lắk",
+      "provinceId": "dak-lak",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Đắk Lắk",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "dak-lak-luong-van-chanh",
+      "name": "Trường THPT chuyên Lương Văn Chánh",
+      "province": "Đắk Lắk",
+      "provinceId": "dak-lak",
+      "region": "TRUNG",
+      "authority": "Sở GDĐT Đắk Lắk",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "tp-hcm-le-hong-phong",
+      "name": "Trường THPT chuyên Lê Hồng Phong",
+      "province": "Thành phố Hồ Chí Minh",
+      "provinceId": "tp-hcm",
+      "region": "NAM",
+      "authority": "Sở GDĐT Thành phố Hồ Chí Minh",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "tp-hcm-tran-dai-nghia",
+      "name": "Trường THPT chuyên Trần Đại Nghĩa",
+      "province": "Thành phố Hồ Chí Minh",
+      "provinceId": "tp-hcm",
+      "region": "NAM",
+      "authority": "Sở GDĐT Thành phố Hồ Chí Minh",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "tp-hcm-hung-vuong",
+      "name": "Trường THPT chuyên Hùng Vương",
+      "province": "Thành phố Hồ Chí Minh",
+      "provinceId": "tp-hcm",
+      "region": "NAM",
+      "authority": "Sở GDĐT Thành phố Hồ Chí Minh",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "tp-hcm-le-quy-don",
+      "name": "Trường THPT chuyên Lê Quý Đôn",
+      "province": "Thành phố Hồ Chí Minh",
+      "provinceId": "tp-hcm",
+      "region": "NAM",
+      "authority": "Sở GDĐT Thành phố Hồ Chí Minh",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "tp-hcm-pho-thong-nang-khieu",
+      "name": "Trường Phổ thông Năng khiếu",
+      "province": "Thành phố Hồ Chí Minh",
+      "provinceId": "tp-hcm",
+      "region": "NAM",
+      "authority": "ĐHQG TP.HCM",
+      "kind": "university",
+      "aliases": [],
+      "sourceIds": [
+        "university-pho-thong-nang-khieu"
+      ]
+    },
+    {
+      "id": "can-tho-ly-tu-trong",
+      "name": "Trường THPT chuyên Lý Tự Trọng",
+      "province": "Cần Thơ",
+      "provinceId": "can-tho",
+      "region": "NAM",
+      "authority": "Sở GDĐT Cần Thơ",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "can-tho-vi-thanh",
+      "name": "Trường THPT chuyên Vị Thanh",
+      "province": "Cần Thơ",
+      "provinceId": "can-tho",
+      "region": "NAM",
+      "authority": "Sở GDĐT Cần Thơ",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "can-tho-nguyen-thi-minh-khai",
+      "name": "Trường THPT chuyên Nguyễn Thị Minh Khai",
+      "province": "Cần Thơ",
+      "provinceId": "can-tho",
+      "region": "NAM",
+      "authority": "Sở GDĐT Cần Thơ",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "dong-nai-luong-the-vinh",
+      "name": "Trường THPT chuyên Lương Thế Vinh",
+      "province": "Đồng Nai",
+      "provinceId": "dong-nai",
+      "region": "NAM",
+      "authority": "Sở GDĐT Đồng Nai",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "dong-nai-quang-trung",
+      "name": "Trường THPT chuyên Quang Trung",
+      "province": "Đồng Nai",
+      "provinceId": "dong-nai",
+      "region": "NAM",
+      "authority": "Sở GDĐT Đồng Nai",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "dong-nai-binh-long",
+      "name": "Trường THPT chuyên Bình Long",
+      "province": "Đồng Nai",
+      "provinceId": "dong-nai",
+      "region": "NAM",
+      "authority": "Sở GDĐT Đồng Nai",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "tay-ninh-hoang-le-kha",
+      "name": "Trường THPT chuyên Hoàng Lê Kha",
+      "province": "Tây Ninh",
+      "provinceId": "tay-ninh",
+      "region": "NAM",
+      "authority": "Sở GDĐT Tây Ninh",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "tay-ninh-tran-van-giau",
+      "name": "Trường THPT chuyên Trần Văn Giàu",
+      "province": "Tây Ninh",
+      "provinceId": "tay-ninh",
+      "region": "NAM",
+      "authority": "Sở GDĐT Tây Ninh",
+      "kind": "provincial",
+      "aliases": [
+        "Trường THPT chuyên Long An"
+      ],
+      "sourceIds": [
+        "huit-2026",
+        "rename-tran-van-giau"
+      ]
+    },
+    {
+      "id": "tay-ninh-nang-khieu-dai-hoc-tan-tao",
+      "name": "Trường THPT Năng khiếu Đại học Tân Tạo",
+      "province": "Tây Ninh",
+      "provinceId": "tay-ninh",
+      "region": "NAM",
+      "authority": "Trường ĐH Tân Tạo",
+      "kind": "university",
+      "aliases": [],
+      "sourceIds": [
+        "university-nang-khieu-dai-hoc-tan-tao"
+      ]
+    },
+    {
+      "id": "vinh-long-nguyen-binh-khiem",
+      "name": "Trường THPT chuyên Nguyễn Bỉnh Khiêm",
+      "province": "Vĩnh Long",
+      "provinceId": "vinh-long",
+      "region": "NAM",
+      "authority": "Sở GDĐT Vĩnh Long",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "vinh-long-ben-tre",
+      "name": "Trường THPT chuyên Bến Tre",
+      "province": "Vĩnh Long",
+      "provinceId": "vinh-long",
+      "region": "NAM",
+      "authority": "Sở GDĐT Vĩnh Long",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "vinh-long-nguyen-thien-thanh",
+      "name": "Trường THPT chuyên Nguyễn Thiện Thành",
+      "province": "Vĩnh Long",
+      "provinceId": "vinh-long",
+      "region": "NAM",
+      "authority": "Sở GDĐT Vĩnh Long",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "dong-thap-nguyen-quang-dieu",
+      "name": "Trường THPT chuyên Nguyễn Quang Diêu",
+      "province": "Đồng Tháp",
+      "provinceId": "dong-thap",
+      "region": "NAM",
+      "authority": "Sở GDĐT Đồng Tháp",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "dong-thap-nguyen-dinh-chieu",
+      "name": "Trường THPT chuyên Nguyễn Đình Chiểu",
+      "province": "Đồng Tháp",
+      "provinceId": "dong-thap",
+      "region": "NAM",
+      "authority": "Sở GDĐT Đồng Tháp",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "dong-thap-tien-giang",
+      "name": "Trường THPT chuyên Tiền Giang",
+      "province": "Đồng Tháp",
+      "provinceId": "dong-thap",
+      "region": "NAM",
+      "authority": "Sở GDĐT Đồng Tháp",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "ca-mau-phan-ngoc-hien",
+      "name": "Trường THPT chuyên Phan Ngọc Hiển",
+      "province": "Cà Mau",
+      "provinceId": "ca-mau",
+      "region": "NAM",
+      "authority": "Sở GDĐT Cà Mau",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "ca-mau-bac-lieu",
+      "name": "Trường THPT chuyên Bạc Liêu",
+      "province": "Cà Mau",
+      "provinceId": "ca-mau",
+      "region": "NAM",
+      "authority": "Sở GDĐT Cà Mau",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "an-giang-thoai-ngoc-hau",
+      "name": "Trường THPT chuyên Thoại Ngọc Hầu",
+      "province": "An Giang",
+      "provinceId": "an-giang",
+      "region": "NAM",
+      "authority": "Sở GDĐT An Giang",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "an-giang-thu-khoa-nghia",
+      "name": "Trường THPT chuyên Thủ Khoa Nghĩa",
+      "province": "An Giang",
+      "provinceId": "an-giang",
+      "region": "NAM",
+      "authority": "Sở GDĐT An Giang",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    },
+    {
+      "id": "an-giang-huynh-man-dat",
+      "name": "Trường THPT chuyên Huỳnh Mẫn Đạt",
+      "province": "An Giang",
+      "provinceId": "an-giang",
+      "region": "NAM",
+      "authority": "Sở GDĐT An Giang",
+      "kind": "provincial",
+      "aliases": [],
+      "sourceIds": [
+        "huit-2026"
+      ]
+    }
+  ]
+}

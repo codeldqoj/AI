@@ -1,0 +1,170 @@
+{
+  "environment": "OFFLINE MOCK; no Atlas, no real embedding, no LLM grading",
+  "fixtureCount": 9,
+  "costUsd": null,
+  "costNote": "No provider calls; production cost not measured",
+  "summary": {
+    "baseline": {
+      "recallAt3": 0.5,
+      "precision": 0.5,
+      "safetyPasses": 6,
+      "p50Ms": 0.00296400000000574,
+      "p95Ms": 0.023704999999992538
+    },
+    "rag": {
+      "recallAt3": 1,
+      "precision": 1,
+      "safetyPasses": 7,
+      "p50Ms": 0.28870700000000227,
+      "p95Ms": 1.739452
+    }
+  },
+  "cases": {
+    "baseline": [
+      {
+        "name": "exact",
+        "ids": [
+          "p1"
+        ],
+        "expected": [
+          "p1"
+        ],
+        "truePositives": 1,
+        "elapsedMs": 0.023704999999992538
+      },
+      {
+        "name": "similar",
+        "ids": [],
+        "expected": [
+          "p3"
+        ],
+        "truePositives": 0,
+        "elapsedMs": 0.0054980000000028895
+      },
+      {
+        "name": "different-hypothesis",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.003885999999994283
+      },
+      {
+        "name": "changed-statement",
+        "ids": [
+          "p5"
+        ],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.003495000000000914
+      },
+      {
+        "name": "revoked",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.0018830000000065183
+      },
+      {
+        "name": "deleted",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.0017019999999945412
+      },
+      {
+        "name": "changed-solution",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.00296400000000574
+      },
+      {
+        "name": "changed-topic",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.0021129999999942584
+      },
+      {
+        "name": "private-source",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.0013220000000018217
+      }
+    ],
+    "rag": [
+      {
+        "name": "exact",
+        "ids": [
+          "p1"
+        ],
+        "expected": [
+          "p1"
+        ],
+        "truePositives": 1,
+        "elapsedMs": 1.739452
+      },
+      {
+        "name": "similar",
+        "ids": [
+          "p3"
+        ],
+        "expected": [
+          "p3"
+        ],
+        "truePositives": 1,
+        "elapsedMs": 0.7943939999999969
+      },
+      {
+        "name": "different-hypothesis",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.2642799999999994
+      },
+      {
+        "name": "changed-statement",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.19096299999999644
+      },
+      {
+        "name": "revoked",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.28836599999999635
+      },
+      {
+        "name": "deleted",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.3033179999999902
+      },
+      {
+        "name": "changed-solution",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.28870700000000227
+      },
+      {
+        "name": "changed-topic",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.3334029999999899
+      },
+      {
+        "name": "private-source",
+        "ids": [],
+        "expected": [],
+        "truePositives": 0,
+        "elapsedMs": 0.24000499999999647
+      }
+    ]
+  }
+}

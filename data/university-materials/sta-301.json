@@ -1,0 +1,703 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-10-25.1",
+  "courseId": "sta-301",
+  "prerequisites": [
+    "Xác suất cơ bản, đại số và tích phân"
+  ],
+  "outcomes": [
+    "Phân tích thiết kế và mô tả dữ liệu",
+    "Ước lượng, lập khoảng và kiểm định với giả thiết rõ ràng",
+    "Diễn giải hồi quy, Bayes và bootstrap có giới hạn"
+  ],
+  "sections": [
+    {
+      "id": "data-sampling",
+      "title": "Dữ liệu, lấy mẫu và mô tả thống kê",
+      "theory": [
+        "Phân biệt tổng thể, mẫu, biến định lượng/định tính và đơn vị quan sát. Trung bình mẫu đo vị trí, phương sai mẫu $s^2=\\sum(x_i-\\bar x)^2/(n-1)$ ước lượng phương sai tổng thể dưới lấy mẫu độc lập cùng phân bố.",
+        "Trung vị và IQR bền hơn với ngoại lai; histogram phụ thuộc cách chia lớp. Suy luận chỉ đáng tin khi thiết kế mẫu và cơ chế thiếu dữ liệu được xem xét, không chỉ dựa vào số lượng quan sát."
+      ],
+      "method": [
+        "Xác định mục tiêu và cách lấy mẫu.",
+        "Vẽ hoặc tóm tắt phân bố và ngoại lai.",
+        "Tính đặc trưng cùng đơn vị."
+      ],
+      "pitfalls": [
+        "Mẫu tự nguyện lớn có thể thiên lệch hơn mẫu ngẫu nhiên nhỏ."
+      ],
+      "examples": [
+        {
+          "statement": "Tính trung bình và phương sai mẫu của 1,2,3.",
+          "steps": [
+            "Trung bình là $(1+2+3)/3=2$.",
+            "Tổng bình phương độ lệch bằng $1+0+1=2$.",
+            "Chia cho n-1 bằng 2 nhận phương sai mẫu bằng 1."
+          ],
+          "result": "$\\bar x=2$, $s^2=1$.",
+          "insight": "Nếu mô tả đúng phân bố thực nghiệm thay vì ước lượng, mẫu số n có mục đích khác."
+        },
+        {
+          "statement": "So sánh trung bình và trung vị của 1,2,3,4,100.",
+          "steps": [
+            "Tổng bằng 110 nên trung bình bằng 22.",
+            "Dữ liệu đã sắp xếp, phần tử giữa là 3.",
+            "Giá trị 100 kéo trung bình xa nhóm số nhỏ nhưng ít ảnh hưởng trung vị."
+          ],
+          "result": "Trung bình 22, trung vị 3.",
+          "insight": "Chọn thước đo vị trí phải xét ngoại lai và mục tiêu phân tích."
+        },
+        {
+          "statement": "Đổi đơn vị nhiệt độ $Y=1.8X+32$. Nếu $\\bar X=20$, $s_X=5$, tìm các đặc trưng của Y.",
+          "steps": [
+            "Trung bình biến đổi affine thành $1.8\\cdot20+32=68$.",
+            "Độ lệch chuẩn nhân với trị tuyệt đối 1.8, thành 9.",
+            "Cộng 32 không thay đổi độ phân tán."
+          ],
+          "result": "$\\bar Y=68$, $s_Y=9$.",
+          "insight": "Phương sai sẽ nhân với $1.8^2$, không phải 1.8."
+        },
+        {
+          "statement": "Khảo sát mức hài lòng chỉ qua người tự bấm bình chọn có là mẫu ngẫu nhiên đơn không?",
+          "steps": [
+            "Khả năng tham gia phụ thuộc động cơ và mức hài lòng.",
+            "Các thành viên tổng thể không có xác suất chọn ngang nhau đã biết.",
+            "Tăng số bình chọn không tự sửa được cơ chế tự lựa chọn."
+          ],
+          "result": "Không đủ cơ sở coi là mẫu ngẫu nhiên đơn.",
+          "insight": "Thiết kế lấy mẫu ảnh hưởng kết luận trước mọi phép tính thống kê."
+        },
+        {
+          "statement": "Có 20 nam và 80 nữ trong mẫu, trung bình lần lượt 7 và 8. Tính trung bình chung.",
+          "steps": [
+            "Tổng điểm nhóm nam là 140 và nữ là 640.",
+            "Tổng điểm 780 trên 100 người.",
+            "Trung bình chung bằng 7.8, không phải 7.5."
+          ],
+          "result": "7.8.",
+          "insight": "Nhóm có kích thước khác nhau cần trung bình có trọng số."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "fernandez",
+          "locator": "Chương 8 Descriptive Statistics; 9 Frequentist Statistics; 10 Bayesian Statistics; các mục Regression"
+        },
+        {
+          "sourceId": "stapleton",
+          "locator": "Các chương về estimation và statistical inference trong bản đính kèm"
+        },
+        {
+          "sourceId": "agresti",
+          "locator": "Phần giới thiệu và mục lục bản trích 49 trang; không coi đây là toàn văn sách"
+        },
+        {
+          "sourceId": "albert",
+          "locator": "Phần mở đầu bản trích 48 trang; đọc bổ trợ định hướng Bayes"
+        }
+      ]
+    },
+    {
+      "id": "estimation",
+      "title": "Ước lượng điểm, likelihood và tính không chệch",
+      "theory": [
+        "Ước lượng là một hàm của mẫu; giá trị ước lượng là kết quả cụ thể sau quan sát. Độ chệch là $E\\hat\\theta-\\theta$, còn MSE bằng phương sai cộng bình phương độ chệch.",
+        "Likelihood xem dữ liệu cố định và tham số biến thiên. MLE tối đa hóa likelihood trong miền tham số; dùng log-likelihood thường dễ hơn. Không chệch không đồng nghĩa tối ưu theo MSE, và MLE hữu hạn mẫu có thể chệch."
+      ],
+      "method": [
+        "Viết mô hình và miền tham số.",
+        "Lập log-likelihood hoặc phương trình moment.",
+        "Kiểm tra biên, cực đại và tính chất ước lượng."
+      ],
+      "pitfalls": [
+        "Likelihood không phải xác suất của tham số trong cách tiếp cận tần suất."
+      ],
+      "examples": [
+        {
+          "statement": "Mẫu Bernoulli có 8 thành công, 2 thất bại. Tìm MLE của p.",
+          "steps": [
+            "Likelihood tỷ lệ $p^8(1-p)^2$.",
+            "Đạo hàm log là $8/p-2/(1-p)$; cho bằng 0 nhận p=0.8.",
+            "Log-likelihood lõm và hai biên cho likelihood 0."
+          ],
+          "result": "$\\hat p=0.8$.",
+          "insight": "MLE Bernoulli là tỷ lệ thành công quan sát."
+        },
+        {
+          "statement": "Mẫu mũ tốc độ lambda có 5 thời gian với tổng 20. Tìm MLE.",
+          "steps": [
+            "Log-likelihood là $5\\log\\lambda-20\\lambda$ cộng hằng số.",
+            "Đạo hàm $5/\\lambda-20=0$.",
+            "Đạo hàm hai âm nên điểm dừng là cực đại."
+          ],
+          "result": "$\\hat\\lambda=5/20=0.25$.",
+          "insight": "Phải ghi dùng tốc độ, không dùng tham số kỳ vọng nghịch đảo."
+        },
+        {
+          "statement": "Chứng minh trung bình mẫu không chệch cho mu.",
+          "steps": [
+            "Giả sử mỗi Xi có kỳ vọng mu hữu hạn.",
+            "Tuyến tính kỳ vọng cho $E\\bar X=(1/n)\\sum EX_i$.",
+            "Tổng n lần mu rồi chia n bằng mu."
+          ],
+          "result": "$E\\bar X=\\mu$.",
+          "insight": "Tính không chệch này không cần độc lập, nhưng công thức phương sai thường cần."
+        },
+        {
+          "statement": "Ước lượng A có độ chệch 1, phương sai 2; B không chệch, phương sai 4. So sánh MSE.",
+          "steps": [
+            "Với A, MSE bằng $2+1^2=3$.",
+            "Với B, MSE bằng $4+0=4$.",
+            "A có MSE nhỏ hơn dù có độ chệch."
+          ],
+          "result": "A tốt hơn theo tiêu chuẩn MSE trong dữ kiện đã cho.",
+          "insight": "Không nên đồng nhất không chệch với tốt nhất trong mọi tiêu chuẩn."
+        },
+        {
+          "statement": "Mẫu $U(0,\\theta)$ có giá trị lớn nhất m. Tìm MLE của theta.",
+          "steps": [
+            "Likelihood bằng $\\theta^{-n}$ khi $\\theta\\ge m$, bằng 0 nếu nhỏ hơn m.",
+            "Trong miền hợp lệ, likelihood giảm theo theta.",
+            "Do đó đạt lớn nhất tại biên nhỏ nhất theta bằng m."
+          ],
+          "result": "$\\hat\\theta=m$.",
+          "insight": "Không phải MLE nào cũng được tìm bằng đạo hàm bằng 0 ở miền trong."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "fernandez",
+          "locator": "Chương 8 Descriptive Statistics; 9 Frequentist Statistics; 10 Bayesian Statistics; các mục Regression"
+        },
+        {
+          "sourceId": "stapleton",
+          "locator": "Các chương về estimation và statistical inference trong bản đính kèm"
+        },
+        {
+          "sourceId": "agresti",
+          "locator": "Phần giới thiệu và mục lục bản trích 49 trang; không coi đây là toàn văn sách"
+        },
+        {
+          "sourceId": "albert",
+          "locator": "Phần mở đầu bản trích 48 trang; đọc bổ trợ định hướng Bayes"
+        }
+      ]
+    },
+    {
+      "id": "intervals",
+      "title": "Khoảng tin cậy và sai số chuẩn",
+      "theory": [
+        "Khoảng tin cậy tần suất là một thủ tục ngẫu nhiên có xác suất phủ tham số cố định bằng mức danh định dưới mô hình. Nó không nói tham số cố định có xác suất 95% sau khi đã quan sát khoảng.",
+        "Với trung bình chuẩn và sigma đã biết, dùng z; sigma chưa biết, dùng t với n-1 bậc tự do dưới giả thiết mẫu chuẩn. Khoảng cho tỷ lệ cần chú ý p gần 0/1; Wald có thể kém ở mẫu nhỏ."
+      ],
+      "method": [
+        "Chọn mô hình và đại lượng trụ.",
+        "Tính sai số chuẩn và phân vị.",
+        "Diễn giải mức phủ, giả thiết và đơn vị."
+      ],
+      "pitfalls": [
+        "Độ lệch chuẩn mẫu khác sai số chuẩn của trung bình."
+      ],
+      "examples": [
+        {
+          "statement": "Xbar=12, sigma=2 đã biết, n=100. Lập khoảng 95% cho mu theo mô hình chuẩn.",
+          "steps": [
+            "Sai số chuẩn bằng $2/\\sqrt{100}=0.2$.",
+            "Biên sai số dùng $1.96\\cdot0.2=0.392$.",
+            "Cộng trừ biên vào 12."
+          ],
+          "result": "$[11.608,12.392]$.",
+          "insight": "Phân vị z được dùng vì sigma đã biết."
+        },
+        {
+          "statement": "Xbar=10, s=2, n=16, mẫu chuẩn. Lập khoảng 95% cho mu, cho $t_{0.975,15}=2.131$.",
+          "steps": [
+            "Sai số chuẩn là $2/4=0.5$.",
+            "Biên sai số bằng $2.131\\cdot0.5=1.0655$.",
+            "Khoảng đối xứng quanh 10."
+          ],
+          "result": "$[8.9345,11.0655]$.",
+          "insight": "Sử dụng phân phối t phản ánh sự bất định do ước lượng sigma."
+        },
+        {
+          "statement": "Muốn biên sai số không quá 0.5 với sigma=3 đã biết, mức 95%. Cần n bao nhiêu?",
+          "steps": [
+            "Điều kiện là $1.96\\cdot3/\\sqrt n\\le0.5$.",
+            "Bình phương cho $n\\ge(1.96\\cdot3/0.5)^2=138.2976$.",
+            "Làm tròn lên để bảo đảm yêu cầu."
+          ],
+          "result": "Cần ít nhất 139 quan sát.",
+          "insight": "Làm tròn xuống sẽ không đáp ứng biên sai số đặt ra."
+        },
+        {
+          "statement": "Ước lượng tỷ lệ từ 100 thành công trong 200 thử. Dùng Wald xấp xỉ 95%.",
+          "steps": [
+            "$\\hat p=0.5$, sai số chuẩn $\\sqrt{0.5\\cdot0.5/200}\\approx0.03536$.",
+            "Biên sai số khoảng 0.06930.",
+            "Cộng trừ quanh 0.5; các số đếm thành công và thất bại đều lớn."
+          ],
+          "result": "Xấp xỉ $[0.4307,0.5693]$.",
+          "insight": "Wald không được dùng máy móc khi số đếm nhỏ hoặc tỷ lệ gần biên."
+        },
+        {
+          "statement": "Một khoảng 95% đã quan sát là [4,6]. Có nói $P(\\mu\\in[4,6])=0.95$ theo mô hình tần suất không?",
+          "steps": [
+            "Mu là tham số cố định và khoảng đã trở thành số cố định.",
+            "Xác suất phủ 95% nói về thủ tục qua những mẫu lặp lại.",
+            "Một diễn giải hậu nghiệm cần mô hình Bayes và prior riêng."
+          ],
+          "result": "Không diễn giải như xác suất hậu nghiệm của mu.",
+          "insight": "Phân biệt hai cách diễn giải giúp tránh nhầm khoảng tin cậy với khoảng khả tín."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "fernandez",
+          "locator": "Chương 8 Descriptive Statistics; 9 Frequentist Statistics; 10 Bayesian Statistics; các mục Regression"
+        },
+        {
+          "sourceId": "stapleton",
+          "locator": "Các chương về estimation và statistical inference trong bản đính kèm"
+        },
+        {
+          "sourceId": "agresti",
+          "locator": "Phần giới thiệu và mục lục bản trích 49 trang; không coi đây là toàn văn sách"
+        },
+        {
+          "sourceId": "albert",
+          "locator": "Phần mở đầu bản trích 48 trang; đọc bổ trợ định hướng Bayes"
+        }
+      ]
+    },
+    {
+      "id": "tests",
+      "title": "Kiểm định giả thuyết, p-value và công suất",
+      "theory": [
+        "Kiểm định gồm giả thuyết không H0, đối H1, thống kê và quy tắc bác bỏ. Sai lầm loại I là bác bỏ H0 đúng; công suất là xác suất bác bỏ khi một đối cụ thể đúng.",
+        "P-value là xác suất dưới H0 nhận thống kê ít nhất cực đoan như quan sát theo hướng kiểm định. Nó không phải xác suất H0 đúng. Không bác bỏ không có nghĩa chứng minh H0; kích thước hiệu ứng và khoảng tin cậy cần đi kèm."
+      ],
+      "method": [
+        "Chốt một phía hay hai phía trước khi xem kết quả.",
+        "Tính phân bố thống kê dưới H0.",
+        "Báo p-value, quyết định và ý nghĩa thực tiễn."
+      ],
+      "pitfalls": [
+        "Thử nhiều giả thuyết làm tăng rủi ro phát hiện giả nếu không điều chỉnh."
+      ],
+      "examples": [
+        {
+          "statement": "Kiểm định hai phía mu=0, sigma=1 đã biết, n=100, xbar=0.2.",
+          "steps": [
+            "Thống kê $z=(0.2-0)/(1/10)=2$.",
+            "P-value hai phía là $2[1-\\Phi(2)]\\approx0.0455$.",
+            "So với alpha=0.05, bác bỏ H0."
+          ],
+          "result": "Bác bỏ ở mức 5%, không bác bỏ ở mức 1%.",
+          "insight": "Kết luận phụ thuộc mức đã chọn, không chỉ con số trung bình."
+        },
+        {
+          "statement": "Cùng dữ liệu, kiểm định một phía H1:mu>0.",
+          "steps": [
+            "Thống kê z vẫn bằng 2.",
+            "P-value chỉ lấy đuôi phải: $1-\\Phi(2)\\approx0.02275$.",
+            "So với alpha 0.05 thì bác bỏ H0."
+          ],
+          "result": "P-value xấp xỉ 0.02275.",
+          "insight": "Chọn phía sau khi xem dấu dữ liệu làm sai hiệu chỉnh loại I."
+        },
+        {
+          "statement": "Đặt alpha=0.01. Sai lầm loại I được hiểu thế nào?",
+          "steps": [
+            "Xét trường hợp H0 thực sự đúng.",
+            "Quy tắc kiểm định được thiết kế bác bỏ với xác suất tối đa 0.01 trong mô hình.",
+            "Điều này là xác suất trước khi lấy mẫu, không phải xác suất kết luận quan sát bị sai."
+          ],
+          "result": "Rủi ro bác bỏ H0 đúng được kiểm soát ở mức 1%.",
+          "insight": "Mức ý nghĩa không bằng xác suất H0 đúng sau dữ liệu."
+        },
+        {
+          "statement": "Nếu một kiểm định có beta=0.2 tại một đối cụ thể, công suất là bao nhiêu?",
+          "steps": [
+            "Beta là xác suất không bác bỏ khi đối đó đúng.",
+            "Bác bỏ và không bác bỏ là hai khả năng bổ sung.",
+            "Công suất bằng $1-\\beta$."
+          ],
+          "result": "0.8.",
+          "insight": "Công suất phải gắn với một giá trị hiệu ứng, không là một số duy nhất cho mọi đối."
+        },
+        {
+          "statement": "Thử 20 giả thuyết đúng, mỗi kiểm định alpha=0.05 độc lập. Xác suất ít nhất một bác bỏ sai?",
+          "steps": [
+            "Mỗi kiểm định không mắc loại I với xác suất 0.95.",
+            "Độc lập cho xác suất không có lỗi là $0.95^{20}$.",
+            "Lấy phần bù."
+          ],
+          "result": "$1-0.95^{20}\\approx0.6415$.",
+          "insight": "Điều chỉnh Bonferroni dùng mức 0.05/20 để kiểm soát lỗi họ mà không cần độc lập."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "fernandez",
+          "locator": "Chương 8 Descriptive Statistics; 9 Frequentist Statistics; 10 Bayesian Statistics; các mục Regression"
+        },
+        {
+          "sourceId": "stapleton",
+          "locator": "Các chương về estimation và statistical inference trong bản đính kèm"
+        },
+        {
+          "sourceId": "agresti",
+          "locator": "Phần giới thiệu và mục lục bản trích 49 trang; không coi đây là toàn văn sách"
+        },
+        {
+          "sourceId": "albert",
+          "locator": "Phần mở đầu bản trích 48 trang; đọc bổ trợ định hướng Bayes"
+        }
+      ]
+    },
+    {
+      "id": "comparisons",
+      "title": "So sánh hai nhóm, cặp ghép và ANOVA",
+      "theory": [
+        "Hai mẫu độc lập và dữ liệu cặp cần được xử lý khác nhau. Với cặp, phân tích các hiệu trong từng cặp; với hai nhóm độc lập, phương sai hiệu trung bình là tổng hai phương sai trung bình.",
+        "Welch không giả sử hai phương sai bằng nhau. ANOVA một yếu tố phân rã tổng bình phương thành giữa nhóm và trong nhóm, dưới giả thiết sai số độc lập, chuẩn và đồng phương sai cho kiểm định F cổ điển."
+      ],
+      "method": [
+        "Xác định độc lập hay cặp.",
+        "Chọn sai số chuẩn phù hợp thiết kế.",
+        "Kiểm tra giả thiết trước khi diễn giải F hoặc t."
+      ],
+      "pitfalls": [
+        "Ghép cặp không đúng hoặc coi các cặp là độc lập có thể làm sai sai số chuẩn."
+      ],
+      "examples": [
+        {
+          "statement": "Hai nhóm độc lập có n1=25,n2=36, phương sai đã biết 4 và 9. Tính SE của hiệu trung bình.",
+          "steps": [
+            "Phương sai trung bình nhóm một là $4/25=0.16$.",
+            "Nhóm hai là $9/36=0.25$.",
+            "Cộng do độc lập rồi lấy căn."
+          ],
+          "result": "$SE=\\sqrt{0.41}\\approx0.6403$.",
+          "insight": "Phương sai cộng, không phải độ lệch chuẩn cộng."
+        },
+        {
+          "statement": "Hiệu sau–trước trong bốn cặp là 1,2,3,2. Tính trung bình và SE của hiệu.",
+          "steps": [
+            "Trung bình hiệu bằng 2.",
+            "Tổng bình phương độ lệch bằng 2 nên $s_d^2=2/3$.",
+            "SE bằng $s_d/\\sqrt4=\\sqrt{1/6}$."
+          ],
+          "result": "$\\bar d=2$, $SE\\approx0.4082$.",
+          "insight": "Đơn vị phân tích là cặp, số mẫu là 4 hiệu chứ không phải 8 phép đo."
+        },
+        {
+          "statement": "Hai nhóm A={1,2}, B={3,4}. Tính thống kê ANOVA F.",
+          "steps": [
+            "Trung bình nhóm 1.5 và 3.5, trung bình chung 2.5; SSB bằng 4.",
+            "SSW là bốn bình phương 0.5, tổng bằng 1.",
+            "$F=[4/(2-1)]/[1/(4-2)]=8$."
+          ],
+          "result": "$F=8$ với bậc tự do $(1,2)$.",
+          "insight": "Thống kê F chưa phải p-value và mẫu rất nhỏ cần giả thiết chuẩn rõ ràng."
+        },
+        {
+          "statement": "Kiểm định đồng thời ba trung bình bằng nhau. H0 của ANOVA là gì?",
+          "steps": [
+            "H0 là $\\mu_1=\\mu_2=\\mu_3$.",
+            "Đối là tồn tại ít nhất một cặp trung bình khác nhau.",
+            "Bác bỏ H0 chưa chỉ ra cặp nào khác; cần phân tích hậu kiểm được điều chỉnh."
+          ],
+          "result": "Đối không đòi mọi cặp đều khác.",
+          "insight": "Một kiểm định tổng thể và các so sánh cặp trả lời những câu hỏi khác nhau."
+        },
+        {
+          "statement": "Vì sao không luôn gộp phương sai hai mẫu trước khi kiểm định trung bình?",
+          "steps": [
+            "Ước lượng phương sai gộp dựa trên giả thiết hai tổng thể có cùng phương sai.",
+            "Nếu giả thiết sai và kích thước mẫu lệch, mức lỗi có thể thay đổi.",
+            "Welch dùng $s_1^2/n_1+s_2^2/n_2$ và bậc tự do xấp xỉ."
+          ],
+          "result": "Cần mô hình hoặc bằng chứng phù hợp trước khi gộp; Welch thường là lựa chọn linh hoạt.",
+          "insight": "Không chọn kiểm định chỉ theo thói quen bỏ qua thiết kế và độ phân tán."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "fernandez",
+          "locator": "Chương 8 Descriptive Statistics; 9 Frequentist Statistics; 10 Bayesian Statistics; các mục Regression"
+        },
+        {
+          "sourceId": "stapleton",
+          "locator": "Các chương về estimation và statistical inference trong bản đính kèm"
+        },
+        {
+          "sourceId": "agresti",
+          "locator": "Phần giới thiệu và mục lục bản trích 49 trang; không coi đây là toàn văn sách"
+        },
+        {
+          "sourceId": "albert",
+          "locator": "Phần mở đầu bản trích 48 trang; đọc bổ trợ định hướng Bayes"
+        }
+      ]
+    },
+    {
+      "id": "regression",
+      "title": "Hồi quy tuyến tính và kiểm tra phần dư",
+      "theory": [
+        "Mô hình $Y_i=\\beta_0+\\beta_1x_i+\\varepsilon_i$ tách quan hệ trung bình và sai số. OLS tối thiểu hóa tổng bình phương phần dư. Công thức dốc là $S_{xy}/S_{xx}$ khi Sxx dương, rồi lấy chặn $\\bar y-\\hat\\beta_1\\bar x$.",
+        "Suy luận cổ điển cần độc lập, phương sai ổn định và giả thiết phân bố cho kiểm định chính xác. Tương quan không khẳng định nhân quả; dự đoán xa miền x đã quan sát dễ sai."
+      ],
+      "method": [
+        "Vẽ dữ liệu và chọn mô hình.",
+        "Tính hệ số, phần dư và độ phù hợp.",
+        "Kiểm tra cấu trúc phần dư và giới hạn ngoại suy."
+      ],
+      "pitfalls": [
+        "R bình phương cao không tự chứng minh quan hệ nhân quả hay mô hình đúng."
+      ],
+      "examples": [
+        {
+          "statement": "Khớp đường thẳng qua dữ liệu (0,1),(1,3),(2,5).",
+          "steps": [
+            "Trung bình x bằng 1, y bằng 3.",
+            "$S_{xx}=2$, $S_{xy}=4$ nên dốc bằng 2.",
+            "Chặn bằng $3-2\\cdot1=1$, phần dư đều 0."
+          ],
+          "result": "$\\hat y=1+2x$.",
+          "insight": "Dữ liệu thẳng hàng cho khớp hoàn hảo, nhưng không tự bảo đảm sai số quan sát tương lai bằng 0."
+        },
+        {
+          "statement": "Mô hình $\\hat y=5+0.4x$ với x tính bằng giờ học. Diễn giải hệ số 0.4.",
+          "steps": [
+            "Giữ trong phạm vi và cách đo của mô hình.",
+            "Tăng x một giờ làm giá trị y dự đoán tăng trung bình 0.4 đơn vị.",
+            "Đây là quan hệ mô hình, không tự khẳng định tăng học gây ra đúng mức đó."
+          ],
+          "result": "Độ dốc mang đơn vị y trên giờ.",
+          "insight": "Luôn nêu đơn vị và tránh gán nghĩa nhân quả không được thiết kế hỗ trợ."
+        },
+        {
+          "statement": "SST=100, SSE=25. Tính R bình phương trong hồi quy có chặn.",
+          "steps": [
+            "Tổng biến thiên giải thích là $100-25=75$.",
+            "$R^2=1-SSE/SST$.",
+            "Thay số nhận 0.75."
+          ],
+          "result": "$R^2=0.75$.",
+          "insight": "Mô hình giải thích 75% biến thiên mẫu theo phân rã bình phương này."
+        },
+        {
+          "statement": "Vì sao dự đoán tại x=100 đáng ngại nếu mẫu chỉ có x trong [0,10]?",
+          "steps": [
+            "Mối quan hệ đã được kiểm tra chỉ trên một khoảng hẹp.",
+            "Ngoài khoảng đó, tuyến tính có thể không còn phù hợp và bất định tăng.",
+            "Đó là ngoại suy; cần dữ liệu hoặc mô hình vật lý bổ sung."
+          ],
+          "result": "Không nên coi dự đoán ngoại suy có độ tin cậy như nội suy.",
+          "insight": "Công thức vẫn tính được số nhưng tính toán được không đồng nghĩa được dữ liệu hỗ trợ."
+        },
+        {
+          "statement": "Phần dư tăng độ phân tán theo giá trị dự đoán gợi điều gì?",
+          "steps": [
+            "Biểu đồ phần dư có dạng hình phễu.",
+            "Điều này gợi phương sai sai số không hằng.",
+            "Có thể cân nhắc biến đổi, trọng số hoặc sai số chuẩn vững, sau khi kiểm tra mô hình."
+          ],
+          "result": "Gợi dị phương sai, không phải tự động chứng minh nó.",
+          "insight": "Chẩn đoán phần dư là công cụ đánh giá giả thiết, không chỉ một hình minh họa."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "fernandez",
+          "locator": "Chương 8 Descriptive Statistics; 9 Frequentist Statistics; 10 Bayesian Statistics; các mục Regression"
+        },
+        {
+          "sourceId": "stapleton",
+          "locator": "Các chương về estimation và statistical inference trong bản đính kèm"
+        },
+        {
+          "sourceId": "agresti",
+          "locator": "Phần giới thiệu và mục lục bản trích 49 trang; không coi đây là toàn văn sách"
+        },
+        {
+          "sourceId": "albert",
+          "locator": "Phần mở đầu bản trích 48 trang; đọc bổ trợ định hướng Bayes"
+        }
+      ]
+    },
+    {
+      "id": "categorical",
+      "title": "Dữ liệu phân loại, chi bình phương và kiểm định hạng",
+      "theory": [
+        "Kiểm định chi bình phương so sánh số đếm quan sát với số đếm kỳ vọng dưới H0. Với bảng r nhân c độc lập, kỳ vọng bằng tích tổng hàng và cột chia tổng chung; bậc tự do thường là (r-1)(c-1).",
+        "Số đếm kỳ vọng quá nhỏ cần phương pháp chính xác hoặc mô phỏng phù hợp. Kiểm định hạng giảm phụ thuộc vào chuẩn nhưng vẫn có giả thiết về độc lập và cách diễn giải vị trí; không phải mọi kiểm định hạng đều chỉ kiểm tra trung vị."
+      ],
+      "method": [
+        "Lập bảng số đếm.",
+        "Tính kỳ vọng dưới H0 và điều kiện xấp xỉ.",
+        "Chọn kiểm định đúng câu hỏi và thiết kế."
+      ],
+      "pitfalls": [
+        "Không dùng phần trăm thay số đếm khi áp công thức chi bình phương."
+      ],
+      "examples": [
+        {
+          "statement": "Bảng 2 nhân 2 là $\\begin{pmatrix}30&20\\\\20&30\\end{pmatrix}$. Tính chi bình phương độc lập.",
+          "steps": [
+            "Mọi tổng hàng và cột bằng 50, tổng chung 100.",
+            "Mỗi ô kỳ vọng 25.",
+            "Có bốn hạng $(5^2)/25=1$, tổng bằng 4."
+          ],
+          "result": "$\\chi^2=4$, bậc tự do 1.",
+          "insight": "Đây là thống kê chưa hiệu chỉnh liên tục cho bảng này."
+        },
+        {
+          "statement": "Xúc xắc gieo 60 lần, sáu mặt đều xuất hiện 10 lần. Tính thống kê phù hợp công bằng.",
+          "steps": [
+            "Dưới H0, mỗi mặt kỳ vọng 10.",
+            "Mọi sai lệch quan sát trừ kỳ vọng đều 0.",
+            "Tổng bình phương chuẩn hóa bằng 0."
+          ],
+          "result": "$\\chi^2=0$; không có bằng chứng lệch từ bảng đếm này.",
+          "insight": "Kết quả không chứng minh tuyệt đối xúc xắc công bằng, chỉ cho dữ liệu không lệch theo thống kê."
+        },
+        {
+          "statement": "Bảng 3 hàng,4 cột có số đếm kỳ vọng đủ lớn. Bậc tự do kiểm định độc lập?",
+          "steps": [
+            "Các tổng hàng và cột tạo ràng buộc lên các ô.",
+            "Công thức là $(r-1)(c-1)$.",
+            "Thay r=3,c=4 được $2\\cdot3$."
+          ],
+          "result": "6 bậc tự do.",
+          "insight": "Bậc tự do không bằng tổng số ô trừ 1 vì còn các ràng buộc biên."
+        },
+        {
+          "statement": "Xếp hạng dữ liệu 2,5,5,8 có giá trị đồng hạng thế nào?",
+          "steps": [
+            "Giá trị 2 nhận hạng 1 và 8 nhận hạng 4.",
+            "Hai giá trị 5 chiếm vị trí 2 và 3.",
+            "Gán cho mỗi giá trị hạng trung bình $(2+3)/2=2.5$."
+          ],
+          "result": "Các hạng là 1,2.5,2.5,4.",
+          "insight": "Hiệu chỉnh đồng hạng cần được giữ khi tính các kiểm định hạng."
+        },
+        {
+          "statement": "Một bảng có ô kỳ vọng 0.2. Có nên tin ngay xấp xỉ chi bình phương?",
+          "steps": [
+            "Xấp xỉ liên tục cần số đếm kỳ vọng không quá nhỏ theo điều kiện phương pháp.",
+            "Ô 0.2 báo hiệu mẫu thưa và xấp xỉ có thể kém.",
+            "Với 2 nhân 2 có thể dùng Fisher; bảng khác cân nhắc phương pháp chính xác hoặc mô phỏng."
+          ],
+          "result": "Không nên áp dụng máy móc xấp xỉ chi bình phương.",
+          "insight": "Gộp nhóm chỉ hợp lý khi có ý nghĩa nội dung, không nhằm ép đạt một quy tắc số học."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "fernandez",
+          "locator": "Chương 8 Descriptive Statistics; 9 Frequentist Statistics; 10 Bayesian Statistics; các mục Regression"
+        },
+        {
+          "sourceId": "stapleton",
+          "locator": "Các chương về estimation và statistical inference trong bản đính kèm"
+        },
+        {
+          "sourceId": "agresti",
+          "locator": "Phần giới thiệu và mục lục bản trích 49 trang; không coi đây là toàn văn sách"
+        },
+        {
+          "sourceId": "albert",
+          "locator": "Phần mở đầu bản trích 48 trang; đọc bổ trợ định hướng Bayes"
+        }
+      ]
+    },
+    {
+      "id": "bayes-bootstrap",
+      "title": "Bayes, dự đoán hậu nghiệm và bootstrap",
+      "theory": [
+        "Bayes kết hợp prior và likelihood để có posterior tỷ lệ tích của chúng. Với Bernoulli và prior Beta(a,b), s thành công và f thất bại tạo posterior Beta(a+s,b+f).",
+        "Bootstrap không tham số lấy mẫu có hoàn lại từ dữ liệu để xấp xỉ phân bố của thống kê; nó không sửa thiên lệch lấy mẫu gốc và cần điều chỉnh với phụ thuộc thời gian. Khoảng khả tín Bayes và khoảng tin cậy bootstrap có cách diễn giải khác nhau."
+      ],
+      "method": [
+        "Xác định prior và likelihood hoặc cơ chế tái mẫu.",
+        "Tính cập nhật hoặc thống kê trên mẫu lặp.",
+        "Diễn giải bất định và các giả thiết."
+      ],
+      "pitfalls": [
+        "Không coi một prior tùy ý hay một lần bootstrap là đủ cho kết luận vững."
+      ],
+      "examples": [
+        {
+          "statement": "Prior p là Beta(1,1), quan sát 3 ngửa,2 sấp. Tìm posterior.",
+          "steps": [
+            "Likelihood tỷ lệ $p^3(1-p)^2$.",
+            "Nhân prior đều giữ các số mũ đó.",
+            "So sánh với mật độ Beta cho tham số 4 và 3."
+          ],
+          "result": "$p\\mid D\\sim\\operatorname{Beta}(4,3)$.",
+          "insight": "Tham số Beta đếm theo số mũ cộng 1, không phải chỉ số lần thành công."
+        },
+        {
+          "statement": "Tính xác suất dự đoán ngửa kế tiếp trong ví dụ trên.",
+          "steps": [
+            "Với p đã biết, xác suất ngửa bằng p.",
+            "Tích phân theo posterior cho $E[p\\mid D]$.",
+            "Trung bình Beta(4,3) bằng $4/(4+3)$."
+          ],
+          "result": "$4/7$.",
+          "insight": "Dự đoán hậu nghiệm trung bình hóa qua sự bất định của tham số."
+        },
+        {
+          "statement": "Prior Beta(2,2), dữ liệu 8 thành công,2 thất bại. Tính posterior mean.",
+          "steps": [
+            "Posterior là Beta(10,4).",
+            "Trung bình bằng $10/14=5/7$.",
+            "Giá trị thấp hơn tỷ lệ mẫu 0.8 vì prior cân đối kéo về 0.5."
+          ],
+          "result": "$5/7\\approx0.7143$.",
+          "insight": "Độ mạnh prior ảnh hưởng rõ hơn khi số quan sát ít."
+        },
+        {
+          "statement": "Từ mẫu 1,2,3, một bootstrap lấy được 3,3,1. Tính trung bình bootstrap.",
+          "steps": [
+            "Lấy mẫu có hoàn lại cho phép giá trị 3 lặp hai lần.",
+            "Tổng mẫu mới là 7, kích thước vẫn 3.",
+            "Trung bình là 7/3, khác trung bình mẫu gốc 2."
+          ],
+          "result": "$\\bar x^*=7/3$.",
+          "insight": "Mỗi mẫu bootstrap là một lần lặp của thống kê, không phải bộ dữ liệu mới độc lập từ tổng thể."
+        },
+        {
+          "statement": "Tại sao không bootstrap từng điểm độc lập cho chuỗi đo có tự tương quan mạnh?",
+          "steps": [
+            "Tái mẫu từng điểm phá cấu trúc phụ thuộc thời gian.",
+            "Phương sai trung bình có thể bị ước lượng quá thấp nếu bỏ tương quan dương.",
+            "Cần phương pháp như block bootstrap với lựa chọn độ dài khối phù hợp."
+          ],
+          "result": "Cơ chế tái mẫu phải phản ánh phụ thuộc của dữ liệu.",
+          "insight": "Bootstrap là nguyên tắc mô phỏng thiết kế, không là công thức dùng chung cho mọi dữ liệu."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "fernandez",
+          "locator": "Chương 8 Descriptive Statistics; 9 Frequentist Statistics; 10 Bayesian Statistics; các mục Regression"
+        },
+        {
+          "sourceId": "stapleton",
+          "locator": "Các chương về estimation và statistical inference trong bản đính kèm"
+        },
+        {
+          "sourceId": "agresti",
+          "locator": "Phần giới thiệu và mục lục bản trích 49 trang; không coi đây là toàn văn sách"
+        },
+        {
+          "sourceId": "albert",
+          "locator": "Phần mở đầu bản trích 48 trang; đọc bổ trợ định hướng Bayes"
+        }
+      ]
+    }
+  ]
+}

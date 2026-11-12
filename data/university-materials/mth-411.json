@@ -1,0 +1,671 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-10-25.1",
+  "courseId": "mth-411",
+  "prerequisites": [
+    "Xác suất cơ bản, giải tích dãy–chuỗi, tư duy chứng minh"
+  ],
+  "outcomes": [
+    "Sử dụng ngôn ngữ đo và tích phân cho xác suất",
+    "Phân biệt các dạng hội tụ và điều kiện đổi giới hạn",
+    "Phân tích kỳ vọng có điều kiện, martingale và tập trung xác suất"
+  ],
+  "sections": [
+    {
+      "id": "measure",
+      "title": "Không gian đo, sigma-đại số và độ đo xác suất",
+      "theory": [
+        "Sigma-đại số chứa toàn không gian, đóng với phần bù và hợp đếm được. Xác suất là độ đo không âm, cộng đếm được và có tổng khối lượng 1. Biến ngẫu nhiên là ánh xạ đo được, bảo đảm nghịch ảnh các tập Borel là biến cố.",
+        "Xác suất 0 không có nghĩa tập rỗng. Tính liên tục từ dưới/trên của độ đo chuyển các dãy biến cố đơn điệu thành giới hạn xác suất; trong xác suất, điều kiện hữu hạn cho chiều từ trên luôn được thỏa."
+      ],
+      "method": [
+        "Xác định họ tập và tính đóng.",
+        "Mô tả nghịch ảnh hoặc biến cố giới hạn.",
+        "Áp dụng cộng đếm được hay tính liên tục độ đo."
+      ],
+      "pitfalls": [
+        "Một đại số chỉ đóng với hợp hữu hạn chưa chắc là sigma-đại số."
+      ],
+      "examples": [
+        {
+          "statement": "Trên $\\Omega=\\{1,2,3\\}$, $\\mathcal F=\\{\\varnothing,\\Omega,\\{1\\},\\{2,3\\}\\}$ có là sigma-đại số?",
+          "steps": [
+            "Phần bù ghép hai tập giữa và ghép rỗng với toàn không gian.",
+            "Mọi hợp các tập trong họ vẫn là một trong bốn tập đó.",
+            "Vì họ hữu hạn, hợp đếm được cũng chỉ tạo các hợp này."
+          ],
+          "result": "Có, đây là sigma-đại số sinh bởi phân hoạch $\\{1\\},\\{2,3\\}$.",
+          "insight": "Sigma-đại số mô tả lượng thông tin phân biệt được, không nhất thiết mọi tập con."
+        },
+        {
+          "statement": "Với U đều trên [0,1], tính $P(U\\in\\mathbb Q)$.",
+          "steps": [
+            "Liệt kê các số hữu tỷ trong đoạn thành một dãy đếm được.",
+            "Mỗi điểm riêng có xác suất 0.",
+            "Tính cộng đếm được cho hợp các điểm cho tổng 0."
+          ],
+          "result": "$P(U\\in\\mathbb Q)=0$.",
+          "insight": "Tập xác suất 0 vẫn có vô hạn phần tử và có thể trù mật."
+        },
+        {
+          "statement": "Đặt $A_n=[0,1-1/n]$ trong [0,1]. Tìm giới hạn xác suất.",
+          "steps": [
+            "Các tập tăng và hợp bằng $[0,1)$.",
+            "Độ dài $A_n$ bằng $1-1/n$.",
+            "Tính liên tục từ dưới cho giới hạn bằng xác suất của hợp, tức 1."
+          ],
+          "result": "$P(A_n)\\to1$.",
+          "insight": "Thiếu điểm 1 không đổi xác suất trong mô hình đều."
+        },
+        {
+          "statement": "Khi nào chỉ báo $1_A$ là một biến ngẫu nhiên trên $(\\Omega,\\mathcal F)$?",
+          "steps": [
+            "Nếu A đo được thì nghịch ảnh các khoảng của chỉ báo chỉ có thể là rỗng, A, phần bù A hoặc toàn không gian.",
+            "Ngược lại, $A=\\{1_A>1/2\\}$.",
+            "Tính đo được của chỉ báo vì vậy tương đương $A\\in\\mathcal F$."
+          ],
+          "result": "$1_A$ đo được khi và chỉ khi A là biến cố.",
+          "insight": "Định nghĩa đo được nối phép tính hàm với cấu trúc tập biến cố."
+        },
+        {
+          "statement": "Trên $\\mathbb N$, đặt $P(\\{n\\})=2^{-n}$ với n bắt đầu từ 1. Đây có là xác suất?",
+          "steps": [
+            "Mỗi khối lượng không âm.",
+            "Tổng chuỗi hình học $\\sum_{n=1}^\\infty2^{-n}=1$.",
+            "Đặt xác suất một tập bằng tổng khối lượng các phần tử của nó sẽ có cộng đếm được."
+          ],
+          "result": "Có, trên sigma-đại số mọi tập con của $\\mathbb N$.",
+          "insight": "Chỉ số đầu 1 là điều kiện để tổng đúng bằng 1."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "roch",
+          "locator": "Các phần Moments and Tails, Concentration, Martingales và Markov Chains"
+        },
+        {
+          "sourceId": "fernandez",
+          "locator": "Các chương Expectation, Concentration, Convergence of Random Processes, Markov Chains"
+        },
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương về conditional expectation và limit theorems; đối chiếu xác suất cơ bản"
+        }
+      ]
+    },
+    {
+      "id": "integration",
+      "title": "Kỳ vọng Lebesgue, Tonelli, Fatou và DCT",
+      "theory": [
+        "Kỳ vọng được xây từ tích phân hàm đơn giản không âm rồi mở rộng. Với biến có dấu, kỳ vọng hữu hạn khi $E|X|<\\infty$. Tonelli cho đổi thứ tự tổng/tích phân của hàm không âm; Fubini cần tính khả tích tuyệt đối trong dạng thường dùng.",
+        "Hội tụ đơn điệu áp dụng cho dãy tăng không âm; Fatou cho chặn dưới giới hạn kỳ vọng; hội tụ bị chặn bởi một biến khả tích cho phép đổi giới hạn và kỳ vọng. Mỗi định lý có giả thiết riêng."
+      ],
+      "method": [
+        "Kiểm tra dấu và khả tích.",
+        "Chọn định lý có giả thiết khớp dãy đang xét.",
+        "Chỉ đổi thứ tự hoặc giới hạn sau khi xác nhận điều kiện."
+      ],
+      "pitfalls": [
+        "Hội tụ hầu chắc chắn một mình không đủ đổi giới hạn với kỳ vọng."
+      ],
+      "examples": [
+        {
+          "statement": "Tính kỳ vọng chỉ báo của biến cố A.",
+          "steps": [
+            "Chỉ báo bằng 1 trên A và 0 ngoài A.",
+            "Tích phân hàm đơn giản bằng giá trị mỗi mức nhân xác suất mức.",
+            "Nhận $1\\cdot P(A)+0\\cdot P(A^c)$."
+          ],
+          "result": "$E1_A=P(A)$.",
+          "insight": "Đây là cầu nối giữa xác suất biến cố và tích phân."
+        },
+        {
+          "statement": "Với U đều [0,1], xét $X_n=U^n$. Có đổi giới hạn và kỳ vọng không?",
+          "steps": [
+            "$U^n\\to0$ ngoài điểm U=1, nên hầu chắc chắn về 0.",
+            "$0\\le X_n\\le1$ với biến chặn khả tích.",
+            "DCT cho $EX_n\\to0$, phù hợp $EX_n=1/(n+1)$."
+          ],
+          "result": "Có, nhờ DCT.",
+          "insight": "Điểm ngoại lệ có xác suất 0 không cản hội tụ hầu chắc chắn."
+        },
+        {
+          "statement": "Xét $X_n=n1_{\\{U\\le1/n\\}}$ với U đều (0,1).",
+          "steps": [
+            "Với mỗi U dương cố định, chỉ báo cuối cùng bằng 0, nên Xn về 0 hầu chắc chắn.",
+            "Nhưng $EX_n=n\\cdot(1/n)=1$.",
+            "Do đó không được đổi giới hạn kỳ vọng; không có biến chặn khả tích chung như DCT yêu cầu."
+          ],
+          "result": "$X_n\\to0$ hầu chắc chắn nhưng $EX_n=1\\not\\to0$.",
+          "insight": "Khối lượng kỳ vọng có thể tập trung vào biến cố hiếm nhưng biên độ lớn."
+        },
+        {
+          "statement": "Với N nguyên không âm, giải thích công thức $EN=\\sum_{k\\ge1}P(N\\ge k)$.",
+          "steps": [
+            "Theo từng kết quả, $N=\\sum_{k\\ge1}1_{\\{N\\ge k\\}}$.",
+            "Các số hạng không âm nên Tonelli đổi tổng và kỳ vọng.",
+            "Kỳ vọng mỗi chỉ báo bằng xác suất tương ứng."
+          ],
+          "result": "Công thức đúng, kể cả hai vế cùng vô hạn.",
+          "insight": "Không cần giả sử trước kỳ vọng hữu hạn khi các hạng không âm."
+        },
+        {
+          "statement": "$X_n=\\min(X,n)$ với X không âm. Tìm giới hạn EXn.",
+          "steps": [
+            "Xn tăng theo n và tiến điểm một tới X.",
+            "Mọi Xn không âm.",
+            "Hội tụ đơn điệu cho $EX_n\\uparrow EX$, có thể vô hạn."
+          ],
+          "result": "$\\lim_nE\\min(X,n)=EX$.",
+          "insight": "Cắt ngọn là cách hợp lệ để xấp xỉ biến không âm chưa biết khả tích."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "roch",
+          "locator": "Các phần Moments and Tails, Concentration, Martingales và Markov Chains"
+        },
+        {
+          "sourceId": "fernandez",
+          "locator": "Các chương Expectation, Concentration, Convergence of Random Processes, Markov Chains"
+        },
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương về conditional expectation và limit theorems; đối chiếu xác suất cơ bản"
+        }
+      ]
+    },
+    {
+      "id": "independence-bc",
+      "title": "Độc lập, biến cố giới hạn và Borel–Cantelli",
+      "theory": [
+        "Độc lập của một họ biến cố đòi công thức tích cho mọi tập con hữu hạn; độc lập từng đôi yếu hơn độc lập chung. Với biến ngẫu nhiên, định nghĩa qua sigma-đại số sinh bởi chúng.",
+        "Borel–Cantelli thứ nhất: nếu tổng xác suất An hữu hạn thì xác suất An xảy ra vô hạn lần bằng 0. Chiều ngược cần giả thiết độc lập thích hợp; chỉ tổng phân kỳ là chưa đủ. Liminf và limsup của biến cố mô tả xảy ra cuối cùng luôn luôn và vô hạn lần."
+      ],
+      "method": [
+        "Viết biến cố giới hạn bằng hợp và giao đếm được.",
+        "Kiểm tra tổng xác suất.",
+        "Nêu độc lập trước khi dùng chiều thứ hai."
+      ],
+      "pitfalls": [
+        "Không thay độc lập chung bằng độc lập từng đôi trong mọi công thức tích nhiều biến."
+      ],
+      "examples": [
+        {
+          "statement": "Tung hai bit độc lập A,B; đặt C là XOR của chúng. Ba bit có độc lập chung không?",
+          "steps": [
+            "Mỗi bit cân bằng và từng cặp có bốn khả năng đồng xác suất.",
+            "Nhưng khi biết A,B thì C đã xác định.",
+            "Chẳng hạn xác suất A=B=C=1 bằng 0, khác $1/8$."
+          ],
+          "result": "Độc lập từng đôi nhưng không độc lập chung.",
+          "insight": "Ví dụ này chỉ rõ khoảng cách giữa hai khái niệm độc lập."
+        },
+        {
+          "statement": "Nếu $P(A_n)=1/n^2$, kết luận gì về xảy ra vô hạn lần?",
+          "steps": [
+            "Tổng $\\sum1/n^2$ hữu hạn.",
+            "Borel–Cantelli thứ nhất không cần độc lập.",
+            "Do đó limsup An có xác suất 0."
+          ],
+          "result": "An chỉ xảy ra hữu hạn lần hầu chắc chắn.",
+          "insight": "Không biết sự phụ thuộc vẫn dùng được chiều thứ nhất."
+        },
+        {
+          "statement": "Các lần tung đồng xu công bằng độc lập. Biến cố ngửa có xảy ra vô hạn lần không?",
+          "steps": [
+            "Mỗi biến cố ngửa có xác suất $1/2$.",
+            "Tổng xác suất phân kỳ và các biến cố độc lập.",
+            "Borel–Cantelli thứ hai cho xác suất xảy ra vô hạn lần bằng 1."
+          ],
+          "result": "Có, hầu chắc chắn.",
+          "insight": "Đây là khẳng định xác suất 1, không nói mọi chuỗi kết quả đều có tính chất đó."
+        },
+        {
+          "statement": "Đặt mọi $A_n=A$ với $P(A)=1/2$. Tổng xác suất phân kỳ có cho xác suất limsup bằng 1 không?",
+          "steps": [
+            "Tổng xác suất là vô hạn.",
+            "Nhưng limsup An chính là A vì các biến cố giống hệt nhau.",
+            "Xác suất limsup bằng $1/2$, không phải 1."
+          ],
+          "result": "Không; sự độc lập bị thiếu.",
+          "insight": "Một chuỗi lặp cùng biến cố bác bỏ việc dùng sai chiều thứ hai."
+        },
+        {
+          "statement": "Nếu $X_n$ độc lập, EXn=0 và phương sai hữu hạn, tính phương sai tổng n biến.",
+          "steps": [
+            "Khai triển phương sai tổng gồm tổng phương sai và các hiệp phương sai.",
+            "Độc lập và khả tích bậc hai cho hiệp phương sai bằng 0.",
+            "Còn đúng tổng các phương sai riêng."
+          ],
+          "result": "$\\operatorname{Var}\\sum_{k=1}^nX_k=\\sum_{k=1}^n\\operatorname{Var}X_k$.",
+          "insight": "Chỉ cần không tương quan để có công thức này, nhưng không được suy ngược ra độc lập."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "roch",
+          "locator": "Các phần Moments and Tails, Concentration, Martingales và Markov Chains"
+        },
+        {
+          "sourceId": "fernandez",
+          "locator": "Các chương Expectation, Concentration, Convergence of Random Processes, Markov Chains"
+        },
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương về conditional expectation và limit theorems; đối chiếu xác suất cơ bản"
+        }
+      ]
+    },
+    {
+      "id": "convergence",
+      "title": "Các kiểu hội tụ và tính khả tích đều",
+      "theory": [
+        "Hội tụ hầu chắc chắn suy ra hội tụ theo xác suất; hội tụ $L^p$ suy ra theo xác suất; hội tụ theo xác suất suy ra theo phân phối. Các chiều ngược nói chung sai.",
+        "Hội tụ theo phân phối được kiểm tra tại điểm liên tục của CDF giới hạn. Muốn nâng hội tụ theo xác suất lên L1 thường cần tính khả tích đều; một điều kiện đủ hữu ích là moment bậc 1+epsilon bị chặn đều. Slutsky kết hợp hội tụ phân phối với đại lượng hội tụ xác suất tới hằng số."
+      ],
+      "method": [
+        "Nêu chính xác loại hội tụ cần chứng minh.",
+        "Dùng chặn xác suất hoặc chuẩn Lp.",
+        "Kiểm tra giả thiết bổ sung khi muốn hội tụ kỳ vọng."
+      ],
+      "pitfalls": [
+        "Các CDF không cần hội tụ tại điểm gián đoạn của CDF giới hạn."
+      ],
+      "examples": [
+        {
+          "statement": "$X_n=Z/n$ với EZ bình phương hữu hạn. Chứng minh hội tụ L2 về 0.",
+          "steps": [
+            "$E|X_n|^2=E[Z^2]/n^2$.",
+            "Tử số hữu hạn cố định, mẫu tăng vô hạn.",
+            "Chuẩn L2 về 0, kéo theo hội tụ theo xác suất."
+          ],
+          "result": "$X_n\\to0$ trong L2.",
+          "insight": "Một công thức moment trực tiếp có thể mạnh hơn chặn xác suất."
+        },
+        {
+          "statement": "$X_n$ bằng n với xác suất 1/n và bằng 0 ngoài ra. Xét hội tụ xác suất và kỳ vọng.",
+          "steps": [
+            "Với epsilon dương cố định và n lớn, $P(|X_n|>\\varepsilon)=1/n\\to0$.",
+            "Vì vậy Xn về 0 theo xác suất.",
+            "Nhưng EXn bằng 1 với mọi n, nên không hội tụ L1 về 0."
+          ],
+          "result": "Hội tụ xác suất nhưng không L1.",
+          "insight": "Ví dụ cảnh báo thiếu tính khả tích đều."
+        },
+        {
+          "statement": "Nếu Xn hội tụ theo phân phối về X và Yn hội tụ xác suất về 2, tổng có giới hạn nào?",
+          "steps": [
+            "Hằng số 2 là giới hạn xác suất.",
+            "Slutsky cho phép cộng đại lượng đó với Xn.",
+            "Tổng hội tụ theo phân phối về X+2; không cần Xn,Yn độc lập trong kết luận này."
+          ],
+          "result": "$X_n+Y_n\\Rightarrow X+2$.",
+          "insight": "Giới hạn là hằng số là điều kiện quan trọng của dạng Slutsky này."
+        },
+        {
+          "statement": "Phân bố của hằng số $X_n=1/n$ hội tụ về hằng số 0. CDF tại 0 có hội tụ không?",
+          "steps": [
+            "Với n hữu hạn, $P(X_n\\le0)=0$.",
+            "CDF của hằng số 0 tại 0 bằng 1.",
+            "Điểm 0 là gián đoạn của CDF giới hạn, nên điều này không mâu thuẫn hội tụ phân phối."
+          ],
+          "result": "CDF không hội tụ tại 0, nhưng phân bố vẫn hội tụ.",
+          "insight": "Định nghĩa loại trừ yêu cầu tại các điểm gián đoạn."
+        },
+        {
+          "statement": "Giả sử $\\sup_nE|X_n|^2\\le C$. Chứng minh họ Xn khả tích đều.",
+          "steps": [
+            "Trên tập $|X_n|>K$, có $|X_n|\\le |X_n|^2/K$.",
+            "Lấy kỳ vọng cho $E[|X_n|1_{|X_n|>K}]\\le C/K$.",
+            "Chặn đúng đều theo n và về 0 khi K tăng."
+          ],
+          "result": "Họ Xn khả tích đều.",
+          "insight": "Một chặn moment cao hơn bậc 1 ngăn kỳ vọng chạy ra đuôi quá lớn."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "roch",
+          "locator": "Các phần Moments and Tails, Concentration, Martingales và Markov Chains"
+        },
+        {
+          "sourceId": "fernandez",
+          "locator": "Các chương Expectation, Concentration, Convergence of Random Processes, Markov Chains"
+        },
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương về conditional expectation và limit theorems; đối chiếu xác suất cơ bản"
+        }
+      ]
+    },
+    {
+      "id": "conditional-expectation",
+      "title": "Kỳ vọng có điều kiện và phép chiếu L2",
+      "theory": [
+        "Với X khả tích, $E[X\\mid\\mathcal G]$ là biến ngẫu nhiên đo được theo G có cùng tích phân với X trên mọi biến cố thuộc G. Nó duy nhất tới một tập xác suất 0.",
+        "Quy tắc tháp và lấy ra yếu tố đã biết hỗ trợ tính toán. Trong L2, kỳ vọng có điều kiện là phép chiếu trực giao lên không gian các biến G-đo được, nên tối ưu hóa sai số bình phương. Công thức tỷ lệ theo biến cố chỉ là trường hợp đặc biệt, không thay định nghĩa tổng quát."
+      ],
+      "method": [
+        "Xác định thông tin đang biết.",
+        "Tính theo từng phần của phân hoạch hoặc dùng độc lập.",
+        "Kiểm tra quy tắc tháp và tính đo được."
+      ],
+      "pitfalls": [
+        "Không điều kiện hóa trên một giá trị liên tục xác suất 0 bằng cách chia trực tiếp hai xác suất 0."
+      ],
+      "examples": [
+        {
+          "statement": "X xúc xắc công bằng; chỉ biết X chẵn hay lẻ. Tìm kỳ vọng có điều kiện.",
+          "steps": [
+            "Khi chẵn, trung bình của 2,4,6 bằng 4.",
+            "Khi lẻ, trung bình của 1,3,5 bằng 3.",
+            "Biến dự đoán chỉ nhận hai giá trị trên hai phần của phân hoạch."
+          ],
+          "result": "$E[X\\mid\\mathcal G]=4$ trên chẵn, 3 trên lẻ.",
+          "insight": "Kỳ vọng có điều kiện là một biến, không chỉ một số."
+        },
+        {
+          "statement": "Kiểm tra quy tắc tháp trong ví dụ xúc xắc.",
+          "steps": [
+            "Hai lớp chẵn và lẻ đều có xác suất $1/2$.",
+            "Trung bình của kỳ vọng điều kiện là $4/2+3/2=3.5$.",
+            "Giá trị này bằng kỳ vọng X của xúc xắc."
+          ],
+          "result": "$E(E[X\\mid\\mathcal G])=EX=3.5$.",
+          "insight": "Lấy kỳ vọng lại phải khôi phục kỳ vọng vô điều kiện."
+        },
+        {
+          "statement": "X,Y độc lập khả tích, tìm $E[X\\mid Y]$.",
+          "steps": [
+            "Biết Y không thay phân bố của X theo độc lập.",
+            "Hằng số EX là đo được theo sigma(Y).",
+            "Nó thỏa điều kiện tích phân trên mọi biến cố phụ thuộc Y."
+          ],
+          "result": "$E[X\\mid Y]=EX$ hầu chắc chắn.",
+          "insight": "Cần độc lập, không chỉ hiệp phương sai bằng 0."
+        },
+        {
+          "statement": "Cho X khả tích và Y đo được theo G, tích YX khả tích; áp dụng quy tắc lấy ra yếu tố.",
+          "steps": [
+            "Vì Y đã được xác định từ thông tin G, nó không còn cần trung bình hóa theo G.",
+            "Quy tắc cho $E[YX\\mid G]=Y E[X\\mid G]$ dưới các điều kiện khả tích thích hợp.",
+            "Với Y là chỉ báo A thuộc G, công thức xác nhận trực tiếp từ định nghĩa."
+          ],
+          "result": "$E[YX\\mid G]=Y E[X\\mid G]$.",
+          "insight": "Đối với Y không bị chặn, phải kiểm tra khả tích của các tích liên quan."
+        },
+        {
+          "statement": "Vì sao $m(Y)=E[X\\mid Y]$ cho dự đoán bình phương tốt nhất?",
+          "steps": [
+            "Viết $X-g(Y)=(X-m(Y))+(m(Y)-g(Y))$.",
+            "Hai thành phần trực giao trong L2 theo tính chất kỳ vọng điều kiện.",
+            "MSE bằng MSE của m cộng $E|m-g|^2$, không âm."
+          ],
+          "result": "$E|X-g(Y)|^2\\ge E|X-m(Y)|^2$.",
+          "insight": "Chứng minh yêu cầu X và các dự đoán thuộc L2."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "roch",
+          "locator": "Các phần Moments and Tails, Concentration, Martingales và Markov Chains"
+        },
+        {
+          "sourceId": "fernandez",
+          "locator": "Các chương Expectation, Concentration, Convergence of Random Processes, Markov Chains"
+        },
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương về conditional expectation và limit theorems; đối chiếu xác suất cơ bản"
+        }
+      ]
+    },
+    {
+      "id": "limit-laws",
+      "title": "Luật số lớn, CLT và hàm đặc trưng",
+      "theory": [
+        "Với các biến iid có kỳ vọng tuyệt đối hữu hạn, luật số lớn mạnh cho trung bình hội tụ hầu chắc chắn. Với phương sai hữu hạn dương, CLT iid cho tổng trừ trung bình, chia sigma căn n hội tụ phân phối về chuẩn tắc.",
+        "Hàm đặc trưng $\\varphi_X(t)=E[e^{itX}]$ luôn tồn tại vì tích phân của hàm có độ lớn 1. Tích hàm đặc trưng cho tổng độc lập và định lý liên tục hỗ trợ chứng minh các giới hạn. Không được dùng CLT cổ điển cho phương sai vô hạn mà chưa kiểm tra điều kiện khác."
+      ],
+      "method": [
+        "Xác định các moment cần có.",
+        "Chuẩn hóa đúng trung bình và phương sai.",
+        "Chọn luật số lớn hoặc CLT theo loại kết luận cần."
+      ],
+      "pitfalls": [
+        "Luật số lớn không cung cấp trực tiếp tốc độ sai số chuẩn của CLT."
+      ],
+      "examples": [
+        {
+          "statement": "Xi iid Bernoulli(p). Luật số lớn mạnh nói gì?",
+          "steps": [
+            "Mỗi Xi có kỳ vọng p và khả tích.",
+            "Trung bình mẫu là tần suất thành công.",
+            "Luật số lớn mạnh cho tần suất về p hầu chắc chắn."
+          ],
+          "result": "$n^{-1}\\sum X_i\\to p$ hầu chắc chắn.",
+          "insight": "Kết quả không nói tần suất ở mọi n luôn gần p."
+        },
+        {
+          "statement": "Chuẩn hóa tổng n biến iid Exp(lambda) để dùng CLT.",
+          "steps": [
+            "Mỗi biến có trung bình $1/\\lambda$, phương sai $1/\\lambda^2$.",
+            "Tổng có trung bình $n/\\lambda$ và độ lệch chuẩn $\\sqrt n/\\lambda$.",
+            "Trừ rồi chia theo hai đại lượng này."
+          ],
+          "result": "$\\lambda(\\sum X_i-n/\\lambda)/\\sqrt n\\Rightarrow N(0,1)$.",
+          "insight": "CLT yêu cầu chuẩn hóa theo căn n, không theo n."
+        },
+        {
+          "statement": "Tìm hàm đặc trưng của Bernoulli(p).",
+          "steps": [
+            "Biến nhận 0 và 1.",
+            "Lấy kỳ vọng $e^{itX}$ theo hai giá trị.",
+            "Nhận $(1-p)\\cdot1+p e^{it}$."
+          ],
+          "result": "$\\varphi_X(t)=1-p+pe^{it}$.",
+          "insight": "Khác MGF ở biến i nhân t, nên vẫn tồn tại không cần moment mũ thực."
+        },
+        {
+          "statement": "X,Y độc lập chuẩn tắc. X+Y có phân bố gì?",
+          "steps": [
+            "Mỗi hàm đặc trưng là $e^{-t^2/2}$.",
+            "Tính độc lập cho tích $e^{-t^2}$.",
+            "Đây là hàm đặc trưng chuẩn có phương sai 2."
+          ],
+          "result": "$X+Y\\sim N(0,2)$.",
+          "insight": "Phương sai cộng trong tổng độc lập; tham số thứ hai ở đây là phương sai."
+        },
+        {
+          "statement": "Có áp dụng CLT hữu hạn phương sai cho biến Cauchy chuẩn không?",
+          "steps": [
+            "Cauchy chuẩn không có kỳ vọng và phương sai hữu hạn theo nghĩa Lebesgue thông thường.",
+            "Giả thiết của CLT iid cổ điển bị thiếu.",
+            "Thực tế trung bình iid Cauchy vẫn có phân bố Cauchy, không tập trung về một hằng số."
+          ],
+          "result": "Không áp dụng dạng CLT cổ điển này.",
+          "insight": "Nhận diện đuôi nặng là bước cần trước các xấp xỉ chuẩn."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "roch",
+          "locator": "Các phần Moments and Tails, Concentration, Martingales và Markov Chains"
+        },
+        {
+          "sourceId": "fernandez",
+          "locator": "Các chương Expectation, Concentration, Convergence of Random Processes, Markov Chains"
+        },
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương về conditional expectation và limit theorems; đối chiếu xác suất cơ bản"
+        }
+      ]
+    },
+    {
+      "id": "martingales",
+      "title": "Markov, martingale và thời điểm dừng",
+      "theory": [
+        "Martingale $(M_n,\\mathcal F_n)$ khả tích, thích nghi và thỏa $E[M_{n+1}\\mid\\mathcal F_n]=M_n$. Nó biểu diễn tính công bằng có điều kiện theo lịch sử. Thời điểm dừng được quyết định bằng thông tin có đến thời điểm đang xét.",
+        "Với thời điểm dừng bị chặn, kỳ vọng martingale được bảo toàn. Cho thời điểm dừng không bị chặn phải có điều kiện bổ sung; không thể áp dụng tùy ý. Với chuỗi Markov, phân bố dừng không tự dẫn đến hội tụ nếu thiếu bất khả quy/phi chu kỳ thích hợp."
+      ],
+      "method": [
+        "Kiểm tra thích nghi và khả tích.",
+        "Tính kỳ vọng có điều kiện bước sau.",
+        "Kiểm tra tính bị chặn hoặc điều kiện của định lý dừng."
+      ],
+      "pitfalls": [
+        "Chiến lược chờ vô hạn không thể được hợp thức hóa chỉ bằng cụm từ dừng tùy chọn."
+      ],
+      "examples": [
+        {
+          "statement": "Xi iid nhận ±1 với xác suất bằng nhau. Sn là tổng tới n. Có là martingale?",
+          "steps": [
+            "Sn là đo được từ lịch sử và khả tích.",
+            "$S_{n+1}=S_n+X_{n+1}$.",
+            "Xi mới độc lập lịch sử và có kỳ vọng 0 nên kỳ vọng điều kiện bằng Sn."
+          ],
+          "result": "Sn là martingale với filtration tự nhiên.",
+          "insight": "Tính công bằng phải được kiểm tra có điều kiện theo toàn bộ lịch sử."
+        },
+        {
+          "statement": "Với bước đi trên, chứng minh $S_n^2-n$ là martingale.",
+          "steps": [
+            "Khai triển $S_{n+1}^2=S_n^2+2S_nX_{n+1}+X_{n+1}^2$.",
+            "Kỳ vọng điều kiện của hạng giữa bằng 0, hạng cuối bằng 1.",
+            "Trừ n+1 cho lại $S_n^2-n$."
+          ],
+          "result": "$S_n^2-n$ là martingale.",
+          "insight": "Bù phần tăng phương sai tạo ra một quá trình công bằng."
+        },
+        {
+          "statement": "T là lần đầu bước đi chạm 2. T có là thời điểm dừng?",
+          "steps": [
+            "Biến cố T không vượt n được xác định bởi việc đã chạm 2 trong n bước đầu.",
+            "Không cần nhìn tương lai.",
+            "Vì vậy biến cố thuộc thông tin thời điểm n."
+          ],
+          "result": "T là thời điểm dừng, có thể không bị chặn.",
+          "insight": "Là thời điểm dừng chưa đủ để áp dụng mọi phiên bản định lý dừng."
+        },
+        {
+          "statement": "Chuỗi hai trạng thái luôn đổi trạng thái có phân bố dừng nào và có hội tụ từ trạng thái 1 không?",
+          "steps": [
+            "Ma trận chuyển là $\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$.",
+            "Phân bố (1/2,1/2) không đổi sau một bước.",
+            "Nhưng từ trạng thái 1, phân bố luân phiên (1,0),(0,1), nên không hội tụ."
+          ],
+          "result": "Có phân bố dừng nhưng không hội tụ từ trạng thái ban đầu này.",
+          "insight": "Chu kỳ 2 là trở ngại, ngay cả khi chuỗi hữu hạn và bất khả quy."
+        },
+        {
+          "statement": "Martingale M0=0 và T là thời điểm dừng không vượt 5. Kỳ vọng MT là bao nhiêu?",
+          "steps": [
+            "T bị chặn nên dạng định lý dừng cho martingale rời rạc khả tích áp dụng.",
+            "Có thể viết tổng các gia số nhân chỉ báo T lớn hơn chỉ số trước.",
+            "Mỗi hạng có kỳ vọng 0 theo kỳ vọng điều kiện."
+          ],
+          "result": "$EM_T=EM_0=0$.",
+          "insight": "Điều kiện bị chặn loại các vấn đề giới hạn ở dạng định lý này."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "roch",
+          "locator": "Các phần Moments and Tails, Concentration, Martingales và Markov Chains"
+        },
+        {
+          "sourceId": "fernandez",
+          "locator": "Các chương Expectation, Concentration, Convergence of Random Processes, Markov Chains"
+        },
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương về conditional expectation và limit theorems; đối chiếu xác suất cơ bản"
+        }
+      ]
+    },
+    {
+      "id": "concentration-mcmc",
+      "title": "Tập trung xác suất, coupling và MCMC",
+      "theory": [
+        "Bất đẳng thức Markov dùng moment thứ nhất của biến không âm; Chebyshev dùng phương sai. Chernoff áp dụng Markov cho hàm mũ rồi tối ưu tham số. Hoeffding cho các biến độc lập bị chặn một chặn đuôi mũ.",
+        "Coupling đặt hai quá trình trên cùng không gian để kiểm soát sai khác phân bố. Metropolis–Hastings thiết kế xác suất chấp nhận để giữ phân bố mục tiêu; các mẫu MCMC thường phụ thuộc, nên số mẫu hiệu dụng có thể nhỏ hơn số lần lặp."
+      ],
+      "method": [
+        "Chọn thông tin moment hoặc chặn sẵn có.",
+        "Kiểm tra độc lập hay điều kiện martingale.",
+        "Với MCMC, kiểm tra bất biến, khả đạt và trộn."
+      ],
+      "pitfalls": [
+        "Histogram trông ổn không chứng minh chuỗi đã trộn hoặc mẫu độc lập."
+      ],
+      "examples": [
+        {
+          "statement": "X không âm, EX=3. Chặn $P(X\\ge10)$.",
+          "steps": [
+            "Trên biến cố X ít nhất 10, chỉ báo không vượt X/10.",
+            "Lấy kỳ vọng hai vế.",
+            "Markov cho chặn bằng 3/10."
+          ],
+          "result": "$P(X\\ge10)\\le0.3$.",
+          "insight": "Không âm là giả thiết thiết yếu để lập bất đẳng thức chỉ báo."
+        },
+        {
+          "statement": "X có trung bình 0, phương sai 4. Chặn $P(|X|\\ge5)$.",
+          "steps": [
+            "Áp dụng Markov cho X bình phương.",
+            "Kỳ vọng X bình phương bằng 4.",
+            "Ngưỡng bình phương bằng 25 nên xác suất không vượt 4/25."
+          ],
+          "result": "Chặn Chebyshev bằng 0.16.",
+          "insight": "Chebyshev là một ứng dụng của Markov cho bình phương độ lệch."
+        },
+        {
+          "statement": "Xi độc lập trong [0,1], n=100. Hoeffding chặn sai lệch trung bình ít nhất 0.1 bao nhiêu?",
+          "steps": [
+            "Dạng hai phía cho $2\\exp(-2n\\varepsilon^2)$.",
+            "Thay n=100, epsilon=0.1, số mũ là $-2$.",
+            "Nhận chặn xấp xỉ 0.2707."
+          ],
+          "result": "$P(|\\bar X-E\\bar X|\\ge0.1)\\le2e^{-2}$.",
+          "insight": "Đây là chặn, không phải xác suất chính xác của sự kiện."
+        },
+        {
+          "statement": "Hai biến X,Y được coupling sao cho $P(X\\ne Y)\\le0.05$. Chặn khoảng cách total variation.",
+          "steps": [
+            "Với mọi tập A, hai chỉ báo thuộc A chỉ khác khi X khác Y.",
+            "Hiệu xác suất theo trị tuyệt đối không vượt $P(X\\ne Y)$.",
+            "Lấy supremum trên các tập A."
+          ],
+          "result": "$d_{TV}(\\mathcal L(X),\\mathcal L(Y))\\le0.05$.",
+          "insight": "Một coupling tốt cho chứng cứ phân bố gần nhau."
+        },
+        {
+          "statement": "Metropolis có proposal đối xứng, mục tiêu không chuẩn hóa pi(x)=2,pi(y)=5. Xác suất chấp nhận từ x sang y và ngược lại?",
+          "steps": [
+            "Với proposal đối xứng, alpha bằng min(1,pi(y)/pi(x)).",
+            "Chiều x sang y nhận min(1,5/2)=1.",
+            "Chiều ngược nhận min(1,2/5)=0.4."
+          ],
+          "result": "Chấp nhận lần lượt 1 và 0.4.",
+          "insight": "Chỉ cần tỷ số mục tiêu nên hằng số chuẩn hóa triệt tiêu."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "roch",
+          "locator": "Các phần Moments and Tails, Concentration, Martingales và Markov Chains"
+        },
+        {
+          "sourceId": "fernandez",
+          "locator": "Các chương Expectation, Concentration, Convergence of Random Processes, Markov Chains"
+        },
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương về conditional expectation và limit theorems; đối chiếu xác suất cơ bản"
+        }
+      ]
+    }
+  ]
+}

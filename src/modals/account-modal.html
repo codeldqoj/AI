@@ -1,0 +1,86 @@
+<!-- ACCOUNT MANAGEMENT MODAL -->
+<div id="accountMgmtModal" class="vmo-modal-overlay">
+  <div class="vmo-modal-container">
+    <div class="vmo-modal-header">
+      <div class="vmo-modal-title">
+        <span>⚙️</span>
+        <span>Quản lý Tài khoản & Phân quyền Hệ thống</span>
+      </div>
+      <button type="button" class="vmo-modal-close" id="modalCloseBtn" title="Đóng cửa sổ">✕</button>
+    </div>
+    <div class="vmo-modal-body">
+      <div id="modalAlert" class="vmo-alert-box"></div>
+
+      <!-- Section: Danh sách tài khoản -->
+      <div class="modal-section-card">
+        <div class="modal-section-title">
+          <span>👥 Danh sách người dùng hiện có</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:0.8rem; font-weight:normal; color:#64748b;">
+              Tổng: <strong id="totalUsersCount">1</strong> tài khoản (<strong id="adminUsersCount" style="color:#b91c1c;">1</strong> Admin)
+            </span>
+          </div>
+        </div>
+        <div class="users-table-wrapper">
+          <table class="users-table">
+            <thead>
+              <tr>
+                <th style="width:40px; text-align:center;">#</th>
+                <th>Tài khoản</th>
+                <th style="width:110px;">Phân quyền</th>
+                <th style="min-width:210px;">Cấp học</th>
+                <th style="width:110px;">Ngày tạo</th>
+                <th style="width:150px; text-align:right;">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <!-- Rendered by account_mgmt.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Section: Thêm tài khoản mới (Chỉ Admin) -->
+      <div class="modal-section-card">
+        <div class="modal-section-title">
+          <span>➕ Thêm người dùng mới (Chỉ dành cho Admin)</span>
+        </div>
+        <form id="addUserForm">
+          <div class="vmo-form-grid">
+            <div class="form-group">
+              <label for="newUsername">Tên đăng nhập *</label>
+              <input type="text" id="newUsername" placeholder="vd: giaovien1" required autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="newPassword">Mật khẩu *</label>
+              <input type="password" id="newPassword" placeholder="Tối thiểu 8 ký tự" minlength="8" required autocomplete="new-password">
+            </div>
+            <div class="form-group">
+              <label for="newName">Họ và tên / Ghi chú</label>
+              <input type="text" id="newName" placeholder="vd: Thầy Tuấn">
+            </div>
+            <div class="form-group">
+              <label for="newRole">Phân quyền *</label>
+              <select id="newRole" required>
+                <option value="student">Thành viên (Học tập và AI xu hướng đề)</option>
+                <option value="teacher">Giáo viên (Quản trị dữ liệu)</option>
+                <option value="admin">Quản trị viên (Toàn quyền quản lý)</option>
+              </select>
+            </div>
+            <fieldset id="newEducationLevels" class="form-group" style="border:1px solid #cbd5e1;border-radius:8px;padding:12px;">
+              <legend>Cấp học được truy cập (chọn nhiều)</legend>
+              <label><input type="checkbox" value="primary"> Tiểu học</label>
+              <label><input type="checkbox" value="lower_secondary"> Trung học cơ sở</label>
+              <label><input type="checkbox" value="upper_secondary" checked> Trung học phổ thông</label>
+              <label><input type="checkbox" value="university"> Đại học</label>
+            </fieldset>
+            <button type="submit" class="btn-submit-user">
+              <span>➕ Tạo tài khoản</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

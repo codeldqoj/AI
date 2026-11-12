@@ -1,0 +1,256 @@
+[
+  {
+    "id": "loomis",
+    "title": "Advanced Calculus",
+    "authors": "Lynn H. Loomis và Shlomo Sternberg",
+    "pdfPages": 592,
+    "reviewNote": "Toàn văn đọc được; tiêu đề tác giả đối chiếu trang đầu",
+    "kind": "uploaded"
+  },
+  {
+    "id": "gallier",
+    "title": "Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning",
+    "authors": "Jean Gallier và Jocelyn Quaintance",
+    "pdfPages": 2236,
+    "reviewNote": "Toàn văn đọc được; bản ghi ngày 22/10/2026",
+    "kind": "uploaded",
+    "pdfUrl": "https://www.cis.upenn.edu/~jean/math-deep.pdf",
+    "pdfSha256": "3c45454c22ffb7f8a12c79e9020a43c517e34d6402b4552de0a11583634041da",
+    "pdfCheckedAt": "2026-10-25",
+    "pdfEditionNote": "Liên kết tới bản PDF công khai của tác giả; số trang áp dụng cho đúng bản PDF tại liên kết này."
+  },
+  {
+    "id": "powers",
+    "title": "Mathematical Methods in Engineering",
+    "authors": "Joseph M. Powers và Mihir Sen",
+    "pdfPages": 638,
+    "reviewNote": "Toàn văn đọc được",
+    "kind": "uploaded"
+  },
+  {
+    "id": "solomon",
+    "title": "Mathematical Methods for Computer Vision, Robotics, and Graphics (CS 205A, 2013)",
+    "authors": "Justin Solomon",
+    "pdfPages": 219,
+    "reviewNote": "Toàn văn đọc được",
+    "kind": "uploaded"
+  },
+  {
+    "id": "abstract",
+    "title": "Abstract Algebra with Applications",
+    "authors": "Audrey Terras",
+    "pdfPages": 327,
+    "reviewNote": "Có lỗi cấu trúc PDF ở một số phần; đã kiểm tra mục lục và phần trích xuất được",
+    "kind": "uploaded"
+  },
+  {
+    "id": "scherk",
+    "title": "Algebra: A Computational Introduction",
+    "authors": "John Scherk",
+    "pdfPages": 419,
+    "reviewNote": "Toàn văn đọc được",
+    "kind": "uploaded",
+    "pdfUrl": "https://www.math.toronto.edu/scherk/book.pdf",
+    "pdfSha256": "f30e913533637b388a46241a8f8aa169193a76f7f96ac519282a225b8f1d98ad",
+    "pdfCheckedAt": "2026-10-25",
+    "pdfEditionNote": "Liên kết tới bản PDF công khai của tác giả; số trang áp dụng cho đúng bản PDF tại liên kết này."
+  },
+  {
+    "id": "vinh",
+    "title": "Đại số tuyến tính",
+    "authors": "Đặng Văn Vinh",
+    "pdfPages": 339,
+    "reviewNote": "Bản scan; đối chiếu bìa và OCR mục lục, không coi OCR là bản văn đã hiệu đính",
+    "kind": "uploaded"
+  },
+  {
+    "id": "lax",
+    "title": "Linear Algebra and Its Applications, 2nd Edition",
+    "authors": "Peter D. Lax",
+    "pdfPages": 394,
+    "reviewNote": "Đối chiếu thông tin thư mục trong tệp",
+    "kind": "uploaded"
+  },
+  {
+    "id": "knill",
+    "title": "Linear Algebra with Probability",
+    "authors": "Oliver Knill",
+    "pdfPages": 158,
+    "reviewNote": "Ghi chú Math 19b, 2011",
+    "kind": "uploaded"
+  },
+  {
+    "id": "bertsekas",
+    "title": "Introduction to Probability, MIT 6.041–6.431 Lecture Notes",
+    "authors": "Dimitri P. Bertsekas và John N. Tsitsiklis",
+    "pdfPages": 284,
+    "reviewNote": "Bản lecture notes Fall 2000; không đồng nhất với mọi ấn bản sách",
+    "kind": "uploaded"
+  },
+  {
+    "id": "yates",
+    "title": "Probability and Stochastic Processes",
+    "authors": "Roy D. Yates và David J. Goodman",
+    "pdfPages": 513,
+    "reviewNote": "Bản scan; đã OCR phần giới thiệu và roadmap",
+    "kind": "uploaded"
+  },
+  {
+    "id": "gnedenko",
+    "title": "An Elementary Introduction to the Theory of Probability",
+    "authors": "B. V. Gnedenko và A. Ya. Khinchin",
+    "pdfPages": 151,
+    "reviewNote": "Toàn văn trích xuất được, có nhiễu OCR",
+    "kind": "uploaded"
+  },
+  {
+    "id": "fernandez",
+    "title": "Probability and Statistics for Data Science",
+    "authors": "Carlos Fernandez-Granda",
+    "pdfPages": 237,
+    "reviewNote": "Ghi chú học phần NYU",
+    "kind": "uploaded",
+    "pdfUrl": "https://cims.nyu.edu/~cfgranda/pages/stuff/probability_stats_for_DS.pdf",
+    "pdfSha256": "913a6ccb6fe809a12867e1ad23e371071620d678dc7dc4281bd3255b9456439c",
+    "pdfCheckedAt": "2026-10-25",
+    "pdfEditionNote": "Liên kết tới bản PDF công khai của tác giả; số trang áp dụng cho đúng bản PDF tại liên kết này."
+  },
+  {
+    "id": "roch",
+    "title": "Modern Discrete Probability: An Essential Toolkit",
+    "authors": "Sébastien Roch",
+    "pdfPages": 571,
+    "reviewNote": "Bản ghi 20/12/2023",
+    "kind": "uploaded",
+    "pdfUrl": "https://people.math.wisc.edu/~roch/mdp/roch-mdp-full.pdf",
+    "pdfSha256": "249fe716a6b32e15bad9f4280d3e0775ddcc14c1195ee552527b82fa9b8afdb2",
+    "pdfCheckedAt": "2026-10-25",
+    "pdfEditionNote": "Liên kết tới bản PDF công khai của tác giả; số trang áp dụng cho đúng bản PDF tại liên kết này."
+  },
+  {
+    "id": "stapleton",
+    "title": "Models for Probability and Statistical Inference: Theory and Applications",
+    "authors": "James H. Stapleton",
+    "pdfPages": 467,
+    "reviewNote": "Có một số trang không trích xuất thành văn bản đầy đủ",
+    "kind": "uploaded"
+  },
+  {
+    "id": "agresti",
+    "title": "Foundations of Statistics for Data Scientists",
+    "authors": "Alan Agresti và Maria Kateri",
+    "pdfPages": 49,
+    "reviewNote": "Bản đính kèm chỉ 49 trang, chủ yếu phần đầu; không là toàn văn",
+    "kind": "uploaded"
+  },
+  {
+    "id": "albert",
+    "title": "Probability and Bayesian Modeling",
+    "authors": "Jim Albert và Huoying Zhou",
+    "pdfPages": 48,
+    "reviewNote": "Bản đính kèm chỉ 48 trang; không gán nội dung chương chưa có cho bản trích",
+    "kind": "uploaded"
+  },
+  {
+    "id": "principles",
+    "title": "Principles of Probability Theory and its Applications",
+    "authors": "Theo thông tin bản đính kèm",
+    "pdfPages": 548,
+    "reviewNote": "Đọc phần giới thiệu và mục lục; nguồn bổ trợ",
+    "kind": "uploaded"
+  },
+  {
+    "id": "ahn",
+    "title": "Probability and Statistics for Science and Engineering",
+    "authors": "Hongshik Ahn",
+    "pdfPages": 367,
+    "reviewNote": "Nguồn bổ trợ xác suất và thống kê kỹ thuật",
+    "kind": "uploaded"
+  },
+  {
+    "id": "openstax3",
+    "title": "Calculus Volume 3",
+    "authors": "Gilbert Strang, Edwin Herman và cộng sự",
+    "pdfPages": 913,
+    "reviewNote": "Chủ yếu giải tích nhiều biến, dùng như nguồn mở rộng, không thay nội dung giải tích một biến",
+    "kind": "uploaded"
+  },
+  {
+    "id": "mit-discrete",
+    "title": "Mathematics for Computer Science",
+    "authors": "MIT OpenCourseWare",
+    "kind": "supplement",
+    "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/resources/mit6_042js15_textbook_pdf/",
+    "reviewNote": "Nguồn chính thức bổ sung cho logic, chứng minh, đếm và đồ thị",
+    "pdfUrl": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf",
+    "pdfPages": 920,
+    "pdfSha256": "a07e73979a55f0be10633fcba12c0195f4475288a9b84331c8eb0de0e0a1571a",
+    "pdfCheckedAt": "2026-10-25"
+  },
+  {
+    "id": "mit-algorithms",
+    "title": "Introduction to Algorithms — Lecture Notes",
+    "authors": "MIT OpenCourseWare",
+    "kind": "supplement",
+    "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/",
+    "reviewNote": "Nguồn chính thức bổ sung cho thiết kế thuật toán; không gán mọi nội dung NP/luồng cho một bài giảng cụ thể"
+  },
+  {
+    "id": "stanford-crypto",
+    "title": "A Graduate Course in Applied Cryptography",
+    "authors": "Dan Boneh và Victor Shoup",
+    "kind": "supplement",
+    "url": "https://crypto.stanford.edu/~dabo/cryptobook/",
+    "reviewNote": "Nguồn chính thức bổ sung về mô hình an toàn và các primitive hiện đại",
+    "pdfUrl": "https://toc.cryptobook.us/book.pdf",
+    "pdfPages": 1130,
+    "pdfSha256": "67bc4507f7558c99f0ecc331651da224f0a73b2453fdd8ff5e67c8d4e56cc7dd",
+    "pdfCheckedAt": "2026-10-25"
+  },
+  {
+    "id": "strang-calculus",
+    "title": "Calculus, Third Edition",
+    "authors": "Gilbert Strang — MIT OpenCourseWare",
+    "kind": "supplement",
+    "reviewNote": "Bản PDF chính thức được kiểm tra mục và trang tham chiếu ngày 25/10/2026.",
+    "pdfUrl": "https://ocw.mit.edu/courses/res-18-001-calculus-fall-2023/mitres_18_001_f17_full_book.pdf",
+    "pdfPages": 706,
+    "pdfSha256": "e9bc46d0663bf59134e45eee296ad244985b397b3957e4d66d90b62e0f089803",
+    "pdfCheckedAt": "2026-10-25"
+  },
+  {
+    "id": "erickson",
+    "title": "Algorithms, 1st edition (June 2019)",
+    "authors": "Jeff Erickson — University of Illinois",
+    "kind": "supplement",
+    "reviewNote": "Bản PDF chính thức được kiểm tra mục và trang tham chiếu ngày 25/10/2026.",
+    "pdfUrl": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/Algorithms-JeffE.pdf",
+    "pdfPages": 472,
+    "pdfSha256": "00295b82ff725c52a71351a0bb1ee1bdb1584e594a62395d3fb382aefd0f4d42",
+    "pdfCheckedAt": "2026-10-25"
+  },
+  {
+    "id": "durrett",
+    "title": "Probability: Theory and Examples, 5th edition (2019)",
+    "authors": "Rick Durrett — Duke University",
+    "kind": "supplement",
+    "reviewNote": "Bản PDF chính thức được kiểm tra mục và trang tham chiếu ngày 25/10/2026.",
+    "pdfUrl": "https://services.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+    "pdfPages": 490,
+    "pdfSha256": "aeac36cbf5e44c53d69fa60a2d29a393e2d0e8c955ee103bd845d925fd910886",
+    "pdfCheckedAt": "2026-10-25"
+  },
+  {
+    "id": "openintro",
+    "title": "OpenIntro Statistics, Fourth Edition (2019)",
+    "authors": "David Diez, Mine Çetinkaya-Rundel và Christopher D. Barr",
+    "kind": "supplement",
+    "reviewNote": "Bản PDF chính thức được kiểm tra mục và trang tham chiếu ngày 25/10/2026.",
+    "pdfUrl": "https://fall2024.data606.net/materials/Textbooks/os4.pdf",
+    "pdfPages": 422,
+    "pdfSha256": "aae10457f716b48e362bdeaf1698318a426fb1a152da480737c2fb59a3406ee8",
+    "pdfCheckedAt": "2026-10-25",
+    "url": "https://www.openintro.org/book/os/",
+    "pdfEditionNote": "Bản thứ tư, cập nhật 08/06/2019; bản PDF dùng trong học phần DATA 606. Số trang áp dụng cho bản tại liên kết này."
+  }
+]

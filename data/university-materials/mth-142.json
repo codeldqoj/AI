@@ -1,0 +1,639 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-10-25.1",
+  "courseId": "mth-142",
+  "prerequisites": [
+    "MTH 141 hoặc kiến thức tương đương"
+  ],
+  "outcomes": [
+    "Chọn kỹ thuật tích phân và kiểm tra hội tụ",
+    "Sử dụng chuỗi và Taylor kèm sai số",
+    "Lập mô hình tích lũy, đường tham số và ODE đơn giản"
+  ],
+  "sections": [
+    {
+      "id": "substitution-parts",
+      "title": "Đổi biến và tích phân từng phần",
+      "theory": [
+        "Đổi biến dựa trên quy tắc dây chuyền: $\\int f(g(x))g'(x)\\,dx=F(g(x))+C$ khi $F'=f$. Với tích phân xác định, đổi cả cận sang biến mới.",
+        "Từng phần: $\\int u\\,dv=uv-\\int v\\,du$, suy từ đạo hàm tích. Chọn $u$ sao cho lấy đạo hàm làm đơn giản hơn; không có quy tắc lựa chọn nào thay thế được kiểm tra bằng đạo hàm."
+      ],
+      "method": [
+        "Nhận diện đạo hàm của biểu thức bên trong.",
+        "Nếu là tích, thử chọn u và dv.",
+        "Đạo hàm kết quả để kiểm tra."
+      ],
+      "pitfalls": [
+        "Không giữ cận của x sau khi chuyển hoàn toàn sang biến u."
+      ],
+      "examples": [
+        {
+          "statement": "Tính $\\int2x\\cos(x^2)\\,dx$.",
+          "steps": [
+            "Đặt $u=x^2$, $du=2x\\,dx$.",
+            "Tích phân trở thành $\\int\\cos u\\,du=\\sin u+C$.",
+            "Thay $u=x^2$ và đạo hàm lại để kiểm tra."
+          ],
+          "result": "$\\sin(x^2)+C$.",
+          "insight": "Hệ số 2x chính là đạo hàm của x bình phương."
+        },
+        {
+          "statement": "Tính $\\int_0^1 x e^{x^2}\\,dx$.",
+          "steps": [
+            "Đặt $u=x^2$ nên $x\\,dx=du/2$.",
+            "Cận mới là 0 và 1.",
+            "Tính $\\tfrac12\\int_0^1 e^u\\,du=(e-1)/2$."
+          ],
+          "result": "$(e-1)/2$.",
+          "insight": "Dù cận số tình cờ giống nhau, vẫn phải chỉ ra cách đổi cận."
+        },
+        {
+          "statement": "Tính $\\int x e^x\\,dx$.",
+          "steps": [
+            "Chọn $u=x$, $dv=e^x\\,dx$, do đó $du=dx$, $v=e^x$.",
+            "Từng phần cho $xe^x-\\int e^x\\,dx$.",
+            "Rút gọn và kiểm tra đạo hàm."
+          ],
+          "result": "$(x-1)e^x+C$.",
+          "insight": "Đạo hàm của đa thức làm giảm bậc nên lựa chọn này kết thúc nhanh."
+        },
+        {
+          "statement": "Tính $\\int\\log x\\,dx$, $x>0$.",
+          "steps": [
+            "Xem tích phân là $\\int(\\log x)\\cdot1\\,dx$.",
+            "Chọn $u=\\log x$, $dv=dx$; nhận $x\\log x-\\int1\\,dx$.",
+            "Đạo hàm $x\\log x-x$ thu lại $\\log x$."
+          ],
+          "result": "$x\\log x-x+C$.",
+          "insight": "Một tích không hiện rõ vẫn có thể viết với thừa số 1."
+        },
+        {
+          "statement": "Tính $\\int_0^1 x\\log x\\,dx$ theo nghĩa suy rộng.",
+          "steps": [
+            "Từng phần trên $[\\varepsilon,1]$ với $u=\\log x$, $dv=x\\,dx$.",
+            "Nguyên hàm là $x^2\\log x/2-x^2/4$.",
+            "Khi $\\varepsilon\\downarrow0$, $\\varepsilon^2\\log\\varepsilon\\to0$, nên còn $-1/4$."
+          ],
+          "result": "$-1/4$.",
+          "insight": "Tại đầu mút logarit vô hạn phải dùng giới hạn, không thế log 0."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 3: Differential Calculus; Chương 8: Integration"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "§9.7 Limits of Sequences and Series; §39.7 Taylor’s formula"
+        }
+      ]
+    },
+    {
+      "id": "rational-trig",
+      "title": "Phân thức hữu tỉ và tích phân lượng giác",
+      "theory": [
+        "Với phân thức, chia đa thức trước nếu bậc tử không nhỏ hơn bậc mẫu. Sau đó phân tích thành phân thức đơn giản trên các nhân tử thực. Nhân tử bậc hai bất khả quy cần tử tuyến tính.",
+        "Các đẳng thức $\\sin^2x+\\cos^2x=1$, $\\sin^2x=(1-\\cos2x)/2$ hỗ trợ tích phân lượng giác. Các dạng $1/(1+x^2)$ và $1/\\sqrt{1-x^2}$ gắn với hàm lượng giác ngược."
+      ],
+      "method": [
+        "Chuẩn hóa biểu thức đại số.",
+        "Chọn phân thức đơn giản hoặc đẳng thức lượng giác.",
+        "Kiểm tra miền của logarit và hàm ngược."
+      ],
+      "pitfalls": [
+        "Nguyên hàm của 1/x là log giá trị tuyệt đối trên mỗi khoảng không chứa 0."
+      ],
+      "examples": [
+        {
+          "statement": "Tính $\\int1/[x(x+1)]\\,dx$.",
+          "steps": [
+            "Phân tích $1/[x(x+1)]=1/x-1/(x+1)$.",
+            "Lấy nguyên hàm từng hạng.",
+            "Kiểm tra đạo hàm trên các khoảng không chứa 0 và $-1$."
+          ],
+          "result": "$\\log|x|-\\log|x+1|+C$.",
+          "insight": "Phân thức đơn giản biến mẫu tích thành các logarit quen thuộc."
+        },
+        {
+          "statement": "Tính $\\int x^2/(x^2+1)\\,dx$.",
+          "steps": [
+            "Chia tử cho mẫu: $x^2/(x^2+1)=1-1/(x^2+1)$.",
+            "Nguyên hàm hai hạng là $x$ và $\\arctan x$.",
+            "Lấy hiệu và kiểm tra bằng đạo hàm."
+          ],
+          "result": "$x-\\arctan x+C$.",
+          "insight": "Chia đa thức trước thường đơn giản hơn đặt biến lượng giác."
+        },
+        {
+          "statement": "Tính $\\int\\sin^2x\\,dx$.",
+          "steps": [
+            "Dùng $\\sin^2x=(1-\\cos2x)/2$.",
+            "Tích phân của $\\cos2x$ là $\\sin2x/2$.",
+            "Gộp hệ số một nửa ngoài ngoặc."
+          ],
+          "result": "$x/2-\\sin(2x)/4+C$.",
+          "insight": "Giảm bậc lượng giác phải giữ hệ số do góc kép."
+        },
+        {
+          "statement": "Tính $\\int\\sin^3x\\cos x\\,dx$.",
+          "steps": [
+            "Đặt $u=\\sin x$, $du=\\cos x\\,dx$.",
+            "Còn $\\int u^3du=u^4/4+C$.",
+            "Trả lại biến x và kiểm tra dây chuyền."
+          ],
+          "result": "$\\sin^4x/4+C$.",
+          "insight": "Một nhân tử cos x cung cấp đúng vi phân của sin x."
+        },
+        {
+          "statement": "Tính $\\int_0^1 1/(1+x^2)\\,dx$.",
+          "steps": [
+            "Nhận ra nguyên hàm là $\\arctan x$.",
+            "Thay cận được $\\arctan1-\\arctan0$.",
+            "Dùng các góc chuẩn $\\pi/4$ và 0."
+          ],
+          "result": "$\\pi/4$.",
+          "insight": "Một công thức nguyên hàm ngược có thể tránh đổi biến dài dòng."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 3: Differential Calculus; Chương 8: Integration"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "§9.7 Limits of Sequences and Series; §39.7 Taylor’s formula"
+        }
+      ]
+    },
+    {
+      "id": "improper",
+      "title": "Tích phân suy rộng và tiêu chuẩn hội tụ",
+      "theory": [
+        "Tích phân trên khoảng vô hạn hoặc có kỳ dị được định nghĩa bằng giới hạn tích phân trên các đoạn hữu hạn. Nếu có nhiều điểm suy rộng, phải kiểm tra từng phần riêng.",
+        "Với hàm không âm, so sánh trực tiếp hoặc so sánh giới hạn quyết định hội tụ. Chuẩn $\\int_1^\\infty x^{-p}dx$ hội tụ khi $p>1$, còn $\\int_0^1x^{-p}dx$ hội tụ khi $p<1$. Hai ngưỡng khác nhau vì vị trí kỳ dị khác nhau."
+      ],
+      "method": [
+        "Xác định tất cả đầu mút hoặc điểm kỳ dị.",
+        "Viết đúng giới hạn một phía.",
+        "Dùng nguyên hàm hoặc so sánh với chuẩn p."
+      ],
+      "pitfalls": [
+        "Không lấy giá trị chính Cauchy làm kết luận tích phân suy rộng thông thường hội tụ."
+      ],
+      "examples": [
+        {
+          "statement": "Tính $\\int_1^\\infty x^{-2}\\,dx$.",
+          "steps": [
+            "Tính đến b: $\\int_1^b x^{-2}dx=1-1/b$.",
+            "Cho $b\\to\\infty$ thì $1/b\\to0$.",
+            "Giới hạn hữu hạn nên tích phân hội tụ."
+          ],
+          "result": "Giá trị bằng 1.",
+          "insight": "Vô hạn của miền không buộc diện tích phải vô hạn."
+        },
+        {
+          "statement": "Xét $\\int_1^\\infty1/x\\,dx$.",
+          "steps": [
+            "Tích phân đến b là $\\log b$.",
+            "Khi $b\\to\\infty$, log b không bị chặn.",
+            "Theo định nghĩa, không có giá trị tích phân hữu hạn."
+          ],
+          "result": "Phân kỳ tới $+\\infty$.",
+          "insight": "Hàm tiến về 0 chưa đủ bảo đảm tích phân hội tụ."
+        },
+        {
+          "statement": "Tính $\\int_0^1x^{-1/2}\\,dx$.",
+          "steps": [
+            "Tính trên $[\\varepsilon,1]$: được $2-2\\sqrt\\varepsilon$.",
+            "Cho $\\varepsilon\\downarrow0$ nhận 2.",
+            "Đây là trường hợp p bằng một nửa, nhỏ hơn 1 tại gốc."
+          ],
+          "result": "Tích phân hội tụ và bằng 2.",
+          "insight": "Kỳ dị tại một điểm vẫn có thể có tích phân hữu hạn."
+        },
+        {
+          "statement": "Chứng minh $\\int_1^\\infty e^{-x^2}dx$ hội tụ.",
+          "steps": [
+            "Với $x\\ge1$, ta có $x^2\\ge x$.",
+            "Suy ra $0\\le e^{-x^2}\\le e^{-x}$.",
+            "Tích phân của hàm chặn từ 1 đến vô hạn là $e^{-1}<\\infty$."
+          ],
+          "result": "Hội tụ theo so sánh.",
+          "insight": "Không cần nguyên hàm sơ cấp để xét hội tụ."
+        },
+        {
+          "statement": "Giải thích vì sao $\\int_{-1}^1 1/x\\,dx$ không hội tụ dù hàm lẻ.",
+          "steps": [
+            "Phải tách tại 0 thành hai tích phân một phía.",
+            "Phần từ 0 đến 1 phân kỳ dương, phần từ $-1$ đến 0 phân kỳ âm.",
+            "Không được cộng hai đại lượng vô hạn để khử nhau."
+          ],
+          "result": "Tích phân suy rộng phân kỳ; giá trị chính đối xứng bằng 0 là khái niệm khác.",
+          "insight": "Đối xứng không thay thế điều kiện hội tụ của từng phần."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 3: Differential Calculus; Chương 8: Integration"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "§9.7 Limits of Sequences and Series; §39.7 Taylor’s formula"
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Ứng dụng tích phân: hình học, công và giá trị trung bình",
+      "theory": [
+        "Diện tích giữa hai đồ thị là tích phân hàm trên trừ hàm dưới, sau khi chia đoạn tại các giao điểm. Thể tích tròn xoay có thể tính bằng đĩa–vành khăn hoặc vỏ trụ.",
+        "Công là $\\int F(x)dx$ khi lực thay đổi theo vị trí; giá trị trung bình của f trên $[a,b]$ là $\\frac1{b-a}\\int_a^bf$. Một công thức chỉ có ý nghĩa khi lát cắt, bán kính và đơn vị được xác định đúng."
+      ],
+      "method": [
+        "Vẽ hoặc mô tả miền và lát cắt.",
+        "Chọn đại lượng vi phân phù hợp.",
+        "Lập tích phân với đơn vị và kiểm tra dấu."
+      ],
+      "pitfalls": [
+        "Đừng nhầm bình phương hiệu hai bán kính với hiệu hai bình phương."
+      ],
+      "examples": [
+        {
+          "statement": "Tính diện tích giữa $y=x$ và $y=x^2$ trên $[0,1]$.",
+          "steps": [
+            "Trên đoạn này $x\\ge x^2$.",
+            "Diện tích là $\\int_0^1(x-x^2)dx$.",
+            "Thay nguyên hàm $x^2/2-x^3/3$ tại 1 và 0."
+          ],
+          "result": "$1/6$.",
+          "insight": "Thứ tự trên trừ dưới giúp diện tích tự nhiên không âm."
+        },
+        {
+          "statement": "Quay miền dưới $y=x$ trên $[0,1]$ quanh trục x. Tính thể tích.",
+          "steps": [
+            "Lát cắt vuông góc trục x là đĩa bán kính x.",
+            "Diện tích lát là $\\pi x^2$.",
+            "Tích phân từ 0 đến 1 cho $\\pi/3$."
+          ],
+          "result": "$V=\\pi/3$.",
+          "insight": "Bình phương bán kính xuất hiện do diện tích mặt cắt tròn."
+        },
+        {
+          "statement": "Tính thể tích khi quay miền dưới $y=1-x$ trên $[0,1]$ quanh trục y.",
+          "steps": [
+            "Dùng vỏ trụ bán kính x, chiều cao $1-x$.",
+            "Thể tích là $2\\pi\\int_0^1x(1-x)dx$.",
+            "Tính được $2\\pi(1/2-1/3)=\\pi/3$."
+          ],
+          "result": "$V=\\pi/3$.",
+          "insight": "Hai phương pháp lát cắt khác nhau có thể cho cùng thể tích."
+        },
+        {
+          "statement": "Lò xo có $F(x)=100x$ N. Tính công kéo từ $0$ đến $0.2$ m.",
+          "steps": [
+            "Lực tăng tuyến tính nên phải tích phân theo độ giãn.",
+            "$W=\\int_0^{0.2}100x\\,dx$.",
+            "Thay cận vào $50x^2$ cho 2 N·m."
+          ],
+          "result": "$W=2$ J.",
+          "insight": "Lấy lực cuối nhân quãng đường sẽ tính thừa vì lực chưa luôn ở mức cuối."
+        },
+        {
+          "statement": "Tính giá trị trung bình của $f(x)=x^2$ trên $[0,3]$.",
+          "steps": [
+            "Tích phân là $\\int_0^3x^2dx=9$.",
+            "Chia cho độ dài đoạn là 3.",
+            "Giá trị nhận được nằm giữa 0 và 9, phù hợp miền giá trị."
+          ],
+          "result": "$f_{\\rm avg}=3$.",
+          "insight": "Giá trị trung bình của hàm khác trung bình hai giá trị đầu mút."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 3: Differential Calculus; Chương 8: Integration"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "§9.7 Limits of Sequences and Series; §39.7 Taylor’s formula"
+        }
+      ]
+    },
+    {
+      "id": "sequences",
+      "title": "Dãy số, giới hạn và truy hồi",
+      "theory": [
+        "Dãy $(a_n)$ là hàm trên số tự nhiên. Dãy tăng và bị chặn trên hội tụ trong $\\mathbb R$; phương trình điểm bất động chỉ cho ứng viên giới hạn, chưa chứng minh dãy hội tụ.",
+        "Với dãy đệ quy, nên tìm miền bất biến và dấu $a_{n+1}-a_n$. Một dãy con không hội tụ hoặc hai dãy con có giới hạn khác nhau có thể bác bỏ hội tụ của cả dãy."
+      ],
+      "method": [
+        "Tính vài số hạng để định hướng.",
+        "Chứng minh chặn và đơn điệu hoặc dùng định nghĩa.",
+        "Chỉ lấy giới hạn truy hồi sau khi có hội tụ."
+      ],
+      "pitfalls": [
+        "Không suy ra hội tụ chỉ vì các số hạng đầu trông ổn định."
+      ],
+      "examples": [
+        {
+          "statement": "Tính $\\lim_{n\\to\\infty}(3n+1)/(n+2)$.",
+          "steps": [
+            "Chia cả tử và mẫu cho n.",
+            "Biểu thức bằng $(3+1/n)/(1+2/n)$.",
+            "Hai phần $1/n$, $2/n$ về 0 và mẫu về 1 khác 0."
+          ],
+          "result": "Giới hạn bằng 3.",
+          "insight": "So sánh bậc lớn nhất bằng cách chuẩn hóa theo n."
+        },
+        {
+          "statement": "Xét dãy $a_n=(-1)^n$.",
+          "steps": [
+            "Dãy con chỉ số chẵn luôn bằng 1.",
+            "Dãy con chỉ số lẻ luôn bằng $-1$.",
+            "Hai dãy con có giới hạn khác nhau nên dãy gốc không hội tụ."
+          ],
+          "result": "Dãy bị chặn nhưng phân kỳ.",
+          "insight": "Bị chặn là chưa đủ; đơn điệu hoặc tiêu chuẩn khác còn thiếu."
+        },
+        {
+          "statement": "Cho $a_1=1$, $a_{n+1}=\\sqrt{2+a_n}$. Tìm giới hạn.",
+          "steps": [
+            "Nếu $1\\le a_n<2$, thì $1<a_{n+1}<2$; quy nạp bảo đảm chặn trên.",
+            "Vì $2+a_n-a_n^2=(2-a_n)(a_n+1)>0$, dãy tăng.",
+            "Giới hạn L thỏa $L^2=2+L$ và $L\\ge1$."
+          ],
+          "result": "$a_n\\to2$.",
+          "insight": "Chỉ sau khi chứng minh hội tụ mới giải phương trình giới hạn."
+        },
+        {
+          "statement": "Tính $\\lim n(\\sqrt{1+1/n}-1)$.",
+          "steps": [
+            "Nhân liên hợp phần trong ngoặc.",
+            "Biểu thức bằng $1/(\\sqrt{1+1/n}+1)$.",
+            "Cho n ra vô hạn, mẫu tiến đến 2."
+          ],
+          "result": "Giới hạn bằng $1/2$.",
+          "insight": "Liên hợp có ích cả với giới hạn dãy và giới hạn hàm."
+        },
+        {
+          "statement": "Tìm số hạng tổng quát của $a_{n+1}=\\tfrac12a_n+1$, $a_0=0$.",
+          "steps": [
+            "Điểm bất động là 2, nên đặt $b_n=a_n-2$.",
+            "Ta có $b_{n+1}=b_n/2$ và $b_0=-2$.",
+            "Suy ra $a_n=2-2^{1-n}$."
+          ],
+          "result": "$a_n=2(1-2^{-n})\\to2$.",
+          "insight": "Dịch về điểm bất động biến truy hồi affine thành cấp số nhân."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 3: Differential Calculus; Chương 8: Integration"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "§9.7 Limits of Sequences and Series; §39.7 Taylor’s formula"
+        }
+      ]
+    },
+    {
+      "id": "series",
+      "title": "Chuỗi số và các tiêu chuẩn hội tụ",
+      "theory": [
+        "Chuỗi $\\sum a_n$ hội tụ khi dãy tổng riêng có giới hạn hữu hạn. Điều kiện cần $a_n\\to0$ không đủ. Chuỗi dương dùng so sánh, tích phân, tỷ số hoặc căn thức.",
+        "Chuỗi luân phiên hội tụ nếu độ lớn giảm về 0; sai số sau N hạng không vượt hạng kế tiếp. Hội tụ tuyệt đối kéo theo hội tụ, nhưng hội tụ có điều kiện không cho phép hoán vị tùy ý."
+      ],
+      "method": [
+        "Kiểm tra số hạng tổng quát có về 0 không.",
+        "Nhận dạng chuỗi chuẩn hoặc chọn tiêu chuẩn.",
+        "Phân biệt hội tụ và hội tụ tuyệt đối."
+      ],
+      "pitfalls": [
+        "Tiêu chuẩn tỷ số có giới hạn bằng 1 không kết luận được."
+      ],
+      "examples": [
+        {
+          "statement": "Tính $\\sum_{n=0}^{\\infty}(1/3)^n$.",
+          "steps": [
+            "Đây là chuỗi hình học với công bội $q=1/3$.",
+            "Vì $|q|<1$, tổng riêng tiến tới $1/(1-q)$.",
+            "Thay q được $3/2$."
+          ],
+          "result": "Tổng bằng $3/2$.",
+          "insight": "Chỉ số bắt đầu từ 0 quyết định số hạng đầu bằng 1."
+        },
+        {
+          "statement": "Xét chuỗi điều hòa $\\sum_{n=1}^{\\infty}1/n$.",
+          "steps": [
+            "Nhóm các số hạng từ $2^{k-1}+1$ đến $2^k$.",
+            "Mỗi nhóm có $2^{k-1}$ hạng, mỗi hạng ít nhất $1/2^k$.",
+            "Mỗi nhóm đóng góp ít nhất $1/2$, nên tổng riêng không bị chặn."
+          ],
+          "result": "Chuỗi phân kỳ.",
+          "insight": "Đây là phản ví dụ cho suy luận số hạng về 0 thì tổng hội tụ."
+        },
+        {
+          "statement": "Xét $\\sum_{n=1}^{\\infty}(-1)^{n+1}/n$.",
+          "steps": [
+            "Độ lớn $1/n$ giảm về 0.",
+            "Tiêu chuẩn luân phiên bảo đảm hội tụ, sai số sau N hạng không vượt $1/(N+1)$.",
+            "Chuỗi trị tuyệt đối là điều hòa nên phân kỳ."
+          ],
+          "result": "Chuỗi hội tụ có điều kiện.",
+          "insight": "Đổi dấu tạo triệt tiêu nhưng không tạo hội tụ tuyệt đối."
+        },
+        {
+          "statement": "Xét $\\sum n/2^n$.",
+          "steps": [
+            "Với $a_n=n/2^n$, tỷ số $a_{n+1}/a_n=(n+1)/(2n)$.",
+            "Giới hạn tỷ số bằng $1/2<1$.",
+            "Tiêu chuẩn tỷ số cho hội tụ tuyệt đối."
+          ],
+          "result": "Chuỗi hội tụ.",
+          "insight": "Tăng đa thức bị suy giảm hình học lấn át."
+        },
+        {
+          "statement": "Xét $\\sum_{n=1}^{\\infty}1/[n(n+1)]$.",
+          "steps": [
+            "Viết $1/[n(n+1)]=1/n-1/(n+1)$.",
+            "Tổng N hạng rút gọn thành $1-1/(N+1)$.",
+            "Cho $N\\to\\infty$ được 1."
+          ],
+          "result": "Chuỗi hội tụ và tổng bằng 1.",
+          "insight": "Chuỗi triệt tiêu cho cả kết luận hội tụ lẫn giá trị tổng."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 3: Differential Calculus; Chương 8: Integration"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "§9.7 Limits of Sequences and Series; §39.7 Taylor’s formula"
+        }
+      ]
+    },
+    {
+      "id": "taylor",
+      "title": "Chuỗi lũy thừa, Taylor và sai số xấp xỉ",
+      "theory": [
+        "Chuỗi lũy thừa $\\sum c_n(x-a)^n$ có bán kính hội tụ R; cần xét riêng hai đầu mút. Trong khoảng hội tụ có thể đạo hàm và tích phân từng hạng.",
+        "Taylor bậc n tại a có hệ số $f^{(k)}(a)/k!$. Dạng dư Lagrange cho $|R_n(x)|\\le M|x-a|^{n+1}/(n+1)!$ nếu đạo hàm cấp n+1 bị chặn bởi M trên đoạn nối. Một chuỗi hình thức chỉ biểu diễn hàm khi phần dư về 0."
+      ],
+      "method": [
+        "Tìm tâm và bán kính hội tụ.",
+        "Lập đa thức hoặc dùng chuỗi chuẩn.",
+        "Chặn phần dư và kiểm tra đầu mút."
+      ],
+      "pitfalls": [
+        "Không bỏ qua kiểm tra phần dư khi chuyển từ đa thức Taylor sang đẳng thức chuỗi vô hạn."
+      ],
+      "examples": [
+        {
+          "statement": "Tìm miền hội tụ của $\\sum_{n=1}^{\\infty}x^n/n$.",
+          "steps": [
+            "Tỷ số độ lớn có giới hạn $|x|$, nên hội tụ khi $|x|<1$.",
+            "Tại $x=1$ là chuỗi điều hòa, phân kỳ.",
+            "Tại $x=-1$ là chuỗi luân phiên, hội tụ."
+          ],
+          "result": "Miền hội tụ $[-1,1)$.",
+          "insight": "Hai đầu mút có thể có hành vi khác nhau."
+        },
+        {
+          "statement": "Xấp xỉ $e^{0.1}$ bằng Taylor bậc 2 tại 0.",
+          "steps": [
+            "$P_2(x)=1+x+x^2/2$.",
+            "Thay $0.1$ nhận $1.105$.",
+            "Trên $[0,0.1]$, đạo hàm cấp 3 là $e^x<1.106$, nên sai số nhỏ hơn $1.106\\cdot0.1^3/6<0.000185$."
+          ],
+          "result": "$e^{0.1}\\approx1.105$ với sai số nhỏ hơn $1.85\\cdot10^{-4}$.",
+          "insight": "Xấp xỉ đi cùng sai số mới có giá trị định lượng."
+        },
+        {
+          "statement": "Viết Taylor của $\\sin x$ đến bậc 3 và chặn sai số tại $x=0.2$.",
+          "steps": [
+            "Công thức là $x-x^3/6$; hệ số bậc 4 bằng 0.",
+            "Dùng Taylor đến bậc 4, đạo hàm cấp 5 có độ lớn không quá 1.",
+            "Sai số không quá $0.2^5/120$."
+          ],
+          "result": "$\\sin0.2\\approx0.1986667$, sai số không quá $2.67\\cdot10^{-6}$.",
+          "insight": "Tận dụng hệ số bằng 0 để có chặn sai số tốt hơn."
+        },
+        {
+          "statement": "Tính $\\sum_{n=1}^{\\infty}n x^{n-1}$ khi $|x|<1$.",
+          "steps": [
+            "Bắt đầu từ $\\sum_{n=0}^{\\infty}x^n=1/(1-x)$.",
+            "Đạo hàm từng hạng trong khoảng hội tụ.",
+            "Đạo hàm vế phải bằng $1/(1-x)^2$."
+          ],
+          "result": "Tổng là $1/(1-x)^2$.",
+          "insight": "Phép đạo hàm từng hạng có điều kiện miền hội tụ rõ ràng."
+        },
+        {
+          "statement": "Tìm ba hạng khác 0 đầu của $\\log(1+x)$ quanh 0.",
+          "steps": [
+            "Tích phân chuỗi hình học $1/(1+t)=1-t+t^2-\\cdots$ từ 0 đến x, với $|x|<1$.",
+            "Thu $x-x^2/2+x^3/3-\\cdots$.",
+            "Hằng số bằng 0 vì log 1 bằng 0."
+          ],
+          "result": "$\\log(1+x)=x-x^2/2+x^3/3+\\cdots$ khi $|x|<1$.",
+          "insight": "Tích phân chuỗi chuẩn tạo một chuỗi mới và xác định hằng số."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 3: Differential Calculus; Chương 8: Integration"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "§9.7 Limits of Sequences and Series; §39.7 Taylor’s formula"
+        }
+      ]
+    },
+    {
+      "id": "parametric-polar-ode",
+      "title": "Đường tham số, tọa độ cực và phương trình vi phân nhập môn",
+      "theory": [
+        "Với $x=x(t),y=y(t)$, hệ số góc là $(dy/dt)/(dx/dt)$ khi $dx/dt\\ne0$; độ dài cung là $\\int\\sqrt{x'(t)^2+y'(t)^2}\\,dt$. Trong tọa độ cực, diện tích miền quét một lần là $\\tfrac12\\int r(\\theta)^2d\\theta$.",
+        "Phương trình tách biến có dạng $y'=g(x)h(y)$. Chia cho h(y) có thể làm mất nghiệm cân bằng, nên phải kiểm tra chúng riêng. Điều kiện đầu chọn nghiệm trong họ, và miền tồn tại phải được nêu."
+      ],
+      "method": [
+        "Xác định biến tham số và hướng quét.",
+        "Lập công thức hình học hoặc tách biến có điều kiện.",
+        "Kiểm tra đếm miền một lần và nghiệm cân bằng."
+      ],
+      "pitfalls": [
+        "Chia cho hàm của nghiệm có thể loại mất nghiệm bằng 0."
+      ],
+      "examples": [
+        {
+          "statement": "Với $x=t^2,y=t^3$, tìm tiếp tuyến tại $t=1$.",
+          "steps": [
+            "Điểm tương ứng là $(1,1)$.",
+            "$dx/dt=2t$, $dy/dt=3t^2$, nên hệ số góc tại 1 là $3/2$.",
+            "Viết tiếp tuyến qua điểm đã tính."
+          ],
+          "result": "$y-1=\\tfrac32(x-1)$.",
+          "insight": "Phải kiểm tra đạo hàm x theo tham số khác 0 tại điểm dùng công thức."
+        },
+        {
+          "statement": "Tính độ dài đường $x=3\\cos t,y=3\\sin t$, $0\\le t\\le\\pi$.",
+          "steps": [
+            "Tốc độ là $\\sqrt{9\\sin^2t+9\\cos^2t}=3$.",
+            "Độ dài bằng $\\int_0^\\pi3dt$.",
+            "Khoảng tham số quét đúng nửa đường tròn một lần."
+          ],
+          "result": "Độ dài bằng $3\\pi$.",
+          "insight": "Độ dài cung dùng tốc độ, không dùng độ dời giữa hai đầu mút."
+        },
+        {
+          "statement": "Tính diện tích hình tròn $r=2$ bằng tọa độ cực.",
+          "steps": [
+            "Góc chạy từ 0 đến $2\\pi$ để quét một lần.",
+            "Diện tích là $\\tfrac12\\int_0^{2\\pi}4\\,d\\theta$.",
+            "Tính tích phân được $4\\pi$."
+          ],
+          "result": "$A=4\\pi$.",
+          "insight": "Hệ số một nửa là phần diện tích quạt tròn trên mỗi vi phân góc."
+        },
+        {
+          "statement": "Giải $y'=2y$, $y(0)=3$.",
+          "steps": [
+            "Với nghiệm khác 0, tách $dy/y=2dx$.",
+            "Tích phân cho $\\log|y|=2x+C$, tức $y=Ke^{2x}$.",
+            "Điều kiện đầu cho $K=3$; đạo hàm lại thỏa phương trình."
+          ],
+          "result": "$y(x)=3e^{2x}$ trên $\\mathbb R$.",
+          "insight": "Nghiệm cân bằng y bằng 0 tồn tại nhưng không thỏa điều kiện đầu này."
+        },
+        {
+          "statement": "Giải $y'=y^2$, $y(0)=1$ và tìm khoảng tồn tại chứa 0.",
+          "steps": [
+            "Tách $y^{-2}dy=dx$, tích phân cho $-1/y=x+C$.",
+            "Điều kiện đầu cho $C=-1$, nên $y=1/(1-x)$.",
+            "Công thức vô hạn tại 1; khoảng cực đại chứa 0 là $(-\\infty,1)$."
+          ],
+          "result": "$y=1/(1-x)$ trên $(-\\infty,1)$.",
+          "insight": "Nghiệm có thể bùng nổ hữu hạn thời gian dù vế phải trơn."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "loomis",
+          "locator": "Chương 3: Differential Calculus; Chương 8: Integration"
+        },
+        {
+          "sourceId": "gallier",
+          "locator": "§9.7 Limits of Sequences and Series; §39.7 Taylor’s formula"
+        }
+      ]
+    }
+  ]
+}

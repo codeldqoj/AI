@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="MathApp: Nền tảng Toán chuyên cùng Gia sư Toán AI. Khám phá tài liệu chuyên đề, kho đề VMO, TST, Olympic và hỗ trợ giải toán chuyên sâu.">
+<meta name="theme-color" content="#173b64">
+<title>MathApp | Chinh phục Toán chuyên cùng Gia sư AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  startup: {
+    // Chỉ render công thức của tab đang hiển thị, không xử lý cả bốn kho lúc khởi động.
+    typeset: false,
+    ready: () => {
+      MathJax.startup.defaultReady();
+      const renderedRoots = new WeakSet();
+      window.renderMathInContainer = async (root, force = false) => {
+        if (!root || (!force && renderedRoots.has(root))) return;
+        root.querySelectorAll?.('.problem-content, .examplebox').forEach(el => {
+          if (!el.getAttribute('data-raw-math')) el.setAttribute('data-raw-math', el.innerHTML);
+        });
+        // Lưu bản HTML/LaTeX gốc của ví dụ trước khi MathJax thêm mjx-container.
+        root.querySelectorAll?.('.examplebox > p, .examplebox .example-solution').forEach(el => {
+          if (el._catalogSourceHtml === undefined) el._catalogSourceHtml = el.innerHTML;
+        });
+        await MathJax.typesetPromise([root]);
+        renderedRoots.add(root);
+      };
+      MathJax.startup.promise.then(() => {
+        document.documentElement.classList.add('mathjax-ready');
+        const activeTab = document.querySelector('.tab-pane.active');
+        if (activeTab) window.renderMathInContainer(activeTab).catch(() => {});
+      });
+    }
+  }
+};
+</script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+        onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js';"></script>
+
+<!-- Stylesheets tách biệt, tối ưu bộ nhớ đệm -->
+<link rel="stylesheet" href="styles.css?v=20260915_2">
+<link rel="stylesheet" href="auth.css?v=20260915_2">
+<link rel="stylesheet" href="ai_guide.css?v=20260915_2">
+<link rel="stylesheet" href="i18n.css?v=20260915_2">
+
+<!-- Synchronous Auth Gate: Chặn truy cập nếu chưa đăng nhập -->
+<script src="education_access.js?v=20261025"></script>
+<script src="auth.js?v=20260915_2"></script>
+<script>
+VMOAuth.requireAuth('login.html');
+</script>
+
+<script type="module" src="vmo_data_service.js?v=20260915_2"></script>
+<!-- INJECT:SPECIALIZED_SCHOOL_REGISTRY -->
+<script src="university_courses.js?v=20261025" defer></script>
+<script src="books.js?v=20261102" defer></script>
+<script src="university_materials.js?v=20261025" defer></script>
+<script src="university.js?v=20261025" defer></script>
+<script src="admissions.js?v=20261016" defer></script>
+<script src="tst-locations.js?v=20260918_tst_locations_v1" defer></script>
+<script src="vmo_db_ui.js?v=20260917_eval_gemini_gpt_v2" defer></script>
+<script src="account_mgmt.js?v=20260915_2" defer></script>
+<script src="geometry_diagram.js?v=20261018" defer></script>
+<script src="ai_guide_engine.js?v=20260917_mathjax_guide_fix_v3" defer></script>
+<script src="i18n_content.js?v=20260915_2" defer></script>
+<script src="i18n.js?v=20260915_2" defer></script>
+<script src="math_support.js?v=20261015" defer></script>
+<script src="app.js?v=20260915_2" defer></script>
+</head>
+<body class="tex2jax_process">
+<a href="#main-content" class="skip-link">Bỏ qua đến nội dung chính</a>
+<header class="hero">
+  <div class="hero-badge">MATHAPP · NỀN TẢNG TOÁN CHUYÊN &amp; OLYMPIC</div>
+  <h1>Chinh phục Toán chuyên cùng Gia sư AI</h1>
+  <p class="hero-slogan">Hiểu sâu bản chất · Rèn tư duy sắc bén · Vững bước đến kỳ thi lớn.</p>
+  <div class="hero-stats" aria-label="Thống kê kho đề và bài toán" aria-busy="true">
+    <div class="stat-chip"><span class="label" data-hero-stat-label="mock">🎯 Bộ đề thi thử VMO</span><span class="stat-value"><span class="num" data-catalog-stat="mock">—</span><span class="stat-unit" data-stat-unit="mock">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="support">🧩 Hỗ trợ giải toán</span><span class="stat-value"><span class="num" data-catalog-stat="support">—</span><span class="stat-unit" data-stat-unit="support">bài toán</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="tst">🏛️ Đề TST</span><span class="stat-value"><span class="num" data-catalog-stat="tst">—</span><span class="stat-unit" data-stat-unit="tst">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="vmo">🇻🇳 Đề VMO</span><span class="stat-value"><span class="num" data-catalog-stat="vmo">—</span><span class="stat-unit" data-stat-unit="vmo">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="olympic">🌐 Đề IMO–Olympic</span><span class="stat-value"><span class="num" data-catalog-stat="olympic">—</span><span class="stat-unit" data-stat-unit="olympic">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="regional">🗂️ Đề Đà Nẵng–Quảng Nam</span><span class="stat-value"><span class="num" data-catalog-stat="regional">—</span><span class="stat-unit" data-stat-unit="regional">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="olympic30">🏅 Đề Olympic 30/4</span><span class="stat-value"><span class="num" data-catalog-stat="olympic30">—</span><span class="stat-unit" data-stat-unit="olympic30">đề</span></span></div>
+    <div class="stat-chip"><span class="label" data-hero-stat-label="duyenhai">🌊 Đề Duyên hải miền Bắc</span><span class="stat-value"><span class="num" data-catalog-stat="duyenhai">—</span><span class="stat-unit" data-stat-unit="duyenhai">đề</span></span></div>
+  </div>
+  <p class="hero-stat-note">Mỗi đề/ngày thi được tính là một đề. <span id="supportStatsScope">Bài toán riêng lẻ theo quyền truy cập.</span></p>
+</header>
+<div class="nav-tabs-wrapper">
+  <!-- TẦNG 1: THANH ĐIỀU HÀNH & TIỆN ÍCH HỆ THỐNG (Top Utility & Account Bar) -->
+  <div class="app-topbar">
+    <div class="app-topbar-inner">
+      <div class="app-topbar-brand">
+        <span class="brand-flag" aria-hidden="true">✦</span>
+        <span class="brand-title">MathApp</span>
+        <span class="brand-tag">Toán chuyên &amp; Olympic</span>
+      </div>
+
+      <div class="app-topbar-actions">
+        <button id="accountMenuToggle" class="responsive-icon-button account-menu-toggle" type="button" aria-label="Mở menu tài khoản" aria-controls="userAuthBar" aria-expanded="false">👤 <span>Tài khoản</span></button>
+        <!-- Cụm Người dùng & Quản trị hệ thống -->
+        <div class="user-auth-bar" id="userAuthBar">
+          <div class="user-info-chip" title="Phiên bảo mật: Tự động đăng xuất sau 5 phút không hoạt động">
+            <span class="user-idle-dot" title="Trạng thái: Đang hoạt động (Tự động bảo vệ sau 5 phút)"></span>
+            <span id="userAvatarContainer"><span>👤</span></span>
+            <span class="user-name" id="currentUserName">admin</span>
+            <span class="user-role-badge role-admin" id="currentUserRole">Admin</span>
+          </div>
+          <button id="btnOpenDataMgmt" class="btn-auth-action btn-database-hub" type="button" onclick="window.openDataHubModal ? window.openDataHubModal() : null" title="Quản lý kho dữ liệu" style="background:#0284c7; color:#ffffff; font-weight:600; display:inline-flex; align-items:center; gap:5px; cursor:pointer;">
+            🗄️ Kho dữ liệu
+          </button>
+          <button id="btnOpenUserMgmt" class="btn-auth-action btn-manage" type="button" title="Quản lý tài khoản">
+            ⚙️ Quản lý tài khoản
+          </button>
+          <button id="btnLogout" class="btn-auth-action btn-logout" type="button" title="Đăng xuất khỏi hệ thống" onclick="VMOAuth.logout('user_action')">
+            🚪 Đăng xuất
+          </button>
+        </div>
+
+        <div class="topbar-divider"></div>
+
+        <!-- Bộ chuyển đổi ngôn ngữ -->
+        <div class="lang-switch-wrap" id="mainLangSwitcher" role="group" aria-label="Ngôn ngữ / Language">
+          <button type="button" class="lang-switch-btn active" data-lang="vi" onclick="setLanguage('vi')" title="Chuyển sang Tiếng Việt">🇻🇳 VI</button>
+          <button type="button" class="lang-switch-btn" data-lang="en" onclick="setLanguage('en')" title="Switch to English">🇬🇧 EN</button>
+        </div>
+
+        <!-- Chuyển đổi Giao diện Sáng/Tối -->
+        <button id="themeToggle" class="theme-btn" type="button" aria-label="Đổi giao diện sáng tối" title="Chuyển đổi giao diện Sáng / Tối">🌙</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="educationAccessSummary" role="status" style="padding:10px 20px;color:var(--text-muted,#475569);font-size:.9rem;"></div>
+  <!-- Content navigation: all modules visible on desktop; one disclosure on small screens. -->
+  <div class="nav-tabs-container module-navigation-shell">
+    <div class="education-level-bar" role="group" aria-label="Cấp học">
+      <div class="education-level-buttons">
+        <button type="button" class="education-level-button" data-education-level="primary" aria-pressed="false">Tiểu học</button>
+        <button type="button" class="education-level-button" data-education-level="lower_secondary" aria-pressed="false">Trung học cơ sở</button>
+        <button type="button" class="education-level-button" data-education-level="upper_secondary" aria-pressed="true">Trung học phổ thông</button>
+        <button type="button" class="education-level-button" data-education-level="university" aria-pressed="false">Đại học</button>
+      </div>
+      <select id="educationLevelSelect" aria-label="Cấp học"><option value="primary">Tiểu học</option><option value="lower_secondary">Trung học cơ sở</option><option value="upper_secondary" selected>Trung học phổ thông</option><option value="university">Đại học</option></select>
+    </div>
+    <button id="moduleNavigationToggle" class="module-navigation-toggle" type="button" aria-controls="moduleNavigation" aria-expanded="false">
+      <span class="module-navigation-summary"><span class="module-navigation-caption" id="moduleNavigationCaption">Đang xem</span><span id="activeModuleLabel">📚 Tài liệu chuyên đề VMO</span></span>
+      <span class="module-navigation-action"><span id="moduleNavigationAction">Chọn mục</span><span class="module-navigation-chevron" aria-hidden="true">⌄</span></span>
+    </button>
+    <nav class="nav-tabs module-navigation" id="moduleNavigation" aria-label="Nội dung theo cấp học">
+      <div class="navigation-group" data-navigation-level="primary" role="group" aria-label="Tiểu học" hidden>
+        <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-primary" type="button" onclick="switchTab('tab-primary',this)">🌱 Tiểu học</button>
+        </div>
+      </div>
+      <div class="navigation-group" data-navigation-level="lower_secondary" role="group" aria-label="Trung học cơ sở" hidden>
+        <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-admission" type="button" onclick="switchTab('tab-admission',this)">🎓 Đề thi vào lớp 10 chuyên</button>
+        </div>
+      </div>
+      <div class="navigation-group" data-navigation-level="upper_secondary" role="group" aria-label="Trung học phổ thông">
+        <div class="navigation-group-items">
+          <button class="tab-btn active" id="tab-btn-danang" type="button" aria-current="page" onclick="switchTab('tab-danang',this)">📚 Tài liệu chuyên đề VMO</button>
+          <button class="tab-btn" id="tab-btn-mock" type="button" onclick="switchTab('tab-mock',this)">🎯 Bộ đề thi thử VMO</button>
+          <button class="tab-btn" id="tab-btn-tst" type="button" onclick="switchTab('tab-tst',this)">🏛️ Đề TST</button>
+          <button class="tab-btn" id="tab-btn-vmo" type="button" onclick="switchTab('tab-vmo',this)">🇻🇳 Đề VMO</button>
+          <button class="tab-btn" id="tab-btn-history" type="button" onclick="switchTab('tab-history',this)">🗂️ Đề Đà Nẵng–Quảng Nam</button>
+          <button class="tab-btn" id="tab-btn-olympic" type="button" onclick="switchTab('tab-olympic',this)">🌐 Đề IMO–Olympic</button>
+          <button class="tab-btn" id="tab-btn-olympic30" type="button" onclick="switchTab('tab-olympic30',this)">🏅 Đề Olympic 30/4</button>
+          <button class="tab-btn" id="tab-btn-duyenhai" type="button" onclick="switchTab('tab-duyenhai',this)">🌊 Đề Duyên hải miền Bắc</button>
+        </div>
+      </div>
+      <div class="navigation-group" data-navigation-level="university" role="group" aria-label="Đại học" hidden>
+        <div class="navigation-group-items">
+          <button class="tab-btn" id="tab-btn-university-materials" type="button" onclick="switchTab('tab-university-materials',this)">📚 Tài liệu Toán–Đại học</button>
+          <button class="tab-btn" id="tab-btn-books" type="button" onclick="switchTab('tab-books',this)">📖 Sách học</button>
+          <button class="tab-btn" id="tab-btn-university" type="button" onclick="switchTab('tab-university',this)">🎓 Đại học</button>
+        </div>
+      </div>
+      <div class="navigation-shared"><button class="tab-btn" id="tab-btn-support" type="button" onclick="switchTab('tab-support',this)">🧩 Hỗ trợ giải toán</button></div>
+    </nav>
+  </div>
+</div>
+<div class="controls-sticky">
+  <div class="controls-container">
+    <div class="search-row">
+      <div class="search-box"><span class="search-icon">🔎</span><input id="searchInput" type="search" aria-label="Tìm trong tab hiện tại" placeholder="Tìm Stolz, LTE, Miquel, nội suy, bất biến, Chebyshev..." autocomplete="off"></div>
+      <button id="mobileTocToggle" class="btn-secondary mobile-toc-toggle" type="button" aria-controls="mainSidebar" aria-expanded="false">☰ Mục lục</button>
+      <a class="btn-action" href="assets/On_luyen_VMO_Da_Nang_2026_2027.pdf" target="_blank" rel="noopener">📄 PDF</a>
+      <button id="printDocumentButton" class="btn-secondary" type="button" onclick="window.printVMODocument ? window.printVMODocument() : window.print()">🖨️ In</button>
+    </div>
+    <div id="searchSummary" class="search-summary" aria-live="polite"></div>
+    <div class="filter-pills" id="mockFilterPills" style="display:none">
+      <button class="pill active" data-filter="ALL">Tất cả đề thử</button><button class="pill" data-filter="MOCK1">Bộ số 1 (Đà Nẵng)</button><button class="pill" data-filter="MOCK2">Bộ số 2 (Đà Nẵng)</button>
+    </div>
+    <div class="filter-pills" id="tstFilterPills" style="display:none">
+      <button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="BAC">Miền Bắc</button><button class="pill" data-filter="TRUNG">Miền Trung</button><button class="pill" data-filter="NAM">Miền Nam</button><button class="pill" data-filter="OLYMPIC">Trường hè / Trại hè</button>
+    </div>
+    <div class="filter-pills" id="vmoFilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề VMO</button></div>
+    <div class="filter-pills" id="olympicFilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề IMO–Olympic</button></div>
+    <div class="filter-pills" id="olympic30FilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="GRADE10">Lớp 10</button><button class="pill" data-filter="GRADE11">Lớp 11</button></div>
+<div class="filter-pills" id="admissionFilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="BAC">Miền Bắc</button><button class="pill" data-filter="TRUNG">Miền Trung</button><button class="pill" data-filter="NAM">Miền Nam</button></div>
+    <div class="filter-pills" id="duyenhaiFilterPills" style="display:none"><button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="GRADE10">Lớp 10</button><button class="pill" data-filter="GRADE11">Lớp 11</button></div>
+    <div class="filter-pills" id="historyFilterPills" style="display:none">
+      <button class="pill active" data-filter="ALL">Tất cả đề</button><button class="pill" data-filter="DANANG">Đà Nẵng</button><button class="pill" data-filter="QUANGNAM">Quảng Nam</button>
+    </div>
+  </div>
+</div>
+<div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+<div class="layout-container" id="main-content">
+  <aside class="sidebar" id="mainSidebar" aria-label="Mục lục đề và tài liệu">
+    <div class="mobile-sidebar-header"><strong>Mục lục</strong><button id="mobileTocClose" class="responsive-icon-button" type="button" aria-label="Đóng mục lục">✕</button></div>
+    <!-- INJECT:SIDEBAR_DANANG -->
+    <!-- INJECT:SIDEBAR_MOCK -->
+    <!-- INJECT:SIDEBAR_TST -->
+    <div id="sidebar-vmo" style="display:none"><div class="sidebar-title">Đề VMO</div><div class="nav-year-group"><div class="nav-year-title">🇻🇳 ĐỀ VMO</div></div></div>
+    <div id="sidebar-olympic" style="display:none"><div class="sidebar-title">Đề IMO–Olympic</div><div class="nav-year-group"><div class="nav-year-title">🌐 CÁC KỲ THI OLYMPIC</div></div></div>
+    <div id="sidebar-admission" style="display:none"><div class="sidebar-title">Đề thi vào lớp 10 chuyên</div><label for="admissionSchoolSearch">Tìm tỉnh/thành, trường chuyên</label><input id="admissionSchoolSearch" type="search" style="width:100%" placeholder="Tên tỉnh/thành hoặc trường..."><p>34 tỉnh/thành · 81 trường</p><div id="admissionDirectory"></div></div>
+    <div id="sidebar-olympic30" style="display:none"><div class="sidebar-title">Đề Olympic 30/4</div><div class="nav-year-group" data-grade="10"><div class="nav-year-title">LỚP 10</div></div><div class="nav-year-group" data-grade="11"><div class="nav-year-title">LỚP 11</div></div></div>
+    <div id="sidebar-duyenhai" style="display:none"><div class="sidebar-title">Đề Duyên hải miền Bắc</div><div class="nav-year-group" data-grade="10"><div class="nav-year-title">LỚP 10</div></div><div class="nav-year-group" data-grade="11"><div class="nav-year-title">LỚP 11</div></div></div>
+<div id="sidebar-support" style="display:none"><div class="sidebar-title">Hỗ trợ giải toán</div><a class="nav-link" href="#mathSupportForm">📷 Tải ảnh và OCR</a><a class="nav-link" href="#supportProblems">📝 Bài toán đã lưu</a></div>
+    <div id="sidebar-books" style="display:none"><div class="sidebar-title">Sách học</div><nav id="booksToc" aria-label="Mục lục sách"></nav></div>
+    <div id="sidebar-university-materials" style="display:none"><div class="sidebar-title">Tài liệu Toán–Đại học</div><nav id="universityMaterialsToc" aria-label="Mục lục Toán Đại học"></nav></div>
+    <div id="sidebar-university" style="display:none"><div class="sidebar-title" data-university-label>Các học phần Đại học</div><nav id="universityCourseList" aria-label="Các học phần Đại học"></nav><div class="nav-year-group" id="universityExamLinks"></div></div>
+    <!-- INJECT:SIDEBAR_HISTORY -->
+  </aside>
+  <main>
+    <div class="tab-pane" id="tab-primary"><section class="feed-container"><h2 data-level-title="primary">Tiểu học</h2><p data-level-empty>Kho học liệu của cấp học này đang được xây dựng. Bạn có thể sử dụng Hỗ trợ giải toán.</p></section></div>
+<!-- EDUCATION:university:START -->
+<style>
+/* Dedicated toolbar: nested selects must not inherit flex-basis from university materials. */
+#booksControls{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end;padding:10px 12px;margin:8px 0;border:1px solid var(--border,#cbd5e1);border-radius:10px;min-width:0}
+#booksControls>label{display:flex;flex-direction:column;gap:4px;min-width:0;max-width:100%;font-size:.82rem;font-weight:600}
+#booksControls>label:first-child{flex:0 1 13rem}
+#booksControls>label:nth-child(2){flex:1 1 20rem;max-width:32rem}
+#booksControls select{display:block;flex:none;width:100%;min-width:0;max-width:100%;height:42px;min-height:42px;padding:6px 30px 6px 10px;border:1px solid var(--border,#cbd5e1);border-radius:7px;background:var(--card-bg,#fff);color:var(--text);font:inherit;text-overflow:ellipsis}
+#tab-books #booksControls>button{min-height:42px;font-size:.8rem;padding:6px 10px}
+#booksControls>label:has(input[type=checkbox]){flex-direction:row;align-items:center;align-self:center;font-weight:400}
+#booksControls input[type=checkbox]{flex:none;width:18px;height:18px;margin:0}
+#booksControls :is(select,button,input):focus-visible{outline:2px solid var(--primary,#173b64);outline-offset:2px}
+@media(max-width:600px){#booksControls{padding:8px;gap:8px}#booksControls>label:first-child,#booksControls>label:nth-child(2){flex:1 1 100%;max-width:100%}#booksControls>button{white-space:normal}}
+#tab-books button{padding:8px 12px;border:1px solid var(--border,#cbd5e1);border-radius:7px;cursor:pointer;font:inherit}
+#booksContent .book-center{text-align:center}#booksContent table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:16px 0}#booksContent th,#booksContent td{border:1px solid var(--border,#cbd5e1);padding:6px 10px}#booksContent img{display:block;margin:12px auto}#booksContent h1{font-size:1.45rem}#booksContent .math.display{overflow-x:auto;display:block}
+#booksContent{overflow-wrap:anywhere;padding:16px 0}#booksContent>button{margin:8px 8px 0 0}
+#booksEditor select,#booksEditor textarea{font:inherit;max-width:100%}
+.book-exercise{margin:16px 0;padding:16px;border:1px solid #cbd5e1;border-radius:10px;background:var(--bg-card,#fff)} .book-exercise .problem-header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px} .book-exercise .problem-id{font-weight:700;margin-right:auto}
+</style>
+<div class="tab-pane" id="tab-books" data-no-i18n="true"><section class="book-dashboard"><h2>📖 Sách học</h2><p>Chọn nhóm sách, chọn sách và mở mục lục để học từng phần.</p></section><div id="booksControls"></div><div id="booksStatus" role="status" aria-live="polite"></div><div id="booksEditor"></div><div id="booksContent" class="book-content"></div></div>
+<!-- EDUCATION:university:END -->
+<div class="tab-pane" id="tab-university-materials" data-no-i18n="true"><section class="book-dashboard"><div class="dashboard-copy"><div class="eyebrow">TOÁN ĐẠI HỌC</div><h2>📚 Tài liệu Toán–Đại học</h2><p>Lý thuyết cốt lõi · Phương pháp giải · Ví dụ từng bước · Nguồn đối chiếu</p><p id="universityMaterialsStats" role="status">Đang tải danh mục học liệu…</p></div></section><div class="university-material-controls"><label for="universityMaterialsCourse">Học phần</label><select id="universityMaterialsCourse"></select><label for="universityMaterialsSearch">Tìm trong học phần</label><input id="universityMaterialsSearch" type="search" placeholder="Tìm khái niệm, định lý, ví dụ…"><button id="universityMaterialsSolutions" type="button">Ẩn/hiện lời giải</button><button id="universityMaterialsPrint" type="button">🖨️ In học phần / PDF</button></div><div id="universityMaterialsContent" class="book-content" aria-live="polite"></div></div>
+<div class="tab-pane" id="tab-university"><section class="feed-container"><div class="section-header-box"><h2 data-university-label>Các học phần Đại học</h2><label for="universityCourseSelect">Chọn học phần</label><select id="universityCourseSelect" style="display:block;max-width:100%;width:100%;padding:10px;margin:8px 0;font:inherit;"></select><label for="universitySectionSelect">Chuyên đề con</label><select id="universitySectionSelect" style="display:block;width:100%;padding:10px;margin:8px 0;font:inherit;"></select><h3 id="universityCourseTitle"></h3></div></section></div>
+<div class="tab-pane" id="tab-pending"><section class="feed-container"><h2 data-pending-title>Chờ phân cấp học</h2><p data-pending-note>Vui lòng liên hệ Admin để được cấp quyền nội dung theo cấp học.</p></section></div>
+<!-- INJECT:TAB_DANANG -->
+    <!-- INJECT:TAB_MOCK -->
+    <!-- INJECT:TAB_TST -->
+    <!-- INJECT:TAB_VMO -->
+    <!-- INJECT:TAB_OLYMPIC -->
+    <!-- INJECT:TAB_ADMISSION -->
+    <!-- INJECT:TAB_OLYMPIC30 -->
+    <!-- INJECT:TAB_DUYENHAI -->
+    <!-- INJECT:TAB_SUPPORT -->
+    <!-- INJECT:TAB_HISTORY -->
+  </main>
+</div>
+<footer>
+  <p>© 2026–2027 · Tài liệu ôn luyện VMO Đà Nẵng</p>
+  <p>Biên soạn: Trần Hoàng Kiên · Bản web phục vụ học tập và bồi dưỡng đội tuyển · Có ngân hàng đề TST và đề Đà Nẵng–Quảng Nam qua các năm.</p>
+</footer>
+<button id="backToTop" class="back-to-top" type="button" aria-label="Về đầu trang">↑</button>
+
+<!-- INJECT:ACCOUNT_MODAL -->
+<!-- INJECT:DATA_HUB_MODAL -->
+</body>
+</html>

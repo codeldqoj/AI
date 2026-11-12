@@ -1,0 +1,671 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-10-25.1",
+  "courseId": "cse-191",
+  "prerequisites": [
+    "Đại số phổ thông"
+  ],
+  "outcomes": [
+    "Viết và kiểm tra lập luận rời rạc",
+    "Mô hình hóa bài toán đếm, quan hệ và đồ thị",
+    "Dùng quy nạp, truy hồi và bất biến để giải thích thuật toán"
+  ],
+  "sections": [
+    {
+      "id": "logic",
+      "title": "Logic mệnh đề, lượng từ và đặc tả",
+      "theory": [
+        "Mệnh đề có một giá trị đúng hoặc sai. Kéo theo $P\\Rightarrow Q$ chỉ sai khi P đúng và Q sai; nó tương đương $\\neg P\\lor Q$. Đặc tả chương trình cần chỉ rõ miền và lượng từ.",
+        "Phủ định $\\forall x\\,P(x)$ là $\\exists x\\,\\neg P(x)$; phủ định $\\exists$ đổi thành $\\forall$. Thứ tự lượng từ thường không thể hoán đổi. Một phản ví dụ đủ bác bỏ mệnh đề phổ quát."
+      ],
+      "method": [
+        "Xác định miền biến.",
+        "Dịch câu thành ký hiệu.",
+        "Phủ định từng lớp và kiểm tra bằng trường hợp cụ thể."
+      ],
+      "pitfalls": [
+        "Không nhầm mệnh đề đảo với mệnh đề phản đảo."
+      ],
+      "examples": [
+        {
+          "statement": "Viết phản đảo của: nếu n chia hết cho 4 thì n chẵn.",
+          "steps": [
+            "Đặt P là chia hết cho 4 và Q là chẵn.",
+            "Phản đảo là $\\neg Q\\Rightarrow\\neg P$.",
+            "Vì thế nếu n lẻ thì n không chia hết cho 4; đây là mệnh đề tương đương ban đầu."
+          ],
+          "result": "Nếu n lẻ thì $4\\nmid n$.",
+          "insight": "Mệnh đề đảo: chẵn suy ra chia hết cho 4 lại sai với n bằng 2."
+        },
+        {
+          "statement": "Phủ định $\\forall x\\in\\mathbb R,\\exists y\\in\\mathbb R:y>x$.",
+          "steps": [
+            "Đổi lượng từ ngoài từ mọi thành tồn tại.",
+            "Đổi lượng từ trong từ tồn tại thành mọi.",
+            "Phủ định bất đẳng thức $y>x$ thành $y\\le x$."
+          ],
+          "result": "$\\exists x\\in\\mathbb R,\\forall y\\in\\mathbb R:y\\le x$.",
+          "insight": "Phủ định này nói có một số thực lớn hơn hoặc bằng tất cả số thực."
+        },
+        {
+          "statement": "Kiểm tra $P\\Rightarrow Q$ khi P sai và Q sai.",
+          "steps": [
+            "Viết $P\\Rightarrow Q\\equiv\\neg P\\lor Q$.",
+            "Khi P sai thì $\\neg P$ đúng.",
+            "Phép hoặc có một vế đúng nên cả biểu thức đúng."
+          ],
+          "result": "Mệnh đề kéo theo đúng trong trường hợp này.",
+          "insight": "Đây là tính đúng hình thức, không phải kết luận quan hệ nhân quả."
+        },
+        {
+          "statement": "So sánh $\\forall x\\exists y:y>x$ và $\\exists y\\forall x:y>x$ trên số thực.",
+          "steps": [
+            "Mệnh đề thứ nhất đúng vì có thể chọn $y=x+1$ theo từng x.",
+            "Mệnh đề thứ hai đòi một y dùng chung cho mọi x.",
+            "Chọn $x=y$ bác bỏ điều kiện nghiêm ngặt $y>x$."
+          ],
+          "result": "Mệnh đề thứ nhất đúng, thứ hai sai.",
+          "insight": "Đổi thứ tự lượng từ làm thay đổi sự phụ thuộc của lựa chọn."
+        },
+        {
+          "statement": "Bác bỏ: mọi số nguyên tố đều lẻ.",
+          "steps": [
+            "Số 2 là số nguyên tố vì chỉ có ước dương 1 và 2.",
+            "Số 2 là số chẵn.",
+            "Một đối tượng thỏa giả thiết nhưng không thỏa kết luận đủ bác bỏ mệnh đề mọi."
+          ],
+          "result": "Phản ví dụ là số 2.",
+          "insight": "Kiểm tra các trường hợp biên nhỏ nhất là một bước hữu ích."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1: Preliminaries, §§1.2–1.8"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1: Congruences; Chương 3: Groups"
+        },
+        {
+          "sourceId": "mit-discrete",
+          "locator": "Các mục Logic, Induction, Counting, Graphs trong học liệu chính thức"
+        }
+      ]
+    },
+    {
+      "id": "proof-induction",
+      "title": "Chứng minh, quy nạp và bất biến vòng lặp",
+      "theory": [
+        "Chứng minh trực tiếp đi từ giả thiết đến kết luận bằng các bước hợp lệ. Phản chứng giả sử kết luận sai rồi dẫn tới mâu thuẫn. Quy nạp gồm cơ sở và bước truyền từ n sang n+1.",
+        "Với vòng lặp, bất biến cần được thiết lập trước vòng, bảo toàn qua mỗi bước và kết hợp điều kiện kết thúc để suy ra kết quả. Tính đúng còn cần chứng minh thuật toán dừng bằng một đại lượng giảm không âm."
+      ],
+      "method": [
+        "Nêu rõ điều cần chứng minh.",
+        "Chọn cơ sở, giả thiết quy nạp hoặc bất biến.",
+        "Kiểm tra cả bảo toàn và kết thúc."
+      ],
+      "pitfalls": [
+        "Kiểm tra vài giá trị không thay thế chứng minh quy nạp."
+      ],
+      "examples": [
+        {
+          "statement": "Chứng minh $1+\\cdots+n=n(n+1)/2$.",
+          "steps": [
+            "Cơ sở $n=1$ đúng.",
+            "Giả sử tổng đến n bằng $n(n+1)/2$.",
+            "Thêm $n+1$ được $(n+1)(n+2)/2$, đúng công thức tại n+1."
+          ],
+          "result": "Công thức đúng với mọi $n\\ge1$.",
+          "insight": "Bước quy nạp phải dùng chính giả thiết cho n, không giả sử kết luận cần chứng minh."
+        },
+        {
+          "statement": "Chứng minh tổng n số lẻ đầu bằng $n^2$.",
+          "steps": [
+            "Cơ sở $1=1^2$.",
+            "Nếu tổng đến $2n-1$ là $n^2$, thêm số tiếp theo $2n+1$.",
+            "Tổng mới $n^2+2n+1=(n+1)^2$."
+          ],
+          "result": "$1+3+\\cdots+(2n-1)=n^2$.",
+          "insight": "Sự chênh lệch hai bình phương giải thích cấu trúc quy nạp."
+        },
+        {
+          "statement": "Chứng minh $\\sqrt2$ không hữu tỉ.",
+          "steps": [
+            "Giả sử $\\sqrt2=a/b$ với a,b nguyên dương nguyên tố cùng nhau.",
+            "Từ $a^2=2b^2$, a chẵn, đặt $a=2k$ thì b cũng chẵn.",
+            "Cả a,b chia hết cho 2, trái giả thiết tối giản."
+          ],
+          "result": "$\\sqrt2\\notin\\mathbb Q$.",
+          "insight": "Phản chứng dùng tính tối giản để tạo mâu thuẫn số học."
+        },
+        {
+          "statement": "Vòng lặp cộng các số từ 1 đến n: nêu bất biến.",
+          "steps": [
+            "Trước bước i, đặt bất biến $s=1+\\cdots+(i-1)$.",
+            "Khởi đầu i bằng 1, s bằng 0, nên đúng; cập nhật $s\\leftarrow s+i$ bảo toàn cho i+1.",
+            "Khi i bằng n+1, s là tổng cần tính; i tăng nên vòng kết thúc."
+          ],
+          "result": "Bất biến chứng minh chương trình tính đúng tổng từ 1 đến n.",
+          "insight": "Chỉ mô tả vòng lặp không phải là chứng minh tính đúng."
+        },
+        {
+          "statement": "Chứng minh số tổ tiên trong cây nhị phân đầy đủ độ sâu h là hữu hạn theo công thức số nút.",
+          "steps": [
+            "Ở mức 0 có 1 nút; mỗi mức k có $2^k$ nút do mỗi nút có hai con.",
+            "Tổng từ mức 0 đến h là chuỗi hình học hữu hạn.",
+            "Nhân tổng với 2 rồi trừ tổng ban đầu cho $2^{h+1}-1$."
+          ],
+          "result": "Tổng số nút là $2^{h+1}-1$.",
+          "insight": "Phải quy ước gốc ở độ sâu 0 để tránh lệch chỉ số."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1: Preliminaries, §§1.2–1.8"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1: Congruences; Chương 3: Groups"
+        },
+        {
+          "sourceId": "mit-discrete",
+          "locator": "Các mục Logic, Induction, Counting, Graphs trong học liệu chính thức"
+        }
+      ]
+    },
+    {
+      "id": "sets-relations",
+      "title": "Tập hợp, ánh xạ, quan hệ và lớp tương đương",
+      "theory": [
+        "Hàm đơn ánh không gán cùng ảnh cho hai đầu vào khác nhau; toàn ánh đạt mọi phần tử của tập đích; song ánh có cả hai tính chất. Quan hệ tương đương là phản xạ, đối xứng và bắc cầu, tạo một phân hoạch.",
+        "Quan hệ thứ tự bộ phận thay đối xứng bằng phản đối xứng; không nhất thiết so sánh được mọi cặp. Cần phân biệt tập ảnh với tập đích đã công bố."
+      ],
+      "method": [
+        "Ghi tập nguồn và đích.",
+        "Kiểm tra từng tính chất bằng định nghĩa.",
+        "Mô tả lớp tương đương hoặc cặp không so sánh được."
+      ],
+      "pitfalls": [
+        "Một công thức không tự quyết định tính toàn ánh nếu chưa nêu tập đích."
+      ],
+      "examples": [
+        {
+          "statement": "Hàm $f:\\mathbb Z\\to\\mathbb Z$, $f(n)=2n$, có song ánh không?",
+          "steps": [
+            "Nếu $2a=2b$ thì a=b, nên đơn ánh.",
+            "Số 1 không có nghịch ảnh nguyên.",
+            "Do đó hàm không toàn ánh trên đích $\\mathbb Z$."
+          ],
+          "result": "Đơn ánh nhưng không song ánh.",
+          "insight": "Nếu đổi tập đích thành tập số chẵn thì cùng công thức trở thành song ánh."
+        },
+        {
+          "statement": "Mô tả các lớp tương đương modulo 3 trên số nguyên.",
+          "steps": [
+            "Đặt $a\\sim b$ khi $3\\mid(a-b)$.",
+            "Chia mọi số nguyên cho 3 cho dư 0,1 hoặc 2.",
+            "Hai số thuộc cùng lớp đúng khi có cùng số dư."
+          ],
+          "result": "Ba lớp là $3\\mathbb Z$, $3\\mathbb Z+1$, $3\\mathbb Z+2$.",
+          "insight": "Các lớp rời nhau và hợp của chúng là toàn bộ số nguyên."
+        },
+        {
+          "statement": "Chứng minh đồng dư modulo m là bắc cầu.",
+          "steps": [
+            "Giả sử $m\\mid(a-b)$ và $m\\mid(b-c)$.",
+            "Cộng hai hiệu cho $a-c=(a-b)+(b-c)$.",
+            "Tổng hai bội của m vẫn là bội của m."
+          ],
+          "result": "$a\\equiv c\\pmod m$.",
+          "insight": "Chứng minh từng tính chất nên quay về định nghĩa chia hết."
+        },
+        {
+          "statement": "Quan hệ bao hàm trên các tập con của $\\{1,2\\}$ có là thứ tự toàn phần?",
+          "steps": [
+            "Bao hàm có phản xạ, phản đối xứng và bắc cầu.",
+            "Tuy nhiên $\\{1\\}$ không nằm trong $\\{2\\}$ và ngược lại.",
+            "Vì có một cặp không so sánh được, thứ tự không toàn phần."
+          ],
+          "result": "Là thứ tự bộ phận, không là thứ tự toàn phần.",
+          "insight": "Hình Hasse biểu diễn thứ tự bộ phận nhưng không buộc mọi cặp có cạnh."
+        },
+        {
+          "statement": "Tính $|A\\cup B|$ nếu $|A|=8$, $|B|=7$, $|A\\cap B|=3$.",
+          "steps": [
+            "Cộng hai kích thước ban đầu được 15.",
+            "Ba phần tử trong giao đã bị đếm hai lần.",
+            "Trừ đi một lần giao để mỗi phần tử chỉ được đếm một lần."
+          ],
+          "result": "$|A\\cup B|=12$.",
+          "insight": "Công thức hợp là nguyên lý bù trừ ở trường hợp hai tập."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1: Preliminaries, §§1.2–1.8"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1: Congruences; Chương 3: Groups"
+        },
+        {
+          "sourceId": "mit-discrete",
+          "locator": "Các mục Logic, Induction, Counting, Graphs trong học liệu chính thức"
+        }
+      ]
+    },
+    {
+      "id": "counting",
+      "title": "Hoán vị, tổ hợp và hệ số nhị thức",
+      "theory": [
+        "Quy tắc nhân dùng cho chuỗi lựa chọn nối tiếp; quy tắc cộng dùng cho các trường hợp rời nhau. Chọn k đối tượng có thứ tự cho $n!/(n-k)!$, còn không phân biệt thứ tự cho $\\binom nk$.",
+        "Phân phối k vật giống nhau vào n ngăn cho $\\binom{k+n-1}{n-1}$ khi cho phép ngăn rỗng. Cần kiểm tra tính phân biệt, sự lặp lại và ràng buộc trước khi chọn công thức."
+      ],
+      "method": [
+        "Xác định đối tượng có phân biệt và có xét thứ tự không.",
+        "Tách bước hoặc trường hợp rời nhau.",
+        "Kiểm tra bằng một trường hợp nhỏ."
+      ],
+      "pitfalls": [
+        "Áp dụng hoán vị cho một nhóm không thứ tự sẽ đếm lặp."
+      ],
+      "examples": [
+        {
+          "statement": "Có bao nhiêu chuỗi nhị phân độ dài 5?",
+          "steps": [
+            "Mỗi vị trí có 2 lựa chọn.",
+            "Năm vị trí độc lập về lựa chọn nên dùng quy tắc nhân.",
+            "Nhận $2^5=32$."
+          ],
+          "result": "32 chuỗi.",
+          "insight": "Nếu cấm một mẫu nào đó thì các lựa chọn không còn đơn giản độc lập."
+        },
+        {
+          "statement": "Chọn 3 sinh viên từ 8 người để lập một nhóm không chức danh.",
+          "steps": [
+            "Thứ tự chọn không tạo nhóm mới.",
+            "Dùng $\\binom83=8!/(3!5!)$.",
+            "Rút gọn được $8\\cdot7\\cdot6/6=56$."
+          ],
+          "result": "56 nhóm.",
+          "insight": "Mỗi nhóm bị hoán vị 3 giai thừa lần trong cách chọn có thứ tự."
+        },
+        {
+          "statement": "Lập chuỗi 3 chữ số khác nhau từ các chữ số 0 đến 9, cho phép 0 ở đầu.",
+          "steps": [
+            "Vị trí đầu có 10 lựa chọn.",
+            "Hai vị trí tiếp theo có 9 và 8 lựa chọn do không lặp.",
+            "Nhân được 720."
+          ],
+          "result": "720 chuỗi.",
+          "insight": "Chuỗi chữ số khác số nguyên có ba chữ số vì cho phép 0 đứng đầu."
+        },
+        {
+          "statement": "Giải số nghiệm nguyên không âm của $x+y+z=5$.",
+          "steps": [
+            "Biểu diễn 5 dấu sao và 2 vách ngăn.",
+            "Chọn vị trí hai vách trong 7 vị trí xác định duy nhất một bộ nghiệm.",
+            "Số cách là $\\binom72=21$."
+          ],
+          "result": "21 nghiệm.",
+          "insight": "Ngăn rỗng tương ứng hai vách kề nhau hoặc vách ở đầu/cuối."
+        },
+        {
+          "statement": "Tìm hệ số của $x^2$ trong $(1+x)^6$.",
+          "steps": [
+            "Từ sáu thừa số chọn đúng hai nơi lấy x.",
+            "Mỗi lựa chọn đóng góp một hạng $x^2$.",
+            "Số lựa chọn bằng $\\binom62=15$."
+          ],
+          "result": "Hệ số bằng 15.",
+          "insight": "Hệ số nhị thức có ý nghĩa đếm trực tiếp, không cần khai triển toàn đa thức."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1: Preliminaries, §§1.2–1.8"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1: Congruences; Chương 3: Groups"
+        },
+        {
+          "sourceId": "mit-discrete",
+          "locator": "Các mục Logic, Induction, Counting, Graphs trong học liệu chính thức"
+        }
+      ]
+    },
+    {
+      "id": "pigeonhole-inclusion",
+      "title": "Dirichlet, bù trừ và đếm xác suất rời rạc",
+      "theory": [
+        "Nguyên lý Dirichlet: phân N vật vào k ngăn thì một ngăn chứa ít nhất $\\lceil N/k\\rceil$ vật. Bù trừ cho ba tập bằng tổng kích thước đơn, trừ các giao đôi, cộng lại giao ba.",
+        "Đếm xác suất đồng khả năng bằng số trường hợp thuận lợi chia tổng số trường hợp; nếu các khả năng không đồng xác suất thì công thức đếm này không tự áp dụng."
+      ],
+      "method": [
+        "Chọn ngăn phù hợp.",
+        "Đếm không gian đầy đủ và phần thuận lợi hoặc phần bù.",
+        "Kiểm tra giao và tính đồng khả năng."
+      ],
+      "pitfalls": [
+        "Không áp dụng xác suất đếm đều cho một quá trình lấy mẫu có thiên lệch."
+      ],
+      "examples": [
+        {
+          "statement": "Trong 13 người, chứng minh có hai người cùng tháng sinh.",
+          "steps": [
+            "Có 12 tháng làm 12 ngăn.",
+            "Đặt mỗi người vào tháng sinh của mình.",
+            "Vì 13 lớn hơn 12, ít nhất một tháng chứa hai người."
+          ],
+          "result": "Luôn có ít nhất hai người cùng tháng sinh.",
+          "insight": "Kết luận không cần giả thiết các tháng sinh có xác suất bằng nhau."
+        },
+        {
+          "statement": "Có 31 tệp chia vào 5 thư mục. Một thư mục có ít nhất bao nhiêu tệp?",
+          "steps": [
+            "Nếu mỗi thư mục tối đa 6 tệp thì tổng tối đa 30.",
+            "Điều này trái với 31 tệp.",
+            "Do đó có thư mục ít nhất 7 tệp."
+          ],
+          "result": "Ít nhất $\\lceil31/5\\rceil=7$ tệp.",
+          "insight": "Dạng phản chứng giải thích công thức làm tròn lên."
+        },
+        {
+          "statement": "Đếm số trong 1 đến 100 chia hết cho 2 hoặc 5.",
+          "steps": [
+            "Có 50 số chia hết cho 2 và 20 số chia hết cho 5.",
+            "Giao là các bội 10, có 10 số.",
+            "Bù trừ cho $50+20-10=60$."
+          ],
+          "result": "60 số.",
+          "insight": "Các bội của bội chung nhỏ nhất chính là phần giao."
+        },
+        {
+          "statement": "Gieo hai xúc xắc công bằng. Xác suất tổng bằng 7 là bao nhiêu?",
+          "steps": [
+            "Không gian gồm 36 cặp có thứ tự đồng xác suất.",
+            "Sáu cặp $(1,6),(2,5),\\ldots,(6,1)$ có tổng 7.",
+            "Chia số thuận lợi cho tổng số cặp."
+          ],
+          "result": "$6/36=1/6$.",
+          "insight": "Các tổng 2 đến 12 không đồng xác suất, nên không thể chia cho 11."
+        },
+        {
+          "statement": "Chọn 5 số nguyên bất kỳ. Chứng minh có hai số có hiệu chia hết cho 4.",
+          "steps": [
+            "Phân mỗi số theo dư khi chia cho 4, gồm bốn ngăn.",
+            "Có năm số nên hai số cùng số dư.",
+            "Hiệu của chúng là hiệu hai số đồng dư, nên chia hết cho 4."
+          ],
+          "result": "Luôn tồn tại cặp có hiệu là bội của 4.",
+          "insight": "Chọn ngăn theo số dư là một kỹ thuật Dirichlet số học."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1: Preliminaries, §§1.2–1.8"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1: Congruences; Chương 3: Groups"
+        },
+        {
+          "sourceId": "mit-discrete",
+          "locator": "Các mục Logic, Induction, Counting, Graphs trong học liệu chính thức"
+        }
+      ]
+    },
+    {
+      "id": "recurrences",
+      "title": "Truy hồi và hàm sinh",
+      "theory": [
+        "Truy hồi mô tả một đại lượng bằng các giá trị trước; điều kiện đầu quyết định nghiệm duy nhất. Với truy hồi tuyến tính hệ số hằng, phương trình đặc trưng hỗ trợ tìm nghiệm; nghiệm kép cần thêm lũy thừa của n.",
+        "Hàm sinh $A(z)=\\sum a_nz^n$ có thể được dùng như chuỗi hình thức để chuyển truy hồi thành phương trình đại số. Phải xử lý các hạng đầu và chỉ số chính xác."
+      ],
+      "method": [
+        "Viết điều kiện đầu.",
+        "Dịch chỉ số hoặc tìm phương trình đặc trưng.",
+        "Kiểm tra công thức bằng các hạng đầu và thế lại truy hồi."
+      ],
+      "pitfalls": [
+        "Một công thức thỏa truy hồi nhưng sai điều kiện đầu vẫn là nghiệm sai."
+      ],
+      "examples": [
+        {
+          "statement": "Giải $a_n=2a_{n-1}$, $a_0=3$.",
+          "steps": [
+            "Mỗi bước nhân thêm 2.",
+            "Sau n bước, $a_n=3\\cdot2^n$.",
+            "Tại n bằng 0 công thức cho 3 và thế lại cho đúng truy hồi."
+          ],
+          "result": "$a_n=3\\cdot2^n$.",
+          "insight": "Đây là trường hợp cơ bản của tăng trưởng theo cấp số nhân."
+        },
+        {
+          "statement": "Giải $a_n=a_{n-1}+n$, $a_0=0$.",
+          "steps": [
+            "Mở truy hồi được $a_n=1+2+\\cdots+n$.",
+            "Dùng tổng cấp số cộng.",
+            "Kiểm tra hiệu hai số hạng liên tiếp đúng bằng n."
+          ],
+          "result": "$a_n=n(n+1)/2$.",
+          "insight": "Mở truy hồi biến bài toán thành một tổng quen thuộc."
+        },
+        {
+          "statement": "Giải $a_n=3a_{n-1}-2a_{n-2}$, $a_0=0,a_1=1$.",
+          "steps": [
+            "Phương trình đặc trưng là $(r-1)(r-2)=0$.",
+            "Nghiệm dạng $A+B2^n$; điều kiện đầu cho $A=-1,B=1$.",
+            "Thế n bằng 2 cho 3, đúng truy hồi."
+          ],
+          "result": "$a_n=2^n-1$.",
+          "insight": "Hai điều kiện đầu xác định hai hệ số độc lập."
+        },
+        {
+          "statement": "Hàm sinh của dãy toàn 1 là gì?",
+          "steps": [
+            "$A(z)=1+z+z^2+\\cdots$.",
+            "Nhân với $1-z$ thì các hệ số bậc dương triệt tiêu.",
+            "Còn $(1-z)A(z)=1$."
+          ],
+          "result": "$A(z)=1/(1-z)$ như chuỗi hình thức, và giải tích khi $|z|<1$.",
+          "insight": "Đẳng thức chuỗi hình thức không đòi chọn một giá trị số z."
+        },
+        {
+          "statement": "Đếm chuỗi nhị phân độ dài n không chứa hai số 1 liên tiếp.",
+          "steps": [
+            "Gọi số lượng là $b_n$. Chuỗi kết thúc bằng 0 nối với một chuỗi hợp lệ độ dài n-1.",
+            "Chuỗi kết thúc bằng 1 phải có đuôi 01 nếu n ít nhất 2, nên đóng góp $b_{n-2}$.",
+            "Do đó $b_n=b_{n-1}+b_{n-2}$ với $b_0=1,b_1=2$; suy ra $b_2=3,b_3=5$."
+          ],
+          "result": "Số lượng là $F_{n+2}$ với $F_0=0,F_1=1$.",
+          "insight": "Chia theo đuôi tạo các trường hợp rời nhau và đầy đủ."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1: Preliminaries, §§1.2–1.8"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1: Congruences; Chương 3: Groups"
+        },
+        {
+          "sourceId": "mit-discrete",
+          "locator": "Các mục Logic, Induction, Counting, Graphs trong học liệu chính thức"
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "title": "Đồ thị, đường đi và liên thông",
+      "theory": [
+        "Đồ thị vô hướng gồm tập đỉnh và tập cạnh không định hướng. Bậc là số cạnh kề đỉnh; tổng bậc bằng hai lần số cạnh. Đường đi, chu trình, liên thông và thành phần liên thông phải được phân biệt.",
+        "BFS phân lớp theo số cạnh từ nguồn trong đồ thị không trọng số. Đồ thị hai phía không có chu trình lẻ; việc tô hai màu bằng BFS vừa kiểm tra tính chất vừa tạo chứng cứ khi thất bại."
+      ],
+      "method": [
+        "Mô hình hóa đỉnh và cạnh.",
+        "Dùng định lý bậc hoặc khám phá theo lớp.",
+        "Nêu rõ đồ thị có hướng, trọng số hay cạnh lặp không."
+      ],
+      "pitfalls": [
+        "Khoảng cách theo BFS là số cạnh, không tự giải bài trọng số tổng quát."
+      ],
+      "examples": [
+        {
+          "statement": "Đồ thị có các bậc $2,2,3,3$. Có bao nhiêu cạnh?",
+          "steps": [
+            "Tổng bậc là 10.",
+            "Mỗi cạnh vô hướng đóng góp 2 vào tổng bậc.",
+            "Suy ra số cạnh bằng $10/2=5$."
+          ],
+          "result": "5 cạnh.",
+          "insight": "Công thức áp dụng khi danh sách bậc thực sự thuộc một đồ thị hợp lệ."
+        },
+        {
+          "statement": "Chứng minh số đỉnh bậc lẻ là chẵn.",
+          "steps": [
+            "Tổng tất cả bậc là $2|E|$, một số chẵn.",
+            "Tổng các bậc chẵn cũng chẵn.",
+            "Tổng các bậc lẻ phải chẵn, nên số hạng lẻ trong tổng đó là chẵn."
+          ],
+          "result": "Số đỉnh bậc lẻ luôn chẵn.",
+          "insight": "Lập luận chẵn lẻ là một bất biến toàn cục của đồ thị."
+        },
+        {
+          "statement": "Đồ thị có cạnh AB, AC, BD, CD, DE. Tìm khoảng cách BFS từ A tới E.",
+          "steps": [
+            "Lớp 0 gồm A; lớp 1 gồm B,C.",
+            "Lớp 2 có D, được tới từ B hoặc C.",
+            "Lớp 3 có E, nên khoảng cách ngắn nhất là 3."
+          ],
+          "result": "Đường A–B–D–E có 3 cạnh.",
+          "insight": "Lớp đầu tiên gặp đỉnh chính là khoảng cách không trọng số."
+        },
+        {
+          "statement": "Chu trình tam giác có là đồ thị hai phía không?",
+          "steps": [
+            "Tô A màu 1 thì hai đỉnh kề B,C phải màu 2.",
+            "Nhưng B và C cũng có cạnh nối nhau.",
+            "Hai đầu cạnh BC cùng màu, trái điều kiện hai phía."
+          ],
+          "result": "Không; tam giác là một chu trình lẻ.",
+          "insight": "Một chu trình lẻ là chứng cứ ngắn gọn bác bỏ tính hai phía."
+        },
+        {
+          "statement": "Đồ thị có cạnh AB, BC và DE. Có bao nhiêu thành phần liên thông?",
+          "steps": [
+            "Từ A khám phá được A,B,C.",
+            "Từ D khám phá được D,E và không có cạnh sang nhóm đầu.",
+            "Hai nhóm này phủ hết các đỉnh đã cho."
+          ],
+          "result": "2 thành phần: $\\{A,B,C\\}$ và $\\{D,E\\}$.",
+          "insight": "Một lần tìm kiếm từ một nguồn chỉ phủ thành phần chứa nguồn đó."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1: Preliminaries, §§1.2–1.8"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1: Congruences; Chương 3: Groups"
+        },
+        {
+          "sourceId": "mit-discrete",
+          "locator": "Các mục Logic, Induction, Counting, Graphs trong học liệu chính thức"
+        }
+      ]
+    },
+    {
+      "id": "trees-boolean",
+      "title": "Cây, cây khung và đại số Boolean",
+      "theory": [
+        "Cây hữu hạn là đồ thị liên thông không chu trình, có n-1 cạnh nếu có n đỉnh. Giữa hai đỉnh của cây có đúng một đường đi đơn. Cây khung giữ tất cả đỉnh của đồ thị liên thông và chọn một cấu trúc cây.",
+        "Đại số Boolean biểu diễn điều kiện bằng AND, OR, NOT; các luật phân phối và De Morgan cho phép rút gọn mạch logic. Trong mô hình đơn giản, độ sâu cây ảnh hưởng số phép so sánh theo đường đi."
+      ],
+      "method": [
+        "Kiểm tra liên thông và chu trình.",
+        "Dùng n-1 cạnh hoặc cấu trúc cha–con.",
+        "Với biểu thức Boolean, đối chiếu bảng chân trị."
+      ],
+      "pitfalls": [
+        "Có n-1 cạnh mà không liên thông chưa đủ để là cây."
+      ],
+      "examples": [
+        {
+          "statement": "Cây có 15 đỉnh thì có bao nhiêu cạnh?",
+          "steps": [
+            "Mọi cây hữu hạn n đỉnh có n-1 cạnh.",
+            "Thay n bằng 15.",
+            "Kiểm tra mô hình gồm một gốc và 14 đỉnh còn lại, mỗi đỉnh có một cạnh tới cha."
+          ],
+          "result": "14 cạnh.",
+          "insight": "Mỗi đỉnh ngoài gốc gắn với đúng một cạnh cha."
+        },
+        {
+          "statement": "Bỏ một cạnh bất kỳ khỏi chu trình vuông có 4 đỉnh. Đồ thị còn lại có là cây?",
+          "steps": [
+            "Chu trình ban đầu có 4 cạnh.",
+            "Bỏ một cạnh còn đường đi qua cả 4 đỉnh, nên vẫn liên thông và không có chu trình.",
+            "Đồ thị có 3 cạnh bằng n-1."
+          ],
+          "result": "Có; đồ thị còn lại là một cây khung.",
+          "insight": "Xóa một cạnh trên chu trình bảo toàn liên thông."
+        },
+        {
+          "statement": "Rút gọn $P\\land(P\\lor Q)$.",
+          "steps": [
+            "Phân phối được $(P\\land P)\\lor(P\\land Q)$.",
+            "Vì $P\\land P=P$, biểu thức là $P\\lor(P\\land Q)$.",
+            "Nếu P đúng thì cả biểu thức đúng; nếu P sai thì cả hai hạng sai."
+          ],
+          "result": "Biểu thức tương đương P.",
+          "insight": "Đây là luật hấp thụ trong đại số Boolean."
+        },
+        {
+          "statement": "Rút gọn phủ định của $P\\lor Q$.",
+          "steps": [
+            "Phép hoặc sai đúng khi cả P và Q đều sai.",
+            "Vì vậy phủ định phép hoặc đúng đúng trong trường hợp $\\neg P$ và $\\neg Q$ cùng đúng.",
+            "Kiểm tra bốn dòng bảng chân trị xác nhận tương đương."
+          ],
+          "result": "$\\neg(P\\lor Q)\\equiv\\neg P\\land\\neg Q$.",
+          "insight": "De Morgan đổi phép hoặc thành phép và khi đẩy phủ định vào trong."
+        },
+        {
+          "statement": "Cây tìm kiếm nhị phân cân bằng có $2^{h+1}-1$ nút. Số so sánh tối đa trên một đường từ gốc đến lá?",
+          "steps": [
+            "Gốc ở độ sâu 0 và lá sâu nhất ở độ sâu h.",
+            "Một đường như vậy qua h+1 nút.",
+            "Mỗi nút kiểm tra một khóa nên cần tối đa h+1 so sánh khóa."
+          ],
+          "result": "$h+1=\\log_2(n+1)$ trong trường hợp cây hoàn hảo này.",
+          "insight": "Không áp dụng kết luận logarit cho cây bị lệch thành một đường thẳng."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "abstract",
+          "locator": "Chương 1: Preliminaries, §§1.2–1.8"
+        },
+        {
+          "sourceId": "scherk",
+          "locator": "Chương 1: Congruences; Chương 3: Groups"
+        },
+        {
+          "sourceId": "mit-discrete",
+          "locator": "Các mục Logic, Induction, Counting, Graphs trong học liệu chính thức"
+        }
+      ]
+    }
+  ]
+}

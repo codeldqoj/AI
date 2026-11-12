@@ -1,0 +1,325 @@
+/* ============================================================
+   AI HƯỚNG DẪN GIẢI TOÁN HỌC - GIÁO SƯ TOÁN HỌC VMO / TST
+   Chuẩn mực giao diện sư phạm cấp THPT Chuyên Toán
+   ============================================================ */
+
+.btn-ai-guide {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn-ai-guide:hover {
+  background: linear-gradient(135deg, #172554 0%, #1d4ed8 100%);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-ai-guide:active {
+  transform: translateY(0);
+}
+
+.btn-ai-guide.active {
+  background: linear-gradient(135deg, #047857 0%, #059669 100%);
+}
+
+.btn-ai-guide .guide-sparkle {
+  font-size: 0.95rem;
+}
+
+/* Khung hiển thị AI Hướng dẫn giải */
+.ai-guide-panel {
+  margin-top: 14px;
+  border: 1px solid #bfdbfe;
+  background: #f8fafc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  animation: aiSlideDown 0.25s ease-out;
+}
+
+@keyframes aiSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-guide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #eff6ff;
+  border-bottom: 1px solid #dbeafe;
+  padding: 10px 16px;
+}
+
+.ai-guide-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.ai-guide-title .prof-badge {
+  background: #1e3a8a;
+  color: #ffffff;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.ai-guide-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-guide-action {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.btn-guide-action:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+/* Nội dung bên trong Hướng dẫn giải */
+.ai-guide-body {
+  padding: 18px 20px;
+  font-size: 0.95rem;
+  line-height: 1.68;
+  color: #1e293b;
+}
+
+/* Các section phân tầng sư phạm */
+.ai-section {
+  margin-bottom: 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+
+.ai-section:last-child {
+  margin-bottom: 0;
+}
+
+.ai-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.ai-section-knowledge .ai-section-title {
+  color: #b45309; /* Hổ phách chuyên đề */
+}
+
+.ai-section-idea .ai-section-title {
+  color: #0284c7; /* Xanh dương ý tưởng */
+}
+
+.ai-section-solution .ai-section-title {
+  color: #15803d; /* Xanh lục lời giải */
+}
+
+.ai-section-notes .ai-section-title {
+  color: #b91c1c; /* Đỏ lưu ý */
+}
+
+.ai-section-content {
+  font-size: 0.92rem;
+  color: #334155;
+}
+
+.ai-section-content p {
+  margin: 0 0 8px 0;
+}
+
+.ai-section-content p:last-child {
+  margin-bottom: 0;
+}
+
+.ai-section-content ul, 
+.ai-section-content ol {
+  margin: 6px 0 10px 20px;
+  padding: 0;
+}
+
+.ai-section-content li {
+  margin-bottom: 5px;
+}
+
+.ai-guide-source-editor {
+  display: block;
+  width: 100%;
+  min-height: 190px;
+  resize: vertical;
+  box-sizing: border-box;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  padding: 12px 14px;
+  background: #ffffff;
+  color: #0f172a;
+  font: 0.86rem/1.55 "JetBrains Mono", Consolas, monospace;
+  tab-size: 2;
+}
+
+.ai-section-solution .ai-guide-source-editor {
+  min-height: 340px;
+}
+
+.ai-guide-source-editor:focus {
+  outline: 2px solid #7c3aed;
+  outline-offset: 1px;
+  border-color: #7c3aed;
+}
+
+/* Hộp công thức nổi bật */
+.ai-formula-box {
+  background: #f8fafc;
+  border-left: 3px solid #3b82f6;
+  padding: 8px 12px;
+  margin: 8px 0;
+  border-radius: 0 4px 4px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+}
+
+/* Trạng thái đang tải giải pháp từ AI */
+.ai-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  color: #64748b;
+  gap: 12px;
+}
+
+.ai-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: aiSpin 0.8s linear infinite;
+}
+
+@keyframes aiSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tương thích Dark Mode */
+body.dark .btn-ai-guide {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: #ffffff;
+}
+
+body.dark .ai-guide-panel {
+  background: #0f172a;
+  border-color: #1e3a8a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .ai-guide-header {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark .ai-guide-title {
+  color: #93c5fd;
+}
+
+body.dark .btn-guide-action {
+  background: #334155;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+body.dark .btn-guide-action:hover {
+  background: #475569;
+  color: #ffffff;
+}
+
+body.dark .ai-section {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark .ai-section-title {
+  border-bottom-color: #334155;
+}
+
+body.dark .ai-section-knowledge .ai-section-title {
+  color: #fbbf24;
+}
+
+body.dark .ai-section-idea .ai-section-title {
+  color: #38bdf8;
+}
+
+body.dark .ai-section-solution .ai-section-title {
+  color: #4ade80;
+}
+
+body.dark .ai-section-notes .ai-section-title {
+  color: #f87171;
+}
+
+body.dark .ai-section-content {
+  color: #cbd5e1;
+}
+
+body.dark .ai-guide-source-editor {
+  background: #0f172a;
+  border-color: #64748b;
+  color: #e2e8f0;
+}
+
+body.dark .ai-formula-box {
+  background: #0f172a;
+  border-left-color: #60a5fa;
+}

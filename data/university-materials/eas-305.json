@@ -1,0 +1,671 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-10-25.1",
+  "courseId": "eas-305",
+  "prerequisites": [
+    "Đếm cơ bản, tích phân một biến"
+  ],
+  "outcomes": [
+    "Chọn mô hình xác suất cho bài toán kỹ thuật",
+    "Tính phân bố và đặc trưng biến ngẫu nhiên",
+    "Đánh giá xấp xỉ, độ tin cậy và quá trình đếm"
+  ],
+  "sections": [
+    {
+      "id": "models",
+      "title": "Mô hình xác suất và biến cố",
+      "theory": [
+        "Một mô hình gồm không gian mẫu, họ biến cố và xác suất thỏa không âm, chuẩn hóa và cộng được trên các biến cố rời nhau. Quy tắc $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$ không đòi độc lập.",
+        "Trong mô hình hữu hạn đồng khả năng, xác suất bằng tỷ lệ số phần tử. Với lấy mẫu có hoặc không hoàn lại, không gian mẫu khác nhau; mô hình phải được chọn trước khi tính."
+      ],
+      "method": [
+        "Mô tả phép thử và kết quả sơ cấp.",
+        "Xác định các biến cố và phần giao.",
+        "Dùng tiên đề hoặc đếm đồng khả năng."
+      ],
+      "pitfalls": [
+        "Các biến cố rời nhau có xác suất dương không thể độc lập."
+      ],
+      "examples": [
+        {
+          "statement": "Gieo xúc xắc công bằng, tính xác suất số chẵn hoặc lớn hơn 4.",
+          "steps": [
+            "A gồm 2,4,6 và B gồm 5,6.",
+            "Giao chỉ có 6, nên hợp có $3+2-1=4$ phần tử.",
+            "Chia cho 6 kết quả đồng khả năng."
+          ],
+          "result": "$P(A\\cup B)=2/3$.",
+          "insight": "Trừ phần giao để không đếm số 6 hai lần."
+        },
+        {
+          "statement": "Một hệ có xác suất hỏng trong ngày 0.03. Xác suất không hỏng?",
+          "steps": [
+            "Biến cố không hỏng là phần bù của hỏng.",
+            "Hai biến cố rời nhau và hợp là toàn không gian.",
+            "Dùng chuẩn hóa $P(A^c)=1-P(A)$."
+          ],
+          "result": "$0.97$.",
+          "insight": "Phần bù thường dễ tính hơn liệt kê mọi tình huống thành công."
+        },
+        {
+          "statement": "Lấy hai linh kiện không hoàn lại từ hộp có 3 tốt, 2 lỗi. Xác suất cả hai tốt?",
+          "steps": [
+            "Có $\\binom52=10$ cặp không thứ tự đồng khả năng.",
+            "Cặp tốt có $\\binom32=3$.",
+            "Chia số cặp thuận lợi cho tổng số cặp."
+          ],
+          "result": "$3/10$.",
+          "insight": "Không hoàn lại làm chất lượng lần sau phụ thuộc kết quả lần đầu."
+        },
+        {
+          "statement": "Nếu $P(A)=0.7$, $P(B)=0.6$, tìm chặn dưới của $P(A\\cap B)$.",
+          "steps": [
+            "Xác suất hợp không vượt 1.",
+            "Từ $P(A\\cap B)=P(A)+P(B)-P(A\\cup B)$ suy ra ít nhất 0.3.",
+            "Chặn này đạt được khi hợp chiếm toàn không gian."
+          ],
+          "result": "$P(A\\cap B)\\ge0.3$.",
+          "insight": "Không có giả thiết độc lập thì chỉ nên kết luận bằng chặn hoặc công thức tổng quát."
+        },
+        {
+          "statement": "Hai biến cố rời nhau có xác suất 0.2 và 0.4. Chúng có độc lập không?",
+          "steps": [
+            "Giao rỗng nên xác suất giao bằng 0.",
+            "Nếu độc lập thì xác suất giao phải bằng $0.2\\cdot0.4=0.08$.",
+            "Hai giá trị khác nhau."
+          ],
+          "result": "Không độc lập.",
+          "insight": "Rời nhau là không xảy ra đồng thời; độc lập là không cung cấp thông tin cho nhau."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương 1–6: Probability, Random Variables, Expectation, Limit Theorems và Bernoulli/Poisson Processes"
+        },
+        {
+          "sourceId": "yates",
+          "locator": "Chương 1–5, 9 và 13 (mục giới thiệu và roadmap đã kiểm tra qua OCR)"
+        },
+        {
+          "sourceId": "gnedenko",
+          "locator": "Phần I: Probabilities; Phần II: Random Variables"
+        }
+      ]
+    },
+    {
+      "id": "conditioning",
+      "title": "Xác suất có điều kiện, Bayes và chẩn đoán",
+      "theory": [
+        "Với $P(B)>0$, $P(A\\mid B)=P(A\\cap B)/P(B)$. Công thức xác suất toàn phần dùng một phân hoạch: $P(B)=\\sum_iP(B\\mid A_i)P(A_i)$. Bayes đảo chiều điều kiện bằng cách chuẩn hóa các trọng số.",
+        "Trong chẩn đoán, xác suất bệnh trước kiểm tra ảnh hưởng mạnh giá trị dự đoán dương; độ nhạy không đồng nhất với xác suất mắc bệnh sau kết quả dương."
+      ],
+      "method": [
+        "Xác định điều kiện và tỷ lệ nền.",
+        "Tính mẫu số bằng xác suất toàn phần.",
+        "Chuẩn hóa và kiểm tra tổng hậu nghiệm bằng 1."
+      ],
+      "pitfalls": [
+        "Không được thay xác suất A biết B bằng xác suất B biết A."
+      ],
+      "examples": [
+        {
+          "statement": "Bệnh có tỷ lệ 1%, độ nhạy 90%, dương giả 5%. Tính xác suất bệnh sau dương tính.",
+          "steps": [
+            "Xác suất bệnh và dương là $0.01\\cdot0.9=0.009$.",
+            "Xác suất dương tổng là $0.009+0.99\\cdot0.05=0.0585$.",
+            "Chia hai xác suất để nhận $0.009/0.0585$."
+          ],
+          "result": "$P(B\\mid+)=2/13\\approx15.38\\%$.",
+          "insight": "Kết quả dương không đồng nghĩa xác suất bệnh bằng độ nhạy 90%."
+        },
+        {
+          "statement": "Nhà máy A cung cấp 60% sản phẩm, tỷ lệ lỗi 2%; B cung cấp 40%, lỗi 5%. Tính tỷ lệ lỗi chung.",
+          "steps": [
+            "Tách theo nguồn A hoặc B, một phân hoạch.",
+            "Lỗi từ A đóng góp $0.6\\cdot0.02=0.012$.",
+            "Lỗi từ B đóng góp $0.4\\cdot0.05=0.02$; cộng hai phần."
+          ],
+          "result": "$P(L)=0.032=3.2\\%$.",
+          "insight": "Tỷ lệ tổng là trung bình có trọng số, không phải trung bình cộng hai tỷ lệ."
+        },
+        {
+          "statement": "Với dữ liệu trên, sản phẩm lỗi có xác suất đến từ B là bao nhiêu?",
+          "steps": [
+            "Tử số là $P(B\\cap L)=0.02$.",
+            "Mẫu số là tỷ lệ lỗi chung 0.032.",
+            "Bayes cho tỷ số $0.02/0.032$."
+          ],
+          "result": "$P(B\\mid L)=0.625$.",
+          "insight": "Nguồn chiếm ít sản lượng hơn vẫn có thể chiếm đa số sản phẩm lỗi."
+        },
+        {
+          "statement": "Xúc xắc cho biết kết quả chẵn. Xác suất kết quả lớn hơn 3?",
+          "steps": [
+            "Sau điều kiện, chỉ còn 2,4,6 với xác suất bằng nhau.",
+            "Hai kết quả 4,6 lớn hơn 3.",
+            "Xác suất điều kiện là $2/3$."
+          ],
+          "result": "$2/3$.",
+          "insight": "Điều kiện làm co không gian mẫu hiệu dụng."
+        },
+        {
+          "statement": "Hai lần tung đồng xu độc lập. Biết lần đầu ngửa, xác suất lần hai ngửa?",
+          "steps": [
+            "Giao hai lần ngửa có xác suất $1/4$.",
+            "Điều kiện lần đầu ngửa có xác suất $1/2$.",
+            "Chia được $(1/4)/(1/2)=1/2$."
+          ],
+          "result": "$1/2$.",
+          "insight": "Độc lập nghĩa là biết kết quả lần đầu không thay đổi phân bố lần sau."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương 1–6: Probability, Random Variables, Expectation, Limit Theorems và Bernoulli/Poisson Processes"
+        },
+        {
+          "sourceId": "yates",
+          "locator": "Chương 1–5, 9 và 13 (mục giới thiệu và roadmap đã kiểm tra qua OCR)"
+        },
+        {
+          "sourceId": "gnedenko",
+          "locator": "Phần I: Probabilities; Phần II: Random Variables"
+        }
+      ]
+    },
+    {
+      "id": "discrete",
+      "title": "Biến ngẫu nhiên rời rạc và các phân bố chuẩn",
+      "theory": [
+        "PMF $p_X(k)=P(X=k)$ không âm và có tổng 1. Bernoulli mô tả một thử nghiệm thành/bại; binomial đếm số thành công trong n thử độc lập cùng p; geometric đếm số lần thử tới thành công đầu.",
+        "Poisson với tham số lambda có PMF $e^{-\\lambda}\\lambda^k/k!$, phù hợp đếm khi các giả thiết quá trình thích hợp được kiểm tra. Không chọn phân bố chỉ vì dữ liệu có số nguyên."
+      ],
+      "method": [
+        "Xác định đại lượng đếm và miền giá trị.",
+        "Kiểm tra giả thiết số lần thử, độc lập và tham số.",
+        "Viết PMF rồi tính xác suất."
+      ],
+      "pitfalls": [
+        "Hai quy ước geometric bắt đầu từ 0 và 1 có kỳ vọng khác nhau."
+      ],
+      "examples": [
+        {
+          "statement": "Tung đồng xu công bằng 4 lần. Xác suất đúng 2 lần ngửa?",
+          "steps": [
+            "$X\\sim\\operatorname{Bin}(4,1/2)$.",
+            "Chọn hai vị trí ngửa có $\\binom42=6$ cách.",
+            "Mỗi chuỗi xác suất $1/16$, nên nhân được $6/16$."
+          ],
+          "result": "$3/8$.",
+          "insight": "Hệ số tổ hợp đếm vị trí các thành công."
+        },
+        {
+          "statement": "Thử độc lập xác suất thành công 0.2. Xác suất thành công đầu ở lần 3?",
+          "steps": [
+            "Dùng geometric trên $\\{1,2,\\ldots\\}$.",
+            "Hai lần đầu phải thất bại, lần ba thành công.",
+            "Xác suất là $0.8^2\\cdot0.2$."
+          ],
+          "result": "$0.128$.",
+          "insight": "Sự kiện này xác định một chuỗi có thứ tự, không cần hệ số tổ hợp."
+        },
+        {
+          "statement": "$X\\sim\\operatorname{Pois}(2)$. Tính $P(X=0)$.",
+          "steps": [
+            "Thay k bằng 0 vào PMF.",
+            "$2^0=1$ và $0!=1$.",
+            "Chỉ còn hệ số mũ $e^{-2}$."
+          ],
+          "result": "$P(X=0)=e^{-2}\\approx0.1353$.",
+          "insight": "Tham số 2 cũng là kỳ vọng số sự kiện trong khoảng quan sát."
+        },
+        {
+          "statement": "Một biến nhận 0,1,2 với xác suất c,2c,3c. Tìm c và $P(X\\ge1)$.",
+          "steps": [
+            "Chuẩn hóa cho $c+2c+3c=1$.",
+            "Suy ra $c=1/6$.",
+            "Xác suất từ 1 trở lên là $2/6+3/6$."
+          ],
+          "result": "$c=1/6$, $P(X\\ge1)=5/6$.",
+          "insight": "Luôn kiểm tra tính chuẩn hóa trước khi tính các đặc trưng khác."
+        },
+        {
+          "statement": "Lấy 2 vật không hoàn lại từ 4 đỏ, 6 xanh. Xác suất có đúng một đỏ?",
+          "steps": [
+            "Tổng số cặp là $\\binom{10}2=45$.",
+            "Chọn một đỏ và một xanh có $4\\cdot6=24$ cách.",
+            "Chia được $24/45$."
+          ],
+          "result": "$8/15$.",
+          "insight": "Đây là siêu bội, không phải binomial do lấy không hoàn lại."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương 1–6: Probability, Random Variables, Expectation, Limit Theorems và Bernoulli/Poisson Processes"
+        },
+        {
+          "sourceId": "yates",
+          "locator": "Chương 1–5, 9 và 13 (mục giới thiệu và roadmap đã kiểm tra qua OCR)"
+        },
+        {
+          "sourceId": "gnedenko",
+          "locator": "Phần I: Probabilities; Phần II: Random Variables"
+        }
+      ]
+    },
+    {
+      "id": "continuous",
+      "title": "Biến liên tục, CDF và phân bố mũ–chuẩn",
+      "theory": [
+        "Mật độ f không phải xác suất tại một điểm: $P(a<X\\le b)=\\int_a^bf(x)dx$, còn $F_X(x)=P(X\\le x)$. Với biến có mật độ, xác suất một điểm bằng 0.",
+        "Mũ tốc độ lambda có mật độ $\\lambda e^{-\\lambda x}$ trên $x\\ge0$ và tính không nhớ. Chuẩn được chuẩn hóa bằng $Z=(X-\\mu)/\\sigma$; phải phân biệt độ lệch chuẩn sigma với phương sai sigma bình phương."
+      ],
+      "method": [
+        "Ghi miền hỗ trợ và chuẩn hóa mật độ.",
+        "Tính xác suất qua tích phân hoặc CDF.",
+        "Kiểm tra đơn vị và tham số hóa."
+      ],
+      "pitfalls": [
+        "Giá trị mật độ lớn hơn 1 không làm mô hình sai; tích phân mới phải bằng 1."
+      ],
+      "examples": [
+        {
+          "statement": "$X\\sim U(2,6)$. Tính $P(3<X<5)$.",
+          "steps": [
+            "Mật độ là $1/(6-2)=1/4$ trong miền.",
+            "Khoảng thuận lợi dài 2.",
+            "Tích phân mật độ trên khoảng bằng $2/4$."
+          ],
+          "result": "$1/2$.",
+          "insight": "Phân bố đều biến xác suất thành tỷ lệ độ dài."
+        },
+        {
+          "statement": "Tìm c để $f(x)=cx$ trên $[0,2]$ là mật độ.",
+          "steps": [
+            "Chuẩn hóa: $\\int_0^2cx\\,dx=2c=1$.",
+            "Suy ra c bằng một nửa.",
+            "Mật độ không âm trên miền nên điều kiện còn lại cũng thỏa."
+          ],
+          "result": "$c=1/2$.",
+          "insight": "Không cần mật độ luôn nhỏ hơn 1 tại mọi điểm."
+        },
+        {
+          "statement": "Tuổi thọ $T\\sim\\operatorname{Exp}(0.1)$, thời gian tính bằng giờ. Tính $P(T>10)$.",
+          "steps": [
+            "Hàm sống của phân bố mũ là $e^{-\\lambda t}$.",
+            "Thay lambda bằng 0.1 và t bằng 10.",
+            "Tích lambda t bằng 1 là đại lượng không đơn vị."
+          ],
+          "result": "$P(T>10)=e^{-1}\\approx0.3679$.",
+          "insight": "Đơn vị của lambda là nghịch đảo đơn vị thời gian."
+        },
+        {
+          "statement": "Với tuổi thọ mũ trên, tính $P(T>15\\mid T>5)$.",
+          "steps": [
+            "Viết xác suất điều kiện bằng $P(T>15)/P(T>5)$.",
+            "Tỷ số là $e^{-1.5}/e^{-0.5}=e^{-1}$.",
+            "Đây cũng là xác suất sống thêm 10 giờ từ ban đầu."
+          ],
+          "result": "$e^{-1}$.",
+          "insight": "Tính không nhớ là giả thiết đặc biệt của phân bố mũ, không đúng cho mọi tuổi thọ."
+        },
+        {
+          "statement": "$X\\sim N(100,15^2)$. Viết $P(X\\le130)$ qua CDF chuẩn.",
+          "steps": [
+            "Chuẩn hóa $Z=(X-100)/15$.",
+            "Ngưỡng 130 tương ứng z bằng 2.",
+            "Do đó xác suất là $\\Phi(2)$, xấp xỉ 0.97725."
+          ],
+          "result": "$P(X\\le130)=\\Phi(2)\\approx0.97725$.",
+          "insight": "Mẫu số là độ lệch chuẩn 15, không phải phương sai 225."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương 1–6: Probability, Random Variables, Expectation, Limit Theorems và Bernoulli/Poisson Processes"
+        },
+        {
+          "sourceId": "yates",
+          "locator": "Chương 1–5, 9 và 13 (mục giới thiệu và roadmap đã kiểm tra qua OCR)"
+        },
+        {
+          "sourceId": "gnedenko",
+          "locator": "Phần I: Probabilities; Phần II: Random Variables"
+        }
+      ]
+    },
+    {
+      "id": "joint-transform",
+      "title": "Phân bố đồng thời, độc lập và biến đổi",
+      "theory": [
+        "Phân bố đồng thời mô tả phụ thuộc; mật độ biên được lấy bằng tích phân hoặc tổng theo biến còn lại. Độc lập tương đương phân bố đồng thời phân tích thành tích hai biên.",
+        "Với biến đổi một–một khả vi, mật độ mới nhân trị tuyệt đối Jacobian nghịch đảo; với biến đổi nhiều–một cần cộng các nhánh. Không được tự giả sử độc lập chỉ vì chưa biết sự phụ thuộc."
+      ],
+      "method": [
+        "Xác định miền hỗ trợ chung.",
+        "Lấy biên hoặc mô tả các nhánh nghịch đảo.",
+        "Kiểm tra chuẩn hóa của mật độ mới."
+      ],
+      "pitfalls": [
+        "Miền tam giác thường tạo phụ thuộc dù công thức mật độ trông đơn giản."
+      ],
+      "examples": [
+        {
+          "statement": "Mật độ chung bằng 2 trên $0<x<y<1$. Tìm mật độ của Y.",
+          "steps": [
+            "Với y cố định trong $(0,1)$, x chạy từ 0 đến y.",
+            "Tích phân $\\int_0^y2dx=2y$.",
+            "Chuẩn hóa $\\int_0^12ydy=1$."
+          ],
+          "result": "$f_Y(y)=2y$ trên $(0,1)$.",
+          "insight": "Cận lấy biên phải phản ánh đúng miền tam giác."
+        },
+        {
+          "statement": "X và Y độc lập Bernoulli(1/2). Tìm phân bố S=X+Y.",
+          "steps": [
+            "Có bốn cặp đồng xác suất $(0,0),(0,1),(1,0),(1,1)$.",
+            "Tổng 0 và 2 có một cặp, tổng 1 có hai cặp.",
+            "Gom các xác suất theo tổng."
+          ],
+          "result": "$P(S=0,1,2)=(1/4,1/2,1/4)$.",
+          "insight": "Tổng hai Bernoulli độc lập cùng tham số là một binomial."
+        },
+        {
+          "statement": "$X\\sim U(0,1)$, $Y=2X+1$. Tìm mật độ Y.",
+          "steps": [
+            "Nghịch đảo là $x=(y-1)/2$, miền Y là $(1,3)$.",
+            "Đạo hàm nghịch đảo bằng $1/2$.",
+            "Nhân mật độ X bằng 1 với hệ số Jacobian."
+          ],
+          "result": "$f_Y(y)=1/2$ trên $(1,3)$.",
+          "insight": "Giãn độ dài gấp đôi làm mật độ giảm một nửa."
+        },
+        {
+          "statement": "$X\\sim U(-1,1)$, $Y=X^2$. Tìm CDF và mật độ Y.",
+          "steps": [
+            "Với $0\\le y\\le1$, điều kiện là $-\\sqrt y\\le X\\le\\sqrt y$.",
+            "Xác suất bằng độ dài $2\\sqrt y$ chia 2, nên F(y) bằng $\\sqrt y$.",
+            "Đạo hàm trong $(0,1)$ cho $1/(2\\sqrt y)$."
+          ],
+          "result": "$F_Y(y)=\\sqrt y$, $f_Y(y)=1/(2\\sqrt y)$ trong miền hỗ trợ.",
+          "insight": "Hai nhánh cộng lại là yếu tố cần thiết trong biến đổi bình phương."
+        },
+        {
+          "statement": "Nếu $X,Y$ độc lập mũ tốc độ lambda, tìm $P(\\min(X,Y)>t)$.",
+          "steps": [
+            "Min lớn hơn t khi cả X và Y đều lớn hơn t.",
+            "Độc lập cho tích hai hàm sống $e^{-\\lambda t}e^{-\\lambda t}$.",
+            "Gộp số mũ được $e^{-2\\lambda t}$."
+          ],
+          "result": "Giá trị nhỏ nhất có phân bố mũ tốc độ $2\\lambda$.",
+          "insight": "Mô hình này cũng diễn tả thời gian hỏng của hai phần tử mắc nối tiếp độc lập."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương 1–6: Probability, Random Variables, Expectation, Limit Theorems và Bernoulli/Poisson Processes"
+        },
+        {
+          "sourceId": "yates",
+          "locator": "Chương 1–5, 9 và 13 (mục giới thiệu và roadmap đã kiểm tra qua OCR)"
+        },
+        {
+          "sourceId": "gnedenko",
+          "locator": "Phần I: Probabilities; Phần II: Random Variables"
+        }
+      ]
+    },
+    {
+      "id": "moments",
+      "title": "Kỳ vọng, phương sai, hiệp phương sai và hàm sinh moment",
+      "theory": [
+        "Kỳ vọng tuyến tính không cần độc lập. Phương sai $\\operatorname{Var}X=E[X^2]-(EX)^2$ đo bình phương độ phân tán. Với tổng, cần cộng các phương sai và hai lần các hiệp phương sai.",
+        "Hàm sinh moment $M_X(t)=E[e^{tX}]$ nếu hữu hạn quanh 0 có đạo hàm cho các moment. Độc lập làm hàm sinh của tổng thành tích; không phải mọi phân bố đều có MGF hữu hạn ngoài 0."
+      ],
+      "method": [
+        "Tính kỳ vọng và moment bậc hai.",
+        "Giữ các hiệp phương sai nếu chưa có độc lập.",
+        "Kiểm tra phương sai không âm."
+      ],
+      "pitfalls": [
+        "Không tương quan không đồng nghĩa độc lập trong phân bố tổng quát."
+      ],
+      "examples": [
+        {
+          "statement": "Xúc xắc công bằng: tìm EX và Var X.",
+          "steps": [
+            "$EX=(1+\\cdots+6)/6=7/2$.",
+            "$E[X^2]=91/6$.",
+            "Lấy $91/6-49/4=35/12$."
+          ],
+          "result": "$EX=3.5$, $\\operatorname{Var}X=35/12$.",
+          "insight": "Phương sai sử dụng moment bậc hai, không phải trung bình trị tuyệt đối độ lệch."
+        },
+        {
+          "statement": "X là số sản phẩm lỗi trong 100 sản phẩm độc lập, mỗi sản phẩm lỗi với xác suất 0.02.",
+          "steps": [
+            "Viết X là tổng 100 chỉ báo lỗi.",
+            "Mỗi chỉ báo có kỳ vọng 0.02 và phương sai $0.02\\cdot0.98$.",
+            "Cộng kỳ vọng và phương sai nhờ độc lập."
+          ],
+          "result": "$EX=2$, $\\operatorname{Var}X=1.96$.",
+          "insight": "Biểu diễn bằng chỉ báo giúp suy ra công thức binomial."
+        },
+        {
+          "statement": "Nếu EX=2, Var X=3, tìm E(4X-1) và Var(4X-1).",
+          "steps": [
+            "Tuyến tính cho kỳ vọng $4\\cdot2-1=7$.",
+            "Cộng hằng số không đổi phương sai.",
+            "Nhân 4 làm phương sai nhân $4^2$."
+          ],
+          "result": "Kỳ vọng 7, phương sai 48.",
+          "insight": "Đơn vị bình phương giải thích vì sao hệ số bị bình phương."
+        },
+        {
+          "statement": "Cho Var X=Var Y=1 và Cov(X,Y)=0.3. Tính Var(X+Y).",
+          "steps": [
+            "Công thức tổng cho $\\operatorname{Var}(X+Y)=\\operatorname{Var}X+\\operatorname{Var}Y+2\\operatorname{Cov}(X,Y)$.",
+            "Thay số được $1+1+0.6$.",
+            "Hiệp phương sai dương làm tổng phân tán hơn trường hợp không tương quan."
+          ],
+          "result": "Phương sai bằng 2.6.",
+          "insight": "Bỏ hiệp phương sai khi các biến phụ thuộc có thể làm sai kết quả."
+        },
+        {
+          "statement": "Tìm MGF của Bernoulli(p) và suy ra kỳ vọng.",
+          "steps": [
+            "X nhận 0 và 1, nên $M(t)=(1-p)+pe^t$.",
+            "Đạo hàm $M'(t)=pe^t$.",
+            "Tại 0 cho $M'(0)=p$."
+          ],
+          "result": "$M(t)=1-p+pe^t$, $EX=p$.",
+          "insight": "MGF gói các moment vào các đạo hàm tại gốc."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương 1–6: Probability, Random Variables, Expectation, Limit Theorems và Bernoulli/Poisson Processes"
+        },
+        {
+          "sourceId": "yates",
+          "locator": "Chương 1–5, 9 và 13 (mục giới thiệu và roadmap đã kiểm tra qua OCR)"
+        },
+        {
+          "sourceId": "gnedenko",
+          "locator": "Phần I: Probabilities; Phần II: Random Variables"
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "title": "Luật số lớn, CLT và xấp xỉ",
+      "theory": [
+        "Với các biến độc lập cùng phân bố có kỳ vọng hữu hạn, trung bình mẫu hội tụ về kỳ vọng theo luật số lớn. Khi phương sai hữu hạn dương, CLT cho trung bình chuẩn hóa hội tụ theo phân phối đến chuẩn.",
+        "Đây là các kết quả tiệm cận, không bảo đảm xấp xỉ chính xác cho mọi n. Bất đẳng thức Chebyshev cho chặn hữu hạn mẫu; hiệu chỉnh liên tục cải thiện một số xấp xỉ chuẩn cho số đếm."
+      ],
+      "method": [
+        "Kiểm tra độc lập, cùng phân bố và moment.",
+        "Chuẩn hóa bằng sai số chuẩn sigma trên căn n.",
+        "Nêu xấp xỉ và kiểm tra điều kiện phù hợp."
+      ],
+      "pitfalls": [
+        "Tăng số mẫu không tự loại được thiên lệch lấy mẫu."
+      ],
+      "examples": [
+        {
+          "statement": "Xi độc lập có trung bình 10, phương sai 4. Tìm phương sai trung bình của 100 biến.",
+          "steps": [
+            "Tổng có phương sai $100\\cdot4=400$.",
+            "Chia tổng cho 100 làm phương sai chia $100^2$.",
+            "Kết quả bằng 0.04, sai số chuẩn bằng 0.2."
+          ],
+          "result": "$\\operatorname{Var}\\bar X=0.04$.",
+          "insight": "Trung bình giảm độ lệch chuẩn theo căn số mẫu."
+        },
+        {
+          "statement": "Dùng Chebyshev chặn $P(|\\bar X-10|\\ge1)$ trong ví dụ trên.",
+          "steps": [
+            "Phương sai trung bình là 0.04.",
+            "Chebyshev cho xác suất không vượt phương sai chia bình phương ngưỡng.",
+            "Với ngưỡng 1, chặn bằng 0.04."
+          ],
+          "result": "Xác suất không vượt 4%.",
+          "insight": "Chặn này không đòi giả thiết chuẩn nhưng có thể khá lỏng."
+        },
+        {
+          "statement": "$X\\sim\\operatorname{Bin}(100,0.5)$. Xấp xỉ $P(45\\le X\\le55)$.",
+          "steps": [
+            "Trung bình 50, độ lệch chuẩn 5.",
+            "Hiệu chỉnh liên tục dùng khoảng $[44.5,55.5]$.",
+            "Chuẩn hóa thành $[-1.1,1.1]$, xác suất xấp xỉ $2\\Phi(1.1)-1$."
+          ],
+          "result": "Xấp xỉ 0.7287.",
+          "insight": "Hai đầu khoảng nửa nguyên cải thiện việc nối số đếm rời rạc với chuẩn liên tục."
+        },
+        {
+          "statement": "Nếu muốn sai số chuẩn giảm một nửa, cần tăng số mẫu bao nhiêu lần?",
+          "steps": [
+            "Sai số chuẩn tỷ lệ với $1/\\sqrt n$.",
+            "Muốn $1/\\sqrt{n_{\\rm new}}=(1/2)/\\sqrt n$.",
+            "Bình phương hai vế cho số mẫu mới gấp 4."
+          ],
+          "result": "Tăng số mẫu 4 lần.",
+          "insight": "Muốn tăng độ chính xác không thể chỉ tăng mẫu theo tỷ lệ tuyến tính."
+        },
+        {
+          "statement": "Quan sát tần suất mặt ngửa 0.52 sau 1000 lần tung. Luật số lớn có chứng minh đồng xu công bằng không?",
+          "steps": [
+            "Luật số lớn nói tần suất tiến về xác suất thật khi các phép thử phù hợp.",
+            "Một quan sát hữu hạn 0.52 có thể xuất hiện với nhiều giá trị p.",
+            "Cần bài toán ước lượng hoặc kiểm định, không được đảo chiều định lý."
+          ],
+          "result": "Không đủ để chứng minh p bằng 0.5.",
+          "insight": "Định lý hội tụ và suy luận thống kê là hai loại phát biểu khác nhau."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương 1–6: Probability, Random Variables, Expectation, Limit Theorems và Bernoulli/Poisson Processes"
+        },
+        {
+          "sourceId": "yates",
+          "locator": "Chương 1–5, 9 và 13 (mục giới thiệu và roadmap đã kiểm tra qua OCR)"
+        },
+        {
+          "sourceId": "gnedenko",
+          "locator": "Phần I: Probabilities; Phần II: Random Variables"
+        }
+      ]
+    },
+    {
+      "id": "processes",
+      "title": "Quá trình Poisson, Markov và độ tin cậy",
+      "theory": [
+        "Quá trình Poisson thuần nhất tốc độ lambda có gia số độc lập, dừng và số sự kiện trong khoảng t có phân bố Poisson(lambda t). Thời gian giữa các sự kiện độc lập có phân bố mũ.",
+        "Chuỗi Markov mô hình hóa bước kế tiếp phụ thuộc trạng thái hiện tại qua ma trận chuyển P; phân bố sau n bước là $\\pi_0P^n$. Mô hình độ tin cậy nối tiếp/song song cần nêu rõ độc lập và cách định nghĩa hệ còn hoạt động."
+      ],
+      "method": [
+        "Xác định thời gian rời rạc hay liên tục.",
+        "Viết tốc độ hoặc ma trận chuyển đúng đơn vị.",
+        "Tính bằng mô hình và kiểm tra tổng xác suất."
+      ],
+      "pitfalls": [
+        "Trạng thái dừng không tự đảm bảo phân bố hội tụ nếu chuỗi tuần hoàn hoặc không có điều kiện phù hợp."
+      ],
+      "examples": [
+        {
+          "statement": "Cuộc gọi đến theo Poisson tốc độ 3 mỗi giờ. Xác suất không có cuộc gọi trong 20 phút?",
+          "steps": [
+            "Đổi 20 phút thành $1/3$ giờ.",
+            "Số cuộc gọi có tham số $3\\cdot1/3=1$.",
+            "Xác suất số đếm bằng 0 là $e^{-1}$."
+          ],
+          "result": "Khoảng 0.3679.",
+          "insight": "Không dùng t bằng 20 khi tốc độ đang tính theo giờ."
+        },
+        {
+          "statement": "Với tốc độ 3 mỗi giờ, thời gian chờ trung bình đến cuộc gọi kế tiếp?",
+          "steps": [
+            "Thời gian chờ là mũ với tốc độ 3.",
+            "Kỳ vọng bằng nghịch đảo tốc độ, $1/3$ giờ.",
+            "Đổi sang phút được 20 phút."
+          ],
+          "result": "20 phút.",
+          "insight": "Tham số tốc độ và kỳ vọng có quan hệ nghịch đảo."
+        },
+        {
+          "statement": "Chuỗi hai trạng thái có $P=\\begin{pmatrix}0.8&0.2\\\\0.3&0.7\\end{pmatrix}$, ban đầu ở trạng thái 1. Phân bố sau hai bước?",
+          "steps": [
+            "Sau một bước là $(0.8,0.2)$.",
+            "Nhân thêm P: xác suất trạng thái 1 là $0.8^2+0.2\\cdot0.3=0.7$.",
+            "Xác suất còn lại bằng 0.3."
+          ],
+          "result": "$\\pi_2=(0.7,0.3)$.",
+          "insight": "Các hàng P cộng bằng 1, nên nhân phân bố hàng ở bên trái."
+        },
+        {
+          "statement": "Tìm phân bố dừng cho ma trận trên.",
+          "steps": [
+            "Đặt $\\pi=(a,1-a)$ và giải $a=0.8a+0.3(1-a)$.",
+            "Suy ra $0.5a=0.3$, tức a=0.6.",
+            "Nhân lại $(0.6,0.4)P$ xác nhận không đổi."
+          ],
+          "result": "$\\pi=(0.6,0.4)$.",
+          "insight": "Cần cả phương trình dừng và chuẩn hóa tổng bằng 1."
+        },
+        {
+          "statement": "Hai phần tử độc lập có độ tin cậy 0.9 và 0.8. So sánh mắc nối tiếp và song song.",
+          "steps": [
+            "Nối tiếp hoạt động khi cả hai hoạt động, nên xác suất $0.9\\cdot0.8$.",
+            "Song song chỉ hỏng khi cả hai hỏng, xác suất $0.1\\cdot0.2$.",
+            "Lấy phần bù cho độ tin cậy song song."
+          ],
+          "result": "Nối tiếp 0.72; song song 0.98.",
+          "insight": "Độc lập là giả thiết quan trọng; hỏng chung có thể làm lợi ích dự phòng giảm mạnh."
+        }
+      ],
+      "references": [
+        {
+          "sourceId": "bertsekas",
+          "locator": "Chương 1–6: Probability, Random Variables, Expectation, Limit Theorems và Bernoulli/Poisson Processes"
+        },
+        {
+          "sourceId": "yates",
+          "locator": "Chương 1–5, 9 và 13 (mục giới thiệu và roadmap đã kiểm tra qua OCR)"
+        },
+        {
+          "sourceId": "gnedenko",
+          "locator": "Phần I: Probabilities; Phần II: Random Variables"
+        }
+      ]
+    }
+  ]
+}
